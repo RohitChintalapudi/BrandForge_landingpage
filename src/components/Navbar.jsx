@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { LOGIN_URL, REGISTER_URL } from "../config/appUrls.js";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,20 +52,20 @@ const Navbar = () => {
             ))}
 
             <div className="flex items-center gap-3 ml-4">
-              <button
-                onClick={() => scrollToSection("for-creators")}
+              <a
+                href={LOGIN_URL}
                 className="px-4 py-2 cursor-pointer text-gray-700 hover:text-gray-900 font-medium text-sm"
               >
-                Join as Creator
-              </button>
-              <motion.button
+                Login
+              </a>
+              <motion.a
+                href={REGISTER_URL}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => scrollToSection("how-it-works")}
                 className="px-5 py-2 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 cursor-pointer transition-colors"
               >
-                Launch Campaign
-              </motion.button>
+                Get Started
+              </motion.a>
             </div>
           </div>
 
@@ -120,18 +121,18 @@ const Navbar = () => {
                 ))}
 
                 <div className="pt-4 border-t border-gray-100 mt-2">
-                  <button
-                    onClick={() => scrollToSection("for-creators")}
-                    className="w-full py-3 cursor-pointer text-gray-700 hover:text-gray-900 font-medium"
+                  <a
+                    href={LOGIN_URL}
+                    className="w-full py-3 cursor-pointer text-gray-700 hover:text-gray-900 font-medium block"
                   >
-                    Join as Creator
-                  </button>
-                  <button
-                    onClick={() => scrollToSection("how-it-works")}
-                    className="w-full mt-2 py-3 bg-orange-500 text-white font-semibold rounded-lg cursor-pointer hover:bg-orange-600 transition-colors"
+                    Login
+                  </a>
+                  <a
+                    href={REGISTER_URL}
+                    className="w-full mt-2 py-3 bg-orange-500 text-white font-semibold rounded-lg cursor-pointer hover:bg-orange-600 transition-colors block text-center"
                   >
-                    Launch Campaign
-                  </button>
+                    Get Started
+                  </a>
                 </div>
               </div>
             </motion.div>

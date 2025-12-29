@@ -11,6 +11,7 @@ import {
   Award,
 } from "lucide-react";
 import Navbar from "./Navbar.jsx";
+import { REGISTER_URL, LOGIN_URL } from "../config/appUrls.js";
 
 // Enhanced animations
 const fadeUp = {
@@ -162,7 +163,7 @@ const LandingPage = () => {
         </div>
 
         <motion.div
-          className="relative max-w-7xl mx-auto px-6 text-center z-10"
+          className="relative max-w-5xl mx-auto text-center z-10"
           initial="hidden"
           animate={controls}
           variants={staggerContainer}
@@ -231,13 +232,14 @@ const LandingPage = () => {
             className="mt-12 flex flex-col sm:flex-row justify-center items-center gap-6"
             variants={fadeUp}
           >
-            <motion.button
+            <motion.a
+              href={REGISTER_URL}
               whileHover={{
                 scale: 1.05,
                 boxShadow: "0 20px 40px rgba(249, 115, 22, 0.3)",
               }}
               whileTap={{ scale: 0.98 }}
-              className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+              className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden inline-block"
             >
               <span className="relative z-10 flex items-center gap-2">
                 Launch a Campaign
@@ -249,21 +251,22 @@ const LandingPage = () => {
                 whileHover={{ x: 0 }}
                 transition={{ duration: 0.3 }}
               />
-            </motion.button>
+            </motion.a>
 
-            <motion.button
+            <motion.a
+              href={REGISTER_URL}
               whileHover={{
                 scale: 1.05,
                 boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)",
               }}
               whileTap={{ scale: 0.98 }}
-              className="group px-8 py-4 bg-white border-2 border-gray-200 text-gray-800 font-semibold rounded-xl hover:border-orange-300 hover:bg-orange-50 transition-all duration-300"
+              className="group px-8 py-4 bg-white border-2 border-gray-200 text-gray-800 font-semibold rounded-xl hover:border-orange-300 hover:bg-orange-50 transition-all duration-300 inline-block"
             >
               <span className="flex cursor-pointer items-center gap-2">
                 Join as Creator
                 <Users className="w-5 h-5 group-hover:text-orange-500 transition-colors" />
               </span>
-            </motion.button>
+            </motion.a>
           </motion.div>
 
           {/* Stats preview */}
@@ -417,13 +420,14 @@ const LandingPage = () => {
                     ))}
                   </div>
 
-                  <motion.button
+                  <motion.a
+                    href={REGISTER_URL}
                     whileHover={{ x: 5 }}
                     className="mt-8 flex items-center gap-2 cursor-pointer text-orange-600 font-semibold"
                   >
                     Start a campaign
                     <ChevronRight className="w-5 h-5" />
-                  </motion.button>
+                  </motion.a>
                 </div>
               </motion.div>
 
@@ -486,13 +490,14 @@ const LandingPage = () => {
                     ))}
                   </div>
 
-                  <motion.button
+                  <motion.a
+                    href={REGISTER_URL}
                     whileHover={{ x: 5 }}
                     className="mt-8 flex items-center cursor-pointer gap-2 text-gray-900 font-semibold"
                   >
                     Join as creator
                     <ChevronRight className="w-5 h-5" />
-                  </motion.button>
+                  </motion.a>
                 </div>
               </motion.div>
             </div>
@@ -699,13 +704,14 @@ const LandingPage = () => {
             className="flex flex-col sm:flex-row justify-center items-center gap-6"
             variants={fadeUp}
           >
-            <motion.button
+            <motion.a
+              href={REGISTER_URL}
               whileHover={{
                 scale: 1.08,
                 boxShadow: "0 25px 50px -12px rgba(249, 115, 22, 0.5)",
               }}
               whileTap={{ scale: 0.98 }}
-              className="group relative px-10 py-5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 overflow-hidden"
+              className="group relative px-10 py-5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 overflow-hidden inline-block"
             >
               <span className="relative z-10 flex items-center gap-3">
                 <Zap className="w-5 h-5" />
@@ -718,21 +724,22 @@ const LandingPage = () => {
                 whileHover={{ x: 0 }}
                 transition={{ duration: 0.4 }}
               />
-            </motion.button>
+            </motion.a>
 
-            <motion.button
+            <motion.a
+              href={REGISTER_URL}
               whileHover={{
                 scale: 1.08,
                 boxShadow: "0 20px 40px rgba(255, 255, 255, 0.15)",
               }}
               whileTap={{ scale: 0.98 }}
-              className="group px-10 py-5 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/20 hover:border-white/40 transition-all duration-300"
+              className="group px-10 py-5 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/20 hover:border-white/40 transition-all duration-300 inline-block"
             >
               <span className="flex items-center gap-3">
                 <Users className="w-5 cursor-pointer h-5" />
                 Join as Creator
               </span>
-            </motion.button>
+            </motion.a>
           </motion.div>
 
           <motion.div
