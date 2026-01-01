@@ -13,7 +13,6 @@ import {
 import Navbar from "./Navbar.jsx";
 import { REGISTER_URL, LOGIN_URL } from "../config/appUrls.js";
 
-// Enhanced animations
 const fadeUp = {
   hidden: { opacity: 0, y: 60 },
   visible: {
@@ -71,11 +70,9 @@ const LandingPage = () => {
   const { scrollY } = useScroll();
   const controls = useAnimation();
 
-  // Parallax effects
   const heroY = useTransform(scrollY, [0, 500], [0, 100]);
   const featuresY = useTransform(scrollY, [300, 800], [0, -50]);
 
-  // Mouse move effect for interactive backgrounds
   useEffect(() => {
     const handleMouseMove = (e) => {
       setMousePosition({
@@ -86,7 +83,6 @@ const LandingPage = () => {
 
     window.addEventListener("mousemove", handleMouseMove);
 
-    // Start animations
     controls.start("visible");
 
     return () => {
@@ -94,7 +90,6 @@ const LandingPage = () => {
     };
   }, [controls]);
 
-  // Calculate mouse parallax effect
   const mouseX = useTransform(() => mousePosition.x / 50);
   const mouseY = useTransform(() => mousePosition.y / 50);
 
@@ -102,9 +97,7 @@ const LandingPage = () => {
     <>
       <Navbar />
 
-      {/* Enhanced Hero Section */}
       <section className="relative pt-32 pb-40 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-100 min-h-screen flex items-center">
-        {/* Dynamic gradient orbs */}
         <motion.div
           className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-orange-400/10 to-orange-600/10 rounded-full blur-3xl"
           animate={{
@@ -131,7 +124,6 @@ const LandingPage = () => {
           }}
         />
 
-        {/* Interactive particles background */}
         <div className="absolute inset-0 overflow-hidden">
           {Array.from({ length: 20 }).map((_, i) => (
             <motion.div
@@ -269,7 +261,6 @@ const LandingPage = () => {
             </motion.a>
           </motion.div>
 
-          {/* Stats preview */}
           <motion.div
             className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto"
             variants={staggerContainer}
@@ -320,7 +311,6 @@ const LandingPage = () => {
           </motion.div>
         </motion.div>
 
-        {/* Scroll indicator */}
         <motion.div
           className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
           animate={{ y: [0, 10, 0] }}
@@ -332,7 +322,6 @@ const LandingPage = () => {
         </motion.div>
       </section>
 
-      {/* Enhanced How It Works Section */}
       <section id="how-it-works" className="py-32 bg-white relative">
         <div className="absolute inset-0 bg-gradient-to-b from-white via-gray-50/50 to-white" />
 
@@ -361,7 +350,6 @@ const LandingPage = () => {
             </motion.div>
 
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              {/* For Brands */}
               <motion.div
                 variants={slideIn("left")}
                 whileHover={{ scale: 1.02 }}
@@ -431,7 +419,6 @@ const LandingPage = () => {
                 </div>
               </motion.div>
 
-              {/* For Creators */}
               <motion.div
                 variants={slideIn("right")}
                 whileHover={{ scale: 1.02 }}
@@ -505,12 +492,10 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Enhanced Features Section */}
       <section
         id="features"
         className="py-32 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden"
       >
-        {/* Background pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#f97316_1px,transparent_1px)] [background-size:40px_40px]" />
         </div>
@@ -627,11 +612,9 @@ const LandingPage = () => {
         </motion.div>
       </section>
 
-      {/* Enhanced Final CTA */}
       <section className="relative py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900" />
 
-        {/* Animated grid background */}
         <div className="absolute inset-0 opacity-10">
           <div
             className="absolute inset-0"
@@ -643,7 +626,6 @@ const LandingPage = () => {
           />
         </div>
 
-        {/* Floating orbs */}
         <motion.div
           className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-orange-500/20 to-orange-600/20 rounded-full blur-3xl"
           animate={{

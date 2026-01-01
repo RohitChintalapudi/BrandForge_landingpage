@@ -20,7 +20,6 @@ const Navbar = () => {
     <>
       <nav className="w-full fixed top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
-          {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
             className="flex items-center gap-2 cursor-pointer"
@@ -32,7 +31,6 @@ const Navbar = () => {
             </div>
           </motion.div>
 
-          {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
             {[
               { label: "How it works", id: "how-it-works" },
@@ -69,7 +67,6 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(!isOpen)}
@@ -95,7 +92,6 @@ const Navbar = () => {
           </motion.button>
         </div>
 
-        {/* Mobile Menu */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
@@ -140,7 +136,6 @@ const Navbar = () => {
         </AnimatePresence>
       </nav>
 
-      {/* Scroll indicator */}
       <motion.div
         className="fixed top-0 left-0 h-1 bg-orange-500 z-40"
         initial={{ width: 0 }}
