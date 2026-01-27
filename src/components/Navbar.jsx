@@ -27,7 +27,7 @@ const Navbar = () => {
           >
             <div className="text-2xl font-bold">
               <span className="text-gray-900">Brand</span>
-              <span className="text-orange-500">Forge</span>
+              <span className="text-purple-500">Forge</span>
             </div>
           </motion.div>
 
@@ -42,10 +42,10 @@ const Navbar = () => {
                 key={item.id}
                 whileHover={{ y: -2 }}
                 onClick={() => scrollToSection(item.id)}
-                className="text-gray-700 cursor-pointer hover:text-orange-600 font-medium text-sm relative group"
+                className="text-gray-700 cursor-pointer hover:text-purple-600 font-medium text-sm relative group"
               >
                 {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-500 group-hover:w-full transition-all duration-300" />
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 group-hover:w-full transition-all duration-300" />
               </motion.button>
             ))}
 
@@ -60,7 +60,7 @@ const Navbar = () => {
                 href={REGISTER_URL}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-5 py-2 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 cursor-pointer transition-colors"
+                className="px-5 py-2 bg-purple-500 text-white font-semibold rounded-lg hover:bg-purple-600 cursor-pointer transition-colors"
               >
                 Get Started
               </motion.a>
@@ -110,7 +110,7 @@ const Navbar = () => {
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className="w-full text-left py-3 px-2 text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded-lg font-medium transition-colors"
+                    className="w-full text-left py-3 px-2 text-gray-700 hover:text-purple-600 hover:bg-purple-50 rounded-lg font-medium transition-colors"
                   >
                     {item.label}
                   </button>
@@ -125,7 +125,7 @@ const Navbar = () => {
                   </a>
                   <a
                     href={REGISTER_URL}
-                    className="w-full mt-2 py-3 bg-orange-500 text-white font-semibold rounded-lg cursor-pointer hover:bg-orange-600 transition-colors block text-center"
+                    className="w-full mt-2 py-3 bg-purple-500 text-white font-semibold rounded-lg cursor-pointer hover:bg-purple-600 transition-colors block text-center"
                   >
                     Get Started
                   </a>
@@ -137,7 +137,7 @@ const Navbar = () => {
       </nav>
 
       <motion.div
-        className="fixed top-0 left-0 h-1 bg-orange-500 z-40"
+        className="fixed top-0 left-0 h-1 bg-purple-500 z-40"
         initial={{ width: 0 }}
         animate={{
           width: `${

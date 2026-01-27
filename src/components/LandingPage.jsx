@@ -99,7 +99,7 @@ const LandingPage = () => {
 
       <section className="relative pt-32 pb-40 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-100 min-h-screen flex items-center">
         <motion.div
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-orange-400/10 to-orange-600/10 rounded-full blur-3xl"
+          className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-purple-400/10 to-purple-600/10 rounded-full blur-3xl"
           animate={{
             x: [0, 30, 0],
             y: [0, -30, 0],
@@ -128,7 +128,7 @@ const LandingPage = () => {
           {Array.from({ length: 20 }).map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-1 h-1 bg-orange-400/30 rounded-full"
+              className="absolute w-1 h-1 bg-purple-400/30 rounded-full"
               initial={{
                 x: Math.random() * window.innerWidth,
                 y: Math.random() * window.innerHeight,
@@ -163,10 +163,10 @@ const LandingPage = () => {
         >
           <motion.div
             variants={fadeUp}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 border border-orange-100 rounded-full mb-8"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-purple-50 border border-purple-100 rounded-full mb-8"
           >
-            <Sparkles className="w-4 h-4 text-orange-500" />
-            <span className="text-sm font-medium text-orange-700">
+            <Sparkles className="w-4 h-4 text-purple-500" />
+            <span className="text-sm font-medium text-purple-700">
               Revolutionizing UGC Marketing
             </span>
           </motion.div>
@@ -178,7 +178,7 @@ const LandingPage = () => {
             <span className="relative">
               Crowdsourced
               <motion.span
-                className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-orange-500 to-orange-300"
+                className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-purple-300"
                 initial={{ width: 0 }}
                 animate={{ width: "100%" }}
                 transition={{ delay: 1, duration: 1 }}
@@ -190,7 +190,7 @@ const LandingPage = () => {
             </span>
             <br />
             <span className="relative inline-block">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 via-purple-600 to-purple-500">
                 Powered by Creators
               </span>
               <motion.div
@@ -198,7 +198,7 @@ const LandingPage = () => {
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                 className="absolute -top-4 -right-4 w-8 h-8"
               >
-                <Sparkles className="w-8 h-8 text-orange-500/50" />
+                <Sparkles className="w-8 h-8 text-purple-500/50" />
               </motion.div>
             </span>
           </motion.h1>
@@ -211,7 +211,7 @@ const LandingPage = () => {
             <span className="relative mx-2 font-semibold text-gray-900">
               creators
               <motion.span
-                className="absolute -bottom-1 left-0 w-full h-0.5 bg-orange-300"
+                className="absolute -bottom-1 left-0 w-full h-0.5 bg-purple-300"
                 initial={{ width: 0 }}
                 animate={{ width: "100%" }}
                 transition={{ delay: 1.5, duration: 0.8 }}
@@ -231,14 +231,14 @@ const LandingPage = () => {
                 boxShadow: "0 20px 40px rgba(249, 115, 22, 0.3)",
               }}
               whileTap={{ scale: 0.98 }}
-              className="group relative px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden inline-block"
+              className="group relative px-8 py-4 bg-gradient-to-r from-purple-500 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden inline-block"
             >
               <span className="relative z-10 flex items-center gap-2">
                 Launch a Campaign
                 <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </span>
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-orange-600 to-orange-700"
+                className="absolute inset-0 bg-gradient-to-r from-purple-600 to-purple-700"
                 initial={{ x: "-100%" }}
                 whileHover={{ x: 0 }}
                 transition={{ duration: 0.3 }}
@@ -252,11 +252,11 @@ const LandingPage = () => {
                 boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)",
               }}
               whileTap={{ scale: 0.98 }}
-              className="group px-8 py-4 bg-white border-2 border-gray-200 text-gray-800 font-semibold rounded-xl hover:border-orange-300 hover:bg-orange-50 transition-all duration-300 inline-block"
+              className="group px-8 py-4 bg-white border-2 border-gray-200 text-gray-800 font-semibold rounded-xl hover:border-purple-300 hover:bg-purple-50 transition-all duration-300 inline-block"
             >
               <span className="flex cursor-pointer items-center gap-2">
                 Join as Creator
-                <Users className="w-5 h-5 group-hover:text-orange-500 transition-colors" />
+                <Users className="w-5 h-5 group-hover:text-purple-500 transition-colors" />
               </span>
             </motion.a>
           </motion.div>
@@ -299,7 +299,7 @@ const LandingPage = () => {
                   boxShadow: "0 20px 40px rgba(0, 0, 0, 0.08)",
                 }}
               >
-                <div className="flex items-center justify-center gap-2 text-orange-500 mb-2">
+                <div className="flex items-center justify-center gap-2 text-purple-500 mb-2">
                   {stat.icon}
                 </div>
                 <div className="text-3xl font-bold text-gray-900">
@@ -317,7 +317,7 @@ const LandingPage = () => {
           transition={{ duration: 2, repeat: Infinity }}
         >
           <div className="w-6 h-10 border-2 border-gray-300 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-orange-500 rounded-full mt-2" />
+            <div className="w-1 h-3 bg-purple-500 rounded-full mt-2" />
           </div>
         </motion.div>
       </section>
@@ -336,13 +336,13 @@ const LandingPage = () => {
               className="flex flex-col items-center mb-20"
               variants={fadeUp}
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 border border-orange-100 rounded-full mb-4">
-                <span className="text-sm font-medium text-orange-700">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-50 border border-purple-100 rounded-full mb-4">
+                <span className="text-sm font-medium text-purple-700">
                   Simple Process
                 </span>
               </div>
               <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900">
-                How <span className="text-orange-500">BrandForge</span> Works
+                How <span className="text-purple-500">BrandForge</span> Works
               </h2>
               <p className="mt-4 text-gray-600 text-lg max-w-2xl text-center">
                 A seamless process connecting brands with talented creators
@@ -355,11 +355,11 @@ const LandingPage = () => {
                 whileHover={{ scale: 1.02 }}
                 className="relative group"
               >
-                <div className="absolute -inset-4 bg-gradient-to-r from-orange-500/5 to-orange-500/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500" />
+                <div className="absolute -inset-4 bg-gradient-to-r from-purple-500/5 to-purple-500/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500" />
                 <div className="relative bg-white p-10 rounded-2xl border border-gray-100 shadow-xl overflow-hidden">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-500 to-orange-300" />
+                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-purple-300" />
                   <div className="flex items-center gap-4 mb-8">
-                    <div className="p-3 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl">
+                    <div className="p-3 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl">
                       <BarChart3 className="w-8 h-8 text-white" />
                     </div>
                     <h3 className="text-2xl font-bold text-gray-900">
@@ -393,8 +393,8 @@ const LandingPage = () => {
                         transition={{ delay: i * 0.2 }}
                         viewport={{ once: true }}
                       >
-                        <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-orange-50 to-orange-100 border border-orange-200 rounded-xl flex items-center justify-center">
-                          <span className="font-bold text-orange-600">
+                        <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 rounded-xl flex items-center justify-center">
+                          <span className="font-bold text-purple-600">
                             {item.step}
                           </span>
                         </div>
@@ -411,7 +411,7 @@ const LandingPage = () => {
                   <motion.a
                     href={REGISTER_URL}
                     whileHover={{ x: 5 }}
-                    className="mt-8 flex items-center gap-2 cursor-pointer text-orange-600 font-semibold"
+                    className="mt-8 flex items-center gap-2 cursor-pointer text-purple-600 font-semibold"
                   >
                     Start a campaign
                     <ChevronRight className="w-5 h-5" />
@@ -511,14 +511,14 @@ const LandingPage = () => {
             variants={staggerContainer}
           >
             <motion.div className="text-center mb-20" variants={fadeUp}>
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 border border-orange-100 rounded-full mb-4">
-                <Sparkles className="w-4 h-4 text-orange-500" />
-                <span className="text-sm font-medium text-orange-700">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-50 border border-purple-100 rounded-full mb-4">
+                <Sparkles className="w-4 h-4 text-purple-500" />
+                <span className="text-sm font-medium text-purple-700">
                   Platform Features
                 </span>
               </div>
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-                Built for <span className="text-orange-500">Performance</span>
+                Built for <span className="text-purple-500">Performance</span>
               </h2>
               <p className="mt-4 text-gray-600 text-lg max-w-2xl mx-auto">
                 Everything you need to run successful UGC campaigns at scale
@@ -531,7 +531,7 @@ const LandingPage = () => {
                   title: "Campaign Management",
                   desc: "Create, manage, and track multiple campaigns with detailed analytics.",
                   icon: <BarChart3 className="w-6 h-6" />,
-                  color: "from-orange-500 to-orange-600",
+                  color: "from-purple-500 to-purple-600",
                 },
                 {
                   title: "Secure Submissions",
@@ -543,7 +543,7 @@ const LandingPage = () => {
                   title: "Creator Discovery",
                   desc: "AI-powered matching to find the perfect creators for your brand.",
                   icon: <Users className="w-6 h-6" />,
-                  color: "from-orange-500 to-orange-600",
+                  color: "from-purple-500 to-purple-600",
                 },
                 {
                   title: "Transparent Selection",
@@ -555,7 +555,7 @@ const LandingPage = () => {
                   title: "Admin Moderation",
                   desc: "Powerful moderation tools to ensure content quality and compliance.",
                   icon: <Shield className="w-6 h-6" />,
-                  color: "from-orange-500 to-orange-600",
+                  color: "from-purple-500 to-purple-600",
                 },
                 {
                   title: "Scalable Architecture",
@@ -578,9 +578,9 @@ const LandingPage = () => {
                     className="absolute -inset-0.5 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl blur"
                     style={{
                       background: `linear-gradient(to right, ${
-                        feature.color.includes("orange") ? "#f97316" : "#111827"
+                        feature.color.includes("purple") ? "#f97316" : "#111827"
                       }, ${
-                        feature.color.includes("orange") ? "#ea580c" : "#1f2937"
+                        feature.color.includes("purple") ? "#ea580c" : "#1f2937"
                       })`,
                     }}
                   />
@@ -627,7 +627,7 @@ const LandingPage = () => {
         </div>
 
         <motion.div
-          className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-orange-500/20 to-orange-600/20 rounded-full blur-3xl"
+          className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-purple-500/20 to-purple-600/20 rounded-full blur-3xl"
           animate={{
             x: [0, 100, 0],
             y: [0, -100, 0],
@@ -661,7 +661,7 @@ const LandingPage = () => {
         >
           <motion.div variants={fadeUp}>
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full mb-8">
-              <Sparkles className="w-4 h-4 text-orange-300" />
+              <Sparkles className="w-4 h-4 text-purple-300" />
               <span className="text-sm font-medium text-white">
                 Ready to Transform Your Marketing?
               </span>
@@ -670,7 +670,7 @@ const LandingPage = () => {
             <h2 className="text-4xl md:text-6xl font-bold text-white mb-8">
               Start Your Next Campaign with
               <span className="block mt-2">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-orange-300 to-orange-400">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-purple-300 to-purple-400">
                   BrandForge
                 </span>
               </span>
@@ -693,7 +693,7 @@ const LandingPage = () => {
                 boxShadow: "0 25px 50px -12px rgba(249, 115, 22, 0.5)",
               }}
               whileTap={{ scale: 0.98 }}
-              className="group relative px-10 py-5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 overflow-hidden inline-block"
+              className="group relative px-10 py-5 bg-gradient-to-r from-purple-500 to-purple-600 text-white font-semibold rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 overflow-hidden inline-block shadow-purple-600"
             >
               <span className="relative z-10 flex items-center gap-3">
                 <Zap className="w-5 h-5" />
@@ -701,7 +701,7 @@ const LandingPage = () => {
                 <ChevronRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
               </span>
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-orange-600 to-orange-700"
+                className="absolute inset-0 bg-gradient-to-r from-purple-600 to-purple-700"
                 initial={{ x: "-100%" }}
                 whileHover={{ x: 0 }}
                 transition={{ duration: 0.4 }}
