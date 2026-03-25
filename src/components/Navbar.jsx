@@ -27,7 +27,7 @@ const Navbar = () => {
           >
             <div className="text-2xl font-bold">
               <span className="text-gray-900">Brand</span>
-              <span className="text-purple-500">Forge</span>
+              <span className="text-purple-500">forge.</span>
             </div>
           </motion.div>
 
