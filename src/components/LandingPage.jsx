@@ -11,6 +11,7 @@ import {
   Award,
 } from "lucide-react";
 import Navbar from "./Navbar.jsx";
+import SectionDivider from "./SectionDivider.jsx";
 import { REGISTER_URL, LOGIN_URL } from "../config/appUrls.js";
 
 const fadeUp = {
@@ -329,6 +330,8 @@ const LandingPage = () => {
         </motion.div>
       </section>
 
+      <SectionDivider />
+
       {/* HOW IT WORKS */}
       <section id="how-it-works" className="py-32 bg-[#070514] relative">
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a071b] via-[#070514] to-[#0a071b]" />
@@ -502,6 +505,8 @@ const LandingPage = () => {
         </div>
       </section>
 
+      <SectionDivider />
+
       {/* PLATFORM FEATURES */}
       <section
         id="features"
@@ -619,6 +624,8 @@ const LandingPage = () => {
           </motion.div>
         </motion.div>
       </section>
+
+      <SectionDivider />
 
       {/* CTA BANNER */}
       <section className="relative py-32 overflow-hidden">
