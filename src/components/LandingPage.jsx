@@ -103,7 +103,7 @@ const LandingPage = () => {
     }, 4000);
   };
 
-  // Mock campaigns for interactive dashboard demo
+  // Mock campaigns for interactive dashboard demo (Seeded Rich Brand Portfolio)
   const demoBrandCampaigns = [
     {
       id: "c1",
@@ -127,6 +127,36 @@ const LandingPage = () => {
     },
     {
       id: "c3",
+      title: "Real-Time AI Meeting Notes Workflow Reel",
+      brand: "EchoNote AI",
+      reward: "₹45,000",
+      status: "approved",
+      submissionsCount: 19,
+      deadline: "Oct 22, 2026",
+      category: "Tech & SaaS",
+    },
+    {
+      id: "c4",
+      title: "Ceremonial Grade Matcha Morning Latte ASMR",
+      brand: "ZenMatcha Botanicals",
+      reward: "₹22,000",
+      status: "approved",
+      submissionsCount: 11,
+      deadline: "Oct 25, 2026",
+      category: "Food & Beverage",
+    },
+    {
+      id: "c5",
+      title: "UltraFit Pro Smart Band Workout Log Ad",
+      brand: "PulseTech Wearables",
+      reward: "₹35,000",
+      status: "approved",
+      submissionsCount: 16,
+      deadline: "Oct 26, 2026",
+      category: "Fitness Tech",
+    },
+    {
+      id: "c6",
       title: "FinFlow Mobile App 30s Viral Hook Ad",
       brand: "FinFlow Technologies",
       reward: "₹35,000",
@@ -134,6 +164,16 @@ const LandingPage = () => {
       submissionsCount: 0,
       deadline: "Oct 28, 2026",
       category: "Tech & Fintech",
+    },
+    {
+      id: "c7",
+      title: "Full-Grain Italian Leather Cardholder Drop Test",
+      brand: "Atelier Leather Co.",
+      reward: "₹20,000",
+      status: "pending",
+      submissionsCount: 0,
+      deadline: "Nov 02, 2026",
+      category: "D2C Lifestyle",
     },
   ];
 
@@ -166,9 +206,27 @@ const LandingPage = () => {
       submittedTime: "5 hours ago",
       rating: "4.8/5",
     },
+    {
+      id: "sub-3",
+      creatorName: "Rohan Desai",
+      handle: "@rohan_visuals",
+      videoTitle: "Fast-Paced Aesthetic EDC Unpack & Laptop Fit",
+      platform: "⚡ Loom Video",
+      submittedTime: "7 hours ago",
+      rating: "4.9/5",
+    },
+    {
+      id: "sub-4",
+      creatorName: "Sneha Roy",
+      handle: "@snehadigital",
+      videoTitle: "Creamy Froth Pour & Natural Energy Review",
+      platform: "📦 Dropbox Link",
+      submittedTime: "11 hours ago",
+      rating: "5.0/5",
+    },
   ];
 
-  // Campaign Marketplace Live Teasers
+  // Campaign Marketplace Live Teasers (Expanded Brand Dataset)
   const marketplaceCampaigns = [
     {
       id: "m1",
@@ -181,7 +239,7 @@ const LandingPage = () => {
       status: "Active Brief",
       urgent: true,
       tag: "D2C Beverage",
-      guidelines: "9:16 Vertical, energetic coffee brewing hook, natural lighting.",
+      guidelines: "9:16 Vertical, energetic coffee brewing hook, natural morning sunlight.",
     },
     {
       id: "m2",
@@ -194,7 +252,7 @@ const LandingPage = () => {
       status: "High Reward",
       urgent: false,
       tag: "SaaS & AI",
-      guidelines: "Screen capture + talking head, show real-time meeting transcription.",
+      guidelines: "Screen capture + talking head, show real-time meeting transcription in action.",
     },
     {
       id: "m3",
@@ -207,7 +265,7 @@ const LandingPage = () => {
       status: "Trending",
       urgent: true,
       tag: "Beauty & Health",
-      guidelines: "Unboxing + unboxing sachet pour, taste reaction test.",
+      guidelines: "Unboxing + unboxing sachet pour, 7-day before-after honest skin commentary.",
     },
     {
       id: "m4",
@@ -220,7 +278,7 @@ const LandingPage = () => {
       status: "Active Brief",
       urgent: false,
       tag: "Fitness Tech",
-      guidelines: "Gym/Outdoor running footage, heart rate sensor feature highlight.",
+      guidelines: "Gym/Outdoor running footage, heart rate sensor feature highlight with upbeat audio.",
     },
     {
       id: "m5",
@@ -233,7 +291,7 @@ const LandingPage = () => {
       status: "Open to All",
       urgent: false,
       tag: "Men's Lifestyle",
-      guidelines: "ASMR unboxing, RFID blocking showcase, pocket fit check.",
+      guidelines: "ASMR unboxing, RFID blocking showcase, front and back pocket fit check.",
     },
     {
       id: "m6",
@@ -246,7 +304,85 @@ const LandingPage = () => {
       status: "Top Brand",
       urgent: true,
       tag: "Fintech",
-      guidelines: "Relatable monthly salary spending humor, app expense categorizer.",
+      guidelines: "Relatable monthly salary spending humor, app automatic expense categorizer showcase.",
+    },
+    {
+      id: "m7",
+      title: "Ceremonial Matcha Whisking ASMR & 2PM Slump Cure",
+      brand: "ZenMatcha Botanicals",
+      category: "food",
+      reward: "₹24,000",
+      deadline: "In 5 days",
+      submissions: 14,
+      status: "Trending",
+      urgent: true,
+      tag: "Organic Foods",
+      guidelines: "Close-up bamboo whisking sounds, clean aesthetic kitchen setting, sustained focus angle.",
+    },
+    {
+      id: "m8",
+      title: "Silk Peptide Night Repair Cream Rich Texture Demo",
+      brand: "LuxeDerma Labs",
+      category: "beauty",
+      reward: "₹32,000",
+      deadline: "In 8 days",
+      submissions: 19,
+      status: "High Reward",
+      urgent: false,
+      tag: "Skincare Science",
+      guidelines: "Macro texture swatch, skin absorption test, gentle evening wind-down voiceover.",
+    },
+    {
+      id: "m9",
+      title: "Carbon-Fiber Gym Duffel Extreme Durability & Water Test",
+      brand: "Veloce Performance",
+      category: "fitness",
+      reward: "₹26,000",
+      deadline: "In 9 days",
+      submissions: 11,
+      status: "Active Brief",
+      urgent: false,
+      tag: "Athletic Gear",
+      guidelines: "Water splash test on outer fabric, shoe compartment demo, locker fit check.",
+    },
+    {
+      id: "m10",
+      title: "CloudSip Sparkling Adaptogen Tonic Blind Taste Test",
+      brand: "CloudSip Beverages",
+      category: "food",
+      reward: "₹20,000",
+      deadline: "In 4 days",
+      submissions: 17,
+      status: "Trending",
+      urgent: true,
+      tag: "Functional Drinks",
+      guidelines: "Spontaneous friend blind taste reaction, can crack sound, zero-sugar emphasis.",
+    },
+    {
+      id: "m11",
+      title: "DevFlow Cloud Terminal 60s Speedrun Workflow",
+      brand: "DevFlow Systems",
+      category: "tech",
+      reward: "₹50,000",
+      deadline: "In 12 days",
+      submissions: 8,
+      status: "Top Brand",
+      urgent: false,
+      tag: "Developer Tools",
+      guidelines: "Dual screen recording, CLI commands deployment demo, developer humor hook.",
+    },
+    {
+      id: "m12",
+      title: "Waterproof Commuter Trench Coat Monsoon Test Reel",
+      brand: "NordicWeave Studio",
+      category: "lifestyle",
+      reward: "₹27,000",
+      deadline: "In 7 days",
+      submissions: 13,
+      status: "Active Brief",
+      urgent: false,
+      tag: "Urban Apparel",
+      guidelines: "Outdoor rain footage, hydrophobic water beading roll-off, stylish city walking shots.",
     },
   ];
 
@@ -1065,7 +1201,8 @@ const LandingPage = () => {
                 { id: "tech", label: "Tech & SaaS" },
                 { id: "beauty", label: "Beauty & Wellness" },
                 { id: "food", label: "Food & Beverage" },
-                { id: "fitness", label: "Fitness" },
+                { id: "fitness", label: "Fitness & Health" },
+                { id: "lifestyle", label: "D2C Lifestyle" },
               ].map((cat) => (
                 <button
                   key={cat.id}
