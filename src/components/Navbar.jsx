@@ -1,19 +1,42 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ChevronRight, ArrowUpRight, Menu, X, Sparkles, Layers, Flame, Trophy, Calculator, HelpCircle } from "lucide-react";
 import { LOGIN_URL, REGISTER_URL } from "../config/appUrls.js";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+
+  const navLinks = [
+    { label: "Live Demo", id: "live-demo" },
+    { label: "Features", id: "for-brands" },
+    { label: "Campaigns", id: "campaigns-explorer" },
+    { label: "Workflow", id: "how-it-works" },
+    { label: "ROI Calc", id: "roi-calculator" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
-      const totalScroll = document.body.scrollHeight - window.innerHeight;
-      if (totalScroll > 0) {
-        setScrollProgress((window.scrollY / totalScroll) * 100);
+      setScrolled(window.scrollY > 20);
+
+      // Simple active section detection
+      const scrollPosition = window.scrollY + 120;
+      for (const link of navLinks) {
+        const el = document.getElementById(link.id);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            setActiveSection(link.id);
+            break;
+          }
+        }
       }
     };
-    window.addEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -21,135 +44,147 @@ const Navbar = () => {
     setIsOpen(false);
     const element = document.getElementById(sectionId);
     if (element) {
-      window.scrollTo({
-        top: element.offsetTop - 80,
-        behavior: "smooth",
-      });
+      const yOffset = -75;
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
     }
   };
 
   return (
-    <>
-      <nav className="w-full fixed top-0 z-50 bg-[#0a071b]/80 backdrop-blur-md border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="flex items-center gap-2 cursor-pointer"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          >
-            <div className="text-2xl font-bold tracking-tight">
-              <span className="text-white">Brand</span>
-              <span className="text-[#a855f7]">forge.</span>
-            </div>
-          </motion.div>
-
-          <div className="hidden md:flex items-center gap-8">
-            {[
-              { label: "How it works", id: "how-it-works" },
-              { label: "Features", id: "features" },
-            ].map((item) => (
-              <motion.button
-                key={item.id}
-                whileHover={{ y: -2 }}
-                onClick={() => scrollToSection(item.id)}
-                className="text-gray-300 cursor-pointer hover:text-white font-semibold text-sm relative group bg-transparent border-none"
-              >
-                {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#a855f7] group-hover:w-full transition-all duration-300" />
-              </motion.button>
-            ))}
-
-            <div className="flex items-center gap-4 ml-4">
-              <a
-                href={LOGIN_URL}
-                className="px-4 py-2 cursor-pointer text-gray-300 hover:text-white font-semibold text-sm transition-colors text-decoration-none"
-              >
-                Login
-              </a>
-              <motion.a
-                href={REGISTER_URL}
-                whileHover={{ scale: 1.05, boxShadow: "0 0 15px rgba(168, 85, 247, 0.4)" }}
-                whileTap={{ scale: 0.95 }}
-                className="px-5 py-2.5 bg-gradient-to-r from-[#6d28d9] to-[#7c3aed] text-white font-bold rounded-xl cursor-pointer transition-all text-decoration-none text-sm"
-              >
-                Get Started
-              </motion.a>
-            </div>
-          </div>
-
-          <motion.button
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-white/5 border-none bg-transparent cursor-pointer"
-          >
-            <div className="w-6 h-6 relative">
-              <span
-                className={`absolute w-6 h-0.5 bg-white rounded-full transition-all duration-300 ${
-                  isOpen ? "rotate-45 top-3" : "top-2"
-                }`}
-              />
-              <span
-                className={`absolute w-6 h-0.5 bg-white rounded-full top-3 transition-all duration-300 ${
-                  isOpen ? "opacity-0" : ""
-                }`}
-              />
-              <span
-                className={`absolute w-6 h-0.5 bg-white rounded-full transition-all duration-300 ${
-                  isOpen ? "-rotate-45 top-3" : "top-4"
-                }`}
-              />
-            </div>
-          </motion.button>
-        </div>
-
-        <AnimatePresence>
-          {isOpen && (
+    <header className="fixed top-2 sm:top-3 inset-x-0 z-50 px-3 sm:px-6 pointer-events-none">
+      <div className="max-w-5xl mx-auto pointer-events-auto">
+        {/* Floating Compact Glass Island */}
+        <div
+          className={`relative rounded-2xl transition-all duration-300 ${
+            scrolled
+              ? "bg-white/90 backdrop-blur-xl border border-purple-100/90 shadow-[0_8px_30px_rgba(124,58,237,0.08)] py-2 px-3 sm:px-4"
+              : "bg-white/80 backdrop-blur-md border border-purple-100/60 shadow-[0_4px_20px_rgba(0,0,0,0.03)] py-2 px-3 sm:px-4"
+          }`}
+        >
+          <div className="flex items-center justify-between gap-2 sm:gap-4">
+            {/* Compact Brand Logo */}
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden bg-[#0a071b] border-t border-white/5 overflow-hidden"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="flex items-center gap-2.5 cursor-pointer select-none flex-shrink-0"
             >
-              <div className="px-6 py-4 space-y-2">
-                {[
-                  { label: "How it works", id: "how-it-works" },
-                  { label: "Features", id: "features" },
-                ].map((item) => (
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#8B5CF6] via-[#7C3AED] to-[#4F46E5] flex items-center justify-center text-white shadow-[0_2px_10px_rgba(139,92,246,0.35)] flex-shrink-0">
+                <svg
+                  width="17"
+                  height="17"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                  <polyline points="2 17 12 22 22 17" />
+                  <polyline points="2 12 12 17 22 12" />
+                </svg>
+              </div>
+
+              <div className="text-base sm:text-lg font-black tracking-tight text-[#1e1b4b]">
+                Brand<span className="bg-gradient-to-r from-[#7C3AED] to-[#6366F1] bg-clip-text text-transparent">Forge</span>
+              </div>
+            </motion.div>
+
+            {/* Curated Compact Navigation Links (Desktop) */}
+            <nav className="hidden md:flex items-center gap-0.5 lg:gap-1 bg-slate-50/80 p-1 rounded-xl border border-slate-100">
+              {navLinks.map((item) => {
+                const isActive = activeSection === item.id;
+                return (
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className="w-full text-left py-3 px-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-xl font-semibold transition-colors bg-transparent border-none cursor-pointer"
+                    className={`relative px-3 py-1 text-xs font-semibold rounded-lg transition-all duration-150 border-none cursor-pointer ${
+                      isActive
+                        ? "text-[#6d28d9] bg-white shadow-xs font-bold"
+                        : "text-slate-600 hover:text-[#7c3aed] hover:bg-white/60 bg-transparent"
+                    }`}
                   >
                     {item.label}
                   </button>
+                );
+              })}
+            </nav>
+
+            {/* Right Quick Actions */}
+            <div className="hidden sm:flex items-center gap-2 flex-shrink-0">
+              <a
+                href={LOGIN_URL}
+                className="px-3 py-1.5 text-xs font-bold text-slate-700 hover:text-[#7c3aed] hover:bg-purple-50/70 rounded-lg transition-colors"
+              >
+                Sign In
+              </a>
+
+              <motion.a
+                href={REGISTER_URL}
+                whileHover={{ y: -1, boxShadow: "0 4px 16px rgba(124, 58, 237, 0.35)" }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-[#8b5cf6] via-[#7c3aed] to-[#4f46e5] text-white text-xs font-bold shadow-[0_2px_10px_rgba(124,58,237,0.25)] transition-all"
+              >
+                <span>Get Started</span>
+                <ChevronRight className="w-3.5 h-3.5" />
+              </motion.a>
+            </div>
+
+            {/* Mobile Hamburger Button */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden p-1.5 rounded-lg text-slate-700 hover:bg-purple-50 hover:text-[#7c3aed] transition-colors border border-purple-100/60 bg-white/50"
+              aria-label="Toggle navigation menu"
+            >
+              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Dropdown Menu Card */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -6, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -6, scale: 0.98 }}
+              transition={{ duration: 0.18, ease: "easeOut" }}
+              className="md:hidden mt-2 p-3 bg-white/95 backdrop-blur-xl border border-purple-100 rounded-2xl shadow-xl overflow-hidden"
+            >
+              <div className="flex flex-col gap-1">
+                {navLinks.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className="w-full text-left py-2 px-3 rounded-xl text-xs font-bold text-slate-700 hover:text-[#7c3aed] hover:bg-purple-50/80 transition-colors flex items-center justify-between border-none bg-transparent cursor-pointer"
+                  >
+                    <span>{item.label}</span>
+                    <ChevronRight className="w-3.5 h-3.5 text-purple-400" />
+                  </button>
                 ))}
 
-                <div className="pt-4 border-t border-white/5 mt-2 flex flex-col gap-2">
+                <div className="pt-2.5 mt-1 border-t border-purple-100 flex items-center gap-2">
                   <a
                     href={LOGIN_URL}
-                    className="w-full py-3 cursor-pointer text-gray-300 hover:text-white font-semibold block text-center text-decoration-none"
+                    className="flex-1 py-2 text-center text-xs font-bold text-slate-700 hover:text-[#7c3aed] bg-slate-50 hover:bg-purple-50 rounded-xl transition-all"
                   >
-                    Login
+                    Sign In
                   </a>
                   <a
                     href={REGISTER_URL}
-                    className="w-full mt-1 py-3 bg-gradient-to-r from-[#6d28d9] to-[#7c3aed] text-white font-bold rounded-xl cursor-pointer block text-center text-decoration-none"
+                    className="flex-1 py-2 text-center text-xs font-bold text-white bg-gradient-to-r from-[#8b5cf6] via-[#7c3aed] to-[#4f46e5] rounded-xl shadow-sm hover:shadow-purple-500/25 transition-all flex items-center justify-center gap-1"
                   >
-                    Get Started
+                    <span>Get Started</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
                   </a>
                 </div>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
-      </nav>
-
-      <motion.div
-        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-[#6d28d9] to-[#a855f7] z-40"
-        style={{ width: `${scrollProgress}%` }}
-        transition={{ duration: 0.1 }}
-      />
-    </>
+      </div>
+    </header>
   );
 };
 
