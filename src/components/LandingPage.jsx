@@ -1461,29 +1461,15 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-100">
             {/* Logo */}
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#8B5CF6] via-[#7C3AED] to-[#4F46E5] flex items-center justify-center text-white shadow-sm flex-shrink-0">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polygon points="12 2 2 7 12 12 22 7 12 2" />
-                  <polyline points="2 17 12 22 22 17" />
-                  <polyline points="2 12 12 17 22 12" />
-                </svg>
-              </div>
+            <div className="flex items-center gap-2.5">
+              <img
+                src="/favi.png"
+                alt="BrandForge"
+                className="w-8 h-8 rounded-xl object-contain flex-shrink-0 shadow-xs"
+              />
               <div className="flex flex-col">
                 <span className="text-lg font-black text-[#1e1b4b] leading-tight">
                   Brand<span className="bg-gradient-to-r from-[#7C3AED] to-[#6366F1] bg-clip-text text-transparent">Forge</span>
-                </span>
-                <span className="text-[0.62rem] font-bold uppercase tracking-wider text-[#8B5CF6]">
-                  Collab Hub
                 </span>
               </div>
             </div>
