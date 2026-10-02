@@ -553,25 +553,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* =====================================================
-          TRUSTED BRANDS BAR
-      ===================================================== */}
-      <div className="border-y border-slate-100 bg-white/70 py-4">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-            Powering Next-Gen UGC Campaigns
-          </span>
-          <div className="flex flex-wrap items-center justify-center gap-5 text-xs font-bold text-slate-500">
-            <span className="hover:text-purple-700 transition-colors">✨ Aura Botanics</span>
-            <span className="hover:text-purple-700 transition-colors">☕ BrewCraft</span>
-            <span className="hover:text-purple-700 transition-colors">⚡ PulseTech</span>
-            <span className="hover:text-purple-700 transition-colors">🌿 EcoGlow</span>
-            <span className="hover:text-purple-700 transition-colors">🎒 UrbanNomad</span>
-            <span className="hover:text-purple-700 transition-colors">💳 FinSnap</span>
-          </div>
-        </div>
-      </div>
-
       <SectionDivider />
 
       {/* =====================================================
