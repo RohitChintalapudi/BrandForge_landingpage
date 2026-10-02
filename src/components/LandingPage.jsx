@@ -983,6 +983,23 @@ const LandingPage = () => {
       ===================================================== */}
       <section id="for-brands" className="py-12 sm:py-16 relative">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          {/* Section Header */}
+          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-100/70 border border-purple-200 text-[10px] font-bold uppercase tracking-wider text-purple-800 mb-2">
+              <Sparkles className="w-3 h-3 text-purple-600" />
+              <span>Tailored Value Propositions</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#1e1b4b] tracking-tight">
+              Built for High-Growth Brands &{" "}
+              <span className="bg-gradient-to-r from-[#7c3aed] via-[#8b5cf6] to-[#4f46e5] bg-clip-text text-transparent">
+                Elite Creators
+              </span>
+            </h2>
+            <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Whether you are scaling authentic UGC video ads or monetizing your creative storytelling, BrandForge gives you the dedicated tools to win.
+            </p>
+          </div>
+
           <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 items-stretch">
             {/* For Brands Pillar */}
             <div className="bg-white rounded-2xl p-5 sm:p-7 border border-purple-100 shadow-[0_4px_20px_rgba(139,92,246,0.04)] relative overflow-hidden flex flex-col justify-between">
