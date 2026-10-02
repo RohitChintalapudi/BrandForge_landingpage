@@ -418,18 +418,6 @@ const LandingPage = () => {
             variants={staggerContainer}
             className="flex flex-col items-center text-center max-w-3xl mx-auto"
           >
-            {/* Live Announcement Chip */}
-            <motion.div
-              variants={fadeIn}
-              className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/95 border border-purple-200/80 shadow-[0_2px_10px_rgba(139,92,246,0.08)] mb-4 backdrop-blur-md"
-            >
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-[11px] font-bold uppercase tracking-wider text-purple-900">
-                Next-Gen UGC Creator & Brand Marketplace
-              </span>
-              <Sparkles className="w-3 h-3 text-purple-600" />
-            </motion.div>
-
             {/* Main Headline */}
             <motion.h1
               variants={fadeIn}
