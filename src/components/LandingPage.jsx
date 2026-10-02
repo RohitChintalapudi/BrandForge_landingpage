@@ -469,26 +469,25 @@ const LandingPage = () => {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3.5 w-full max-w-sm"
+              className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-md mx-auto"
             >
               <motion.a
                 href={REGISTER_URL}
                 whileHover={{ scale: 1.03, y: -2, boxShadow: "0 10px 25px -3px rgba(124, 58, 237, 0.4)" }}
                 whileTap={{ scale: 0.97 }}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#8b5cf6] via-[#7c3aed] to-[#4f46e5] text-white font-bold text-xs sm:text-sm shadow-[0_4px_18px_rgba(124,58,237,0.3)] transition-all cursor-pointer"
+                className="w-full sm:w-48 h-11 inline-flex items-center justify-center gap-2 px-4 rounded-xl bg-gradient-to-r from-[#8b5cf6] via-[#7c3aed] to-[#4f46e5] text-white font-bold text-xs sm:text-sm shadow-[0_4px_18px_rgba(124,58,237,0.3)] transition-all cursor-pointer whitespace-nowrap"
               >
-                <Building2 className="w-4 h-4" />
+                <Building2 className="w-4 h-4 flex-shrink-0" />
                 <span>Launch a Campaign</span>
-                <ArrowRight className="w-3.5 h-3.5" />
               </motion.a>
 
               <motion.a
                 href={REGISTER_URL}
                 whileHover={{ scale: 1.03, y: -2, backgroundColor: "rgba(255, 255, 255, 1)", borderColor: "rgba(139, 92, 246, 0.5)" }}
                 whileTap={{ scale: 0.97 }}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-white/95 border border-purple-200 text-[#1e1b4b] font-bold text-xs sm:text-sm shadow-xs hover:shadow-sm transition-all cursor-pointer"
+                className="w-full sm:w-48 h-11 inline-flex items-center justify-center gap-2 px-4 rounded-xl bg-white/95 border border-purple-200 text-[#1e1b4b] font-bold text-xs sm:text-sm shadow-xs hover:shadow-sm transition-all cursor-pointer whitespace-nowrap"
               >
-                <Palette className="w-4 h-4 text-[#7c3aed]" />
+                <Palette className="w-4 h-4 text-[#7c3aed] flex-shrink-0" />
                 <span>Join as Creator</span>
               </motion.a>
             </motion.div>
