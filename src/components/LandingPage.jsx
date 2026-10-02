@@ -34,6 +34,7 @@ import {
 } from "lucide-react";
 import Navbar from "./Navbar.jsx";
 import SectionDivider from "./SectionDivider.jsx";
+import ScrollStackWorkflow from "./ScrollStackWorkflow.jsx";
 import { REGISTER_URL, LOGIN_URL } from "../config/appUrls.js";
 
 // Animation Variants
@@ -1412,71 +1413,9 @@ const LandingPage = () => {
       <SectionDivider />
 
       {/* =====================================================
-          6. HOW IT WORKS (3-STEP WORKFLOW)
+          6. HOW IT WORKS (INTERACTIVE SCROLL STACK WORKFLOW)
       ===================================================== */}
-      <section id="how-it-works" className="py-12 sm:py-16 relative bg-slate-50/70">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800 text-[10px] font-bold uppercase tracking-wider mb-2">
-              <Layers className="w-3 h-3 text-purple-600" />
-              <span>Simple 3-Step Process</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-[#1e1b4b] tracking-tight">
-              How BrandForge Operates
-            </h2>
-            <p className="mt-1 text-slate-600 text-xs sm:text-sm">
-              A frictionless collaboration engine connecting brands with top creators.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-5">
-            {[
-              {
-                step: "01",
-                title: "Post or Discover Briefs",
-                desc: "Brands set targeted campaign rules & prize pools. Creators browse verified briefs matching their niche.",
-                badge: "Step 1: Initiation",
-              },
-              {
-                step: "02",
-                title: "Pitch & Review Videos",
-                desc: "Creators submit uncompressed Google Drive or YouTube links. Brands review submissions in a clean dashboard.",
-                badge: "Step 2: Submissions",
-              },
-              {
-                step: "03",
-                title: "Crown Winner & Payout",
-                desc: "Brands crown winning creators with 1-click. Creators get instant payouts and brands gain full ad rights.",
-                badge: "Step 3: Crown & Reward",
-              },
-            ].map((step, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-2xl p-5 border border-purple-100 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:border-purple-300 hover:shadow-md transition-all relative overflow-hidden flex flex-col justify-between"
-              >
-                <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-[#8b5cf6] to-[#4f46e5]" />
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="w-9 h-9 rounded-xl bg-purple-50 border border-purple-100 text-[#7c3aed] font-black text-base flex items-center justify-center">
-                      {step.step}
-                    </span>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-purple-700 bg-purple-50 px-2 py-0.5 rounded-full border border-purple-100">
-                      {step.badge}
-                    </span>
-                  </div>
-                  <h4 className="text-sm sm:text-base font-bold text-[#1e1b4b] mb-1.5">{step.title}</h4>
-                  <p className="text-slate-600 text-xs leading-relaxed">{step.desc}</p>
-                </div>
-
-                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center text-[11px] font-bold text-purple-700">
-                  <CheckCircle2 className="w-3.5 h-3.5 mr-1 text-emerald-600" />
-                  <span>Escrow Protected</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ScrollStackWorkflow />
 
       <SectionDivider />
 
