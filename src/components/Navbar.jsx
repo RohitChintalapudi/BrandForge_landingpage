@@ -57,8 +57,8 @@ const Navbar = () => {
         <div
           className={`relative rounded-2xl transition-all duration-300 ${
             scrolled
-              ? "bg-white/90 backdrop-blur-xl border border-purple-100/90 shadow-[0_8px_30px_rgba(124,58,237,0.08)] py-2 px-3 sm:px-4"
-              : "bg-white/80 backdrop-blur-md border border-purple-100/60 shadow-[0_4px_20px_rgba(0,0,0,0.03)] py-2 px-3 sm:px-4"
+              ? "bg-white/95 backdrop-blur-xl border border-purple-200/90 shadow-[0_12px_32px_-4px_rgba(15,23,42,0.14),0_4px_16px_rgba(124,58,237,0.12)] py-2 px-3 sm:px-4"
+              : "bg-white/90 backdrop-blur-md border border-purple-100/90 shadow-[0_10px_25px_-3px_rgba(15,23,42,0.08),0_4px_12px_rgba(124,58,237,0.08)] py-2 px-3 sm:px-4"
           }`}
         >
           <div className="flex items-center justify-between gap-2 sm:gap-4">
@@ -72,11 +72,14 @@ const Navbar = () => {
               <img
                 src="/favi.png"
                 alt="BrandForge"
-                className="w-8 h-8 rounded-xl object-contain flex-shrink-0 shadow-xs"
+                className="w-8 h-8 rounded-xl object-contain flex-shrink-0 shadow-sm border border-purple-100/80"
               />
 
-              <div className="text-base sm:text-lg font-black tracking-tight text-[#1e1b4b]">
-                Brand<span className="bg-gradient-to-r from-[#7C3AED] to-[#6366F1] bg-clip-text text-transparent">Forge</span>
+              <div className="text-lg sm:text-xl font-black tracking-tight text-[#1e1b4b] leading-none">
+                <span className="font-extrabold text-[#1e1b4b]">Brand</span>
+                <span className="bg-gradient-to-r from-[#7C3AED] via-[#6366F1] to-[#4F46E5] bg-clip-text text-transparent font-black ml-0.5">
+                  Forge
+                </span>
               </div>
             </motion.div>
 
