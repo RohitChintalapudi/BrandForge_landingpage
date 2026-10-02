@@ -1,11 +1,5 @@
-import React, { useRef, useEffect } from "react";
-import {
-  motion,
-  useScroll,
-  useSpring,
-  useTransform,
-} from "framer-motion";
-import Lenis from "lenis";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 import {
   FileCheck,
   Video,
@@ -20,39 +14,43 @@ import {
   Star,
   Play,
   Layers,
+  Award,
+  Sparkle,
 } from "lucide-react";
 import { REGISTER_URL } from "../config/appUrls.js";
 
 const WORKFLOW_STEPS = [
   {
-    id: 1,
-    tabTitle: "01 · Brief Initiation",
+    id: "step-1",
     stepNumber: "01",
+    tabTitle: "01 · Brief Creation",
     badge: "Step 1: Campaign Creation",
     title: "Post Targeted Briefs & Lock Prize Escrow",
     description:
-      "Brands define hooks, talking points, target aspect ratios, and deposit escrow-guaranteed prize pools (₹5,000 to ₹1,00,000+). Verified creators discover briefs tailored to their exact niche within seconds.",
+      "Brands specify exact hooks, talking points, target aspect ratios, and deposit escrow-guaranteed prize pools (₹5,000 to ₹1,00,000+). Verified creators discover briefs tailored to their exact niche within seconds.",
     color: "#FAF5FF",
+    borderTopColor: "#7C3AED",
     accentColor: "#7C3AED",
-    textColor: "#1E1B4B",
+    cardBg: "from-[#faf5ff] to-[#f3e8ff]",
     features: [
       "Custom hook prompts & visual guidelines",
-      "100% Escrow protected bounty pools",
-      "Instant matching with verified creators",
+      "100% Escrow-protected bounty pools",
+      "Instant matching with verified niche creators",
     ],
     visualType: "brief",
   },
   {
-    id: 2,
-    tabTitle: "02 · Video Pitching",
+    id: "step-2",
     stepNumber: "02",
+    tabTitle: "02 · Video Pitching",
     badge: "Step 2: Submissions & Review",
     title: "Receive High-Converting UGC Video Pitches",
     description:
       "Creators submit uncompressed Google Drive, YouTube unlisted, or Loom video concepts without clunky upload limits. Brands stream and review submissions in real-time with automated rating tools.",
     color: "#EEF2FF",
+    borderTopColor: "#4F46E5",
     accentColor: "#4F46E5",
-    textColor: "#1E1B4B",
+    cardBg: "from-[#eef2ff] to-[#e0e7ff]",
     features: [
       "Frictionless public link submissions",
       "Stream raw uncompressed 4K video clips",
@@ -61,16 +59,17 @@ const WORKFLOW_STEPS = [
     visualType: "pitch",
   },
   {
-    id: 3,
-    tabTitle: "03 · Crown & Reward",
+    id: "step-3",
     stepNumber: "03",
+    tabTitle: "03 · Crown & Payout",
     badge: "Step 3: Instant Settlement",
     title: "Crown Winning Creators with Instant Payout",
     description:
       "Brands crown winning video concepts in 1-click. Escrow funds release directly into the creator's bank account within 24 hours, while the brand gains immediate commercial licensing and raw ad-ready assets.",
     color: "#FFFBEB",
+    borderTopColor: "#D97706",
     accentColor: "#D97706",
-    textColor: "#1E1B4B",
+    cardBg: "from-[#fffbeb] to-[#fef3c7]",
     features: [
       "1-Click automated winner selection",
       "Instant 24-hour direct creator payouts",
@@ -80,77 +79,13 @@ const WORKFLOW_STEPS = [
   },
 ];
 
-function buildCardKeyframes(index, totalCards) {
-  const steps = [];
-  const yValues = [];
-  const scaleValues = [];
-  const numTransitions = Math.max(totalCards - 1, 1);
-
-  for (let step = 0; step <= numTransitions; step++) {
-    const progress = step / numTransitions;
-    steps.push(progress);
-
-    if (step < index) {
-      yValues.push(700);
-      scaleValues.push(1);
-    } else if (step === index) {
-      yValues.push(0);
-      scaleValues.push(1);
-    } else {
-      const stackDepth = step - index;
-      yValues.push(-stackDepth * 42);
-      scaleValues.push(1 - stackDepth * 0.04);
-    }
-  }
-
-  if (index === 0) {
-    return {
-      steps,
-      y: yValues,
-      scale: scaleValues,
-    };
-  }
-
-  const entryStart = (index - 1) / numTransitions;
-  const entryEnd = index / numTransitions;
-  const fullSteps = [];
-  const fullY = [];
-  const fullScale = [];
-
-  for (let i = 0; i < steps.length; i++) {
-    if (steps[i] < entryStart) {
-      fullSteps.push(steps[i]);
-      fullY.push(700);
-      fullScale.push(1);
-    }
-  }
-
-  fullSteps.push(entryStart);
-  fullY.push(700);
-  fullScale.push(1);
-
-  for (let i = 0; i < steps.length; i++) {
-    if (steps[i] >= entryEnd) {
-      fullSteps.push(steps[i]);
-      fullY.push(yValues[i]);
-      fullScale.push(scaleValues[i]);
-    }
-  }
-
-  return {
-    steps: fullSteps,
-    y: fullY,
-    scale: fullScale,
-  };
-}
-
 function RenderCardVisual({ type }) {
   if (type === "brief") {
     return (
-      <div className="bg-white rounded-2xl p-5 sm:p-6 border border-purple-200/90 shadow-[0_8px_30px_rgba(124,58,237,0.08)] flex flex-col justify-between h-full relative overflow-hidden">
+      <div className="bg-white rounded-2xl p-4 sm:p-5 border border-purple-200 shadow-[0_4px_20px_rgba(124,58,237,0.06)] flex flex-col justify-between h-full relative overflow-hidden">
         <div className="flex items-center justify-between pb-3 border-b border-slate-100">
           <div className="flex items-center gap-2">
-            <span className="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold">
+            <span className="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-sm">
               🏢
             </span>
             <div>
@@ -158,15 +93,15 @@ function RenderCardVisual({ type }) {
               <div className="text-[10px] text-slate-400">Campaign Brief #BF-2026</div>
             </div>
           </div>
-          <span className="text-[10px] px-2.5 py-1 rounded-full bg-purple-50 text-purple-700 font-bold border border-purple-200">
-            Escrow Locked 🔒
+          <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-purple-50 text-purple-700 font-bold border border-purple-200 flex items-center gap-1">
+            <Lock className="w-2.5 h-2.5" /> Escrow Locked
           </span>
         </div>
 
-        <div className="py-3.5 space-y-2.5">
-          <div className="p-2.5 rounded-xl bg-purple-50/50 border border-purple-100">
-            <span className="text-[10px] font-bold text-purple-900 uppercase block mb-0.5">Required Hook Format</span>
-            <span className="text-xs font-semibold text-slate-800">"3-Second Problem Hook: Why Your Skin Feels Dull in Summer"</span>
+        <div className="py-2.5 space-y-2">
+          <div className="p-2.5 rounded-xl bg-purple-50/60 border border-purple-100">
+            <span className="text-[9px] font-bold text-purple-900 uppercase block mb-0.5">Required Hook Format</span>
+            <span className="text-[11px] font-semibold text-slate-800 line-clamp-1">"3-Second Problem Hook: Why Your Skin Feels Dull in Summer"</span>
           </div>
 
           <div className="grid grid-cols-2 gap-2">
@@ -181,12 +116,12 @@ function RenderCardVisual({ type }) {
           </div>
         </div>
 
-        <div className="pt-3 border-t border-slate-100 flex items-center justify-between bg-purple-50/40 -mx-5 -mb-5 p-4 rounded-b-2xl">
+        <div className="pt-2.5 border-t border-slate-100 flex items-center justify-between bg-purple-50/40 -mx-4 -mb-4 sm:-mx-5 sm:-mb-5 p-3 sm:p-3.5 rounded-b-2xl">
           <div>
             <span className="text-[9px] text-slate-500 font-bold uppercase block">Guaranteed Prize Pool</span>
-            <span className="text-lg font-black text-purple-700">₹30,000</span>
+            <span className="text-base sm:text-lg font-black text-purple-700">₹30,000</span>
           </div>
-          <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100/80 px-2.5 py-1 rounded-full flex items-center gap-1">
+          <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100/80 px-2.5 py-0.5 rounded-full flex items-center gap-1">
             <CheckCircle2 className="w-3 h-3 text-emerald-600" />
             <span>Verified Brief</span>
           </span>
@@ -197,10 +132,10 @@ function RenderCardVisual({ type }) {
 
   if (type === "pitch") {
     return (
-      <div className="bg-white rounded-2xl p-5 sm:p-6 border border-indigo-200/90 shadow-[0_8px_30px_rgba(99,102,241,0.08)] flex flex-col justify-between h-full relative overflow-hidden">
+      <div className="bg-white rounded-2xl p-4 sm:p-5 border border-indigo-200 shadow-[0_4px_20px_rgba(99,102,241,0.06)] flex flex-col justify-between h-full relative overflow-hidden">
         <div className="flex items-center justify-between pb-3 border-b border-slate-100">
           <div className="flex items-center gap-2">
-            <span className="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold">
+            <span className="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-sm">
               🎨
             </span>
             <div>
@@ -208,33 +143,33 @@ function RenderCardVisual({ type }) {
               <div className="text-[10px] text-slate-400">@aarav_creates • Level 2 UGC</div>
             </div>
           </div>
-          <span className="text-[10px] px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 font-bold border border-amber-200 flex items-center gap-1">
-            <Star className="w-3 h-3 fill-amber-400 text-amber-500" /> 4.9 Rating
+          <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-700 font-bold border border-amber-200 flex items-center gap-1">
+            <Star className="w-2.5 h-2.5 fill-amber-400 text-amber-500" /> 4.9 Rating
           </span>
         </div>
 
         {/* Video Player Preview Mockup */}
-        <div className="my-2 p-3 rounded-xl bg-gradient-to-br from-slate-900 to-indigo-950 text-white relative overflow-hidden shadow-inner">
-          <div className="flex items-center justify-between text-[10px] text-indigo-200 mb-2">
-            <span className="font-mono">📁 Google Drive Uncompressed 4K</span>
-            <span className="bg-emerald-500/30 text-emerald-300 px-2 py-0.5 rounded font-bold">Ready</span>
+        <div className="my-1.5 p-3 rounded-xl bg-gradient-to-br from-slate-900 to-indigo-950 text-white relative overflow-hidden shadow-inner">
+          <div className="flex items-center justify-between text-[10px] text-indigo-200 mb-1.5">
+            <span className="font-mono text-[9px]">📁 Google Drive 4K Raw</span>
+            <span className="bg-emerald-500/30 text-emerald-300 px-1.5 py-0.2 rounded text-[9px] font-bold">Ready</span>
           </div>
-          <div className="flex items-center gap-3 py-1">
-            <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white cursor-pointer hover:scale-105 transition-transform">
-              <Play className="w-4 h-4 fill-white translate-x-0.5" />
+          <div className="flex items-center gap-2.5 py-0.5">
+            <div className="w-9 h-9 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white flex-shrink-0">
+              <Play className="w-3.5 h-3.5 fill-white translate-x-0.5" />
             </div>
             <div>
-              <div className="text-xs font-bold text-white">"Vitamin C Texture & AM Routine"</div>
-              <div className="text-[10px] text-slate-300">Duration: 0:34 • Resolution: 2160x3840</div>
+              <div className="text-[11px] font-bold text-white line-clamp-1">"Vitamin C Texture & AM Routine"</div>
+              <div className="text-[9px] text-slate-300">Duration: 0:34 • Resolution: 2160x3840</div>
             </div>
           </div>
         </div>
 
-        <div className="pt-2 flex items-center justify-between text-xs font-bold text-indigo-700">
-          <span className="text-slate-500 text-[11px]">Submission Time: 2h ago</span>
-          <span className="inline-flex items-center gap-1 text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-lg">
-            <CheckCircle2 className="w-3.5 h-3.5 text-indigo-600" />
-            <span>HQ Link Checked</span>
+        <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-indigo-700">
+          <span className="text-slate-500 text-[10px]">Submitted: 2h ago</span>
+          <span className="inline-flex items-center gap-1 text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded text-[10px]">
+            <CheckCircle2 className="w-3 h-3 text-indigo-600" />
+            <span>HQ Link Verified</span>
           </span>
         </div>
       </div>
@@ -242,44 +177,44 @@ function RenderCardVisual({ type }) {
   }
 
   return (
-    <div className="bg-white rounded-2xl p-5 sm:p-6 border border-amber-200/90 shadow-[0_8px_30px_rgba(245,158,11,0.08)] flex flex-col justify-between h-full relative overflow-hidden">
+    <div className="bg-white rounded-2xl p-4 sm:p-5 border border-amber-200 shadow-[0_4px_20px_rgba(245,158,11,0.06)] flex flex-col justify-between h-full relative overflow-hidden">
       <div className="flex items-center justify-between pb-3 border-b border-slate-100">
         <div className="flex items-center gap-2">
           <span className="w-8 h-8 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-sm">
             🏆
           </span>
           <div>
-            <div className="text-xs font-black text-slate-900">Campaign Winner Crowned</div>
-            <div className="text-[10px] text-emerald-600 font-bold">Payout Released Automatically</div>
+            <div className="text-xs font-black text-slate-900">Winner Crowned</div>
+            <div className="text-[10px] text-emerald-600 font-bold">Instant Payout Released</div>
           </div>
         </div>
-        <span className="text-[10px] px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-bold border border-emerald-200">
+        <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-bold border border-emerald-200">
           ₹35,000 Paid
         </span>
       </div>
 
-      <div className="py-3 space-y-2">
-        <div className="p-3 rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <Trophy className="w-5 h-5 text-amber-500" />
+      <div className="py-2 space-y-2">
+        <div className="p-2.5 rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Trophy className="w-4 h-4 text-amber-500 flex-shrink-0" />
             <div>
-              <span className="text-[10px] text-amber-900 font-bold uppercase block">Awarded Creator</span>
-              <span className="text-xs font-black text-slate-900">Priya Menon (@priyaugestudio)</span>
+              <span className="text-[9px] text-amber-900 font-bold uppercase block">Awarded Creator</span>
+              <span className="text-[11px] font-black text-slate-900 line-clamp-1">Priya Menon (@priyaugestudio)</span>
             </div>
           </div>
-          <span className="text-sm font-black text-amber-700">👑 Winner</span>
+          <span className="text-xs font-black text-amber-700">👑 Winner</span>
         </div>
 
-        <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between text-[11px]">
+        <div className="p-2 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between text-[10px]">
           <span className="text-slate-600">Full Commercial Ad License:</span>
-          <span className="font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Granted ✓</span>
+          <span className="font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.2 rounded">Granted ✓</span>
         </div>
       </div>
 
-      <div className="pt-3 border-t border-slate-100 flex items-center justify-between bg-amber-50/40 -mx-5 -mb-5 p-4 rounded-b-2xl">
-        <span className="text-[11px] text-slate-600 font-medium">Bank settlement status:</span>
-        <span className="text-xs font-bold text-emerald-700 flex items-center gap-1">
-          <CheckCircle2 className="w-3.5 h-3.5" />
+      <div className="pt-2.5 border-t border-slate-100 flex items-center justify-between bg-amber-50/40 -mx-4 -mb-4 sm:-mx-5 sm:-mb-5 p-3 sm:p-3.5 rounded-b-2xl">
+        <span className="text-[10px] text-slate-600 font-medium">Bank settlement status:</span>
+        <span className="text-[11px] font-bold text-emerald-700 flex items-center gap-1">
+          <CheckCircle2 className="w-3 h-3" />
           <span>Direct Payout Complete</span>
         </span>
       </div>
@@ -287,195 +222,109 @@ function RenderCardVisual({ type }) {
   );
 }
 
-function AnimatedWorkflowCard({
-  project,
-  index,
-  totalCards,
-  smoothProgress,
-}) {
-  const keyframes = buildCardKeyframes(index, totalCards);
-  const y = useTransform(smoothProgress, keyframes.steps, keyframes.y);
-  const scale = useTransform(smoothProgress, keyframes.steps, keyframes.scale);
-
+export function ScrollStackWorkflow() {
   return (
-    <motion.div
-      style={{
-        y,
-        scale,
-        zIndex: 700 + index * 10,
-        transformOrigin: "center top",
-        willChange: "transform",
-        backfaceVisibility: "hidden",
-        transformStyle: "preserve-3d",
-      }}
-      className="absolute inset-x-0 top-0 w-full select-none"
-    >
-      <div className="relative box-border w-full pt-12 sm:pt-14">
-        {/* Top Tab Pill Header */}
-        <div
-          style={{ backgroundColor: project.color }}
-          className="absolute left-0 top-0 flex h-12 w-48 sm:w-64 items-center rounded-t-2xl px-4 sm:px-6 text-xs sm:text-sm font-bold tracking-tight text-[#1e1b4b] border-t border-l border-r border-purple-200/80 shadow-[inset_0_-1px_0_rgba(0,0,0,0.04)]"
-        >
-          <span className="truncate flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full" style={{ backgroundColor: project.accentColor }} />
-            <span>{project.tabTitle}</span>
-          </span>
+    <section id="how-it-works" className="py-12 sm:py-16 relative bg-[#fafbfc]">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-10">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-100/80 border border-purple-200 text-[10px] font-bold uppercase tracking-wider text-purple-800 mb-2">
+            <Layers className="w-3 h-3 text-purple-600" />
+            <span>Interactive 3-Step Process</span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#1e1b4b] tracking-tight">
+            How BrandForge Operates
+          </h2>
+          <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+            A seamless, escrow-protected collaboration engine connecting brands with elite UGC creators.
+          </p>
         </div>
 
-        {/* Main Card Container */}
-        <div
-          style={{ backgroundColor: project.color }}
-          className="relative grid min-h-[26rem] sm:min-h-[29rem] grid-cols-1 items-center gap-6 overflow-hidden rounded-b-2xl rounded-tr-2xl p-6 sm:p-8 border border-purple-200/90 shadow-[0_12px_36px_-6px_rgba(124,58,237,0.12),inset_0_-2px_4px_-2px_rgba(0,0,0,0.06)] md:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)] md:gap-8"
-        >
-          {/* Left Text Column */}
-          <div className="z-10 flex flex-col items-start gap-3.5">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 border border-purple-200/80 text-[10px] font-bold uppercase tracking-wider text-purple-900 shadow-xs">
-              <span className="font-black text-purple-700">{project.stepNumber}</span>
-              <span>•</span>
-              <span>{project.badge}</span>
-            </div>
+        {/* Stacking Card Deck Container */}
+        <div className="space-y-6 sm:space-y-8 relative">
+          {WORKFLOW_STEPS.map((step, index) => {
+            // Calculate sticky top offset so cards stack neatly
+            const topOffset = 80 + index * 24; // 80px, 104px, 128px
 
-            <h3 className="m-0 text-xl sm:text-2xl lg:text-3xl font-black leading-tight tracking-tight text-[#1e1b4b]">
-              {project.title}
-            </h3>
-
-            <p className="m-0 text-xs sm:text-sm md:text-base font-normal leading-relaxed text-slate-600">
-              {project.description}
-            </p>
-
-            <div className="mt-2 space-y-2 w-full">
-              {project.features.map((feature, fIdx) => (
-                <div key={fIdx} className="flex items-center gap-2 text-xs font-semibold text-slate-700">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
-                  <span>{feature}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-4">
-              <a
-                href={REGISTER_URL}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-[#8b5cf6] to-[#7c3aed] text-white text-xs font-bold shadow-xs hover:shadow-purple-500/30 transition-all cursor-pointer"
+            return (
+              <motion.div
+                key={step.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                style={{
+                  top: `${topOffset}px`,
+                  zIndex: index + 10,
+                }}
+                className="sticky rounded-2xl sm:rounded-3xl border border-purple-200/90 shadow-[0_10px_35px_-5px_rgba(124,58,237,0.1),0_4px_12px_rgba(0,0,0,0.03)] bg-white overflow-hidden transition-shadow"
               >
-                <span>Experience {project.tabTitle.split("·")[1]}</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </a>
-            </div>
-          </div>
+                {/* Top Tab Strip */}
+                <div
+                  style={{ backgroundColor: step.color }}
+                  className="flex items-center justify-between px-4 sm:px-6 py-2.5 border-b border-purple-100/80"
+                >
+                  <div className="flex items-center gap-2">
+                    <span
+                      className="w-2.5 h-2.5 rounded-full"
+                      style={{ backgroundColor: step.accentColor }}
+                    />
+                    <span className="text-xs font-bold text-[#1e1b4b]">
+                      {step.tabTitle}
+                    </span>
+                  </div>
 
-          {/* Right Visual Graphic Column */}
-          <div className="relative w-full h-[18rem] sm:h-[21rem]">
-            <RenderCardVisual type={project.visualType} />
-          </div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-purple-900 bg-white/80 px-2.5 py-0.5 rounded-full border border-purple-200">
+                    {step.badge}
+                  </span>
+                </div>
+
+                {/* Card Content Grid */}
+                <div
+                  style={{ backgroundColor: step.color }}
+                  className="p-5 sm:p-8 grid md:grid-cols-[1.2fr_0.8fr] gap-6 items-center"
+                >
+                  {/* Left Column Text Details */}
+                  <div className="flex flex-col items-start gap-3">
+                    <h3 className="m-0 text-xl sm:text-2xl font-black text-[#1e1b4b] tracking-tight leading-tight">
+                      {step.title}
+                    </h3>
+
+                    <p className="m-0 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                      {step.description}
+                    </p>
+
+                    <div className="mt-1 space-y-1.5 w-full">
+                      {step.features.map((feature, fIdx) => (
+                        <div key={fIdx} className="flex items-center gap-2 text-xs font-semibold text-slate-700">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
+                          <span>{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="mt-3">
+                      <a
+                        href={REGISTER_URL}
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-[#8b5cf6] to-[#7c3aed] text-white text-xs font-bold shadow-xs hover:shadow-purple-500/30 transition-all cursor-pointer"
+                      >
+                        <span>Get Started with {step.tabTitle.split("·")[1]}</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Right Column Visual Graphic */}
+                  <div className="w-full h-[17rem] sm:h-[19rem]">
+                    <RenderCardVisual type={step.visualType} />
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
-    </motion.div>
-  );
-}
-
-export function ScrollStackWorkflow({
-  className = "",
-  enableLenis = false,
-}) {
-  const containerRef = useRef(null);
-
-  useEffect(() => {
-    if (!enableLenis) return;
-
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: "vertical",
-      gestureOrientation: "vertical",
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-    });
-
-    let animationFrameId = 0;
-    const raf = (time) => {
-      lenis.raf(time);
-      animationFrameId = requestAnimationFrame(raf);
-    };
-    animationFrameId = requestAnimationFrame(raf);
-
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-      lenis.destroy();
-    };
-  }, [enableLenis]);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 120,
-    damping: 24,
-    mass: 0.15,
-    restDelta: 0.0001,
-  });
-
-  return (
-    <div id="how-it-works" className={`w-full py-12 sm:py-16 relative bg-[#fafbfc] ${className}`}>
-      {/* Section Header */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 mb-8 text-center">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-100/80 border border-purple-200 text-[10px] font-bold uppercase tracking-wider text-purple-800 mb-2">
-          <Layers className="w-3 h-3 text-purple-600" />
-          <span>Interactive 3-Step Engine</span>
-        </div>
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#1e1b4b] tracking-tight">
-          How BrandForge Operates
-        </h2>
-        <p className="mt-2 text-xs sm:text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
-          A seamless, escrow-protected collaboration engine connecting brands with elite UGC creators.
-        </p>
-
-        <div className="mt-3 flex items-center justify-center gap-2 text-xs font-semibold text-purple-700">
-          <span>Scroll down to experience each step</span>
-          <motion.svg
-            animate={{ y: [0, 4, 0] }}
-            transition={{
-              repeat: Infinity,
-              duration: 1.6,
-              ease: "easeInOut",
-            }}
-            className="h-4 w-4 text-purple-600"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M12 4.75v13.5M6.75 13.75l5.25 5.5 5.25-5.5" />
-          </motion.svg>
-        </div>
-      </div>
-
-      {/* Sticky Stacking Cards Section */}
-      <section
-        ref={containerRef}
-        aria-label="Stacked BrandForge Workflow"
-        className="relative w-full"
-        style={{ height: `${WORKFLOW_STEPS.length * 95}vh` }}
-      >
-        <div className="sticky top-20 sm:top-24 grid min-h-[30rem] w-full place-items-center px-3 sm:px-6">
-          <div className="relative h-[32rem] min-h-[32rem] w-full max-w-5xl overflow-visible">
-            {WORKFLOW_STEPS.map((stepItem, index) => (
-              <AnimatedWorkflowCard
-                key={stepItem.id}
-                project={stepItem}
-                index={index}
-                totalCards={WORKFLOW_STEPS.length}
-                smoothProgress={smoothProgress}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-    </div>
+    </section>
   );
 }
 
