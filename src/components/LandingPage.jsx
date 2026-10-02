@@ -386,10 +386,12 @@ const LandingPage = () => {
     },
   ];
 
-  const filteredMarketplace = marketplaceCampaigns.filter((item) => {
-    if (marketCategory === "all") return true;
-    return item.category === marketCategory;
-  });
+  const filteredMarketplace = marketplaceCampaigns
+    .filter((item) => {
+      if (marketCategory === "all") return true;
+      return item.category === marketCategory;
+    })
+    .slice(0, 6);
 
   // Calculate ROI
   const calculatedVideos = Math.round(brandBudget / 10000);
@@ -1220,6 +1222,17 @@ const LandingPage = () => {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Centered Explore More in Portal Link */}
+          <div className="mt-8 text-center">
+            <a
+              href={REGISTER_URL}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white border border-purple-200 text-[#1e1b4b] text-xs font-bold shadow-xs hover:border-purple-300 hover:shadow-sm hover:text-purple-700 transition-all"
+            >
+              <span>Explore All 24+ Live Opportunities in Creator Portal</span>
+              <ArrowRight className="w-3.5 h-3.5 text-purple-600" />
+            </a>
           </div>
         </div>
       </section>
