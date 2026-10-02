@@ -1,4 +1,4 @@
-import React, { useState, useRef, useLayoutEffect, useEffect } from "react";
+import React, { useState, useRef, useLayoutEffect, useEffect, useCallback } from "react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -18,28 +18,6 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { REGISTER_URL } from "../config/appUrls.js";
-
-export function sliderStep(cardWidth, overlapFactor, cardGap) {
-  return Math.round(cardWidth - cardWidth * overlapFactor + cardGap);
-}
-
-export function snapSliderIndex(offsetX, step, velocity, total) {
-  if (total <= 1) return 0;
-  let index = -offsetX / step;
-  if (velocity < -300) index = Math.ceil(index);
-  else if (velocity > 300) index = Math.floor(index);
-  else index = Math.round(index);
-  return Math.max(0, Math.min(index, total - 1));
-}
-
-export function cardLeave(diff) {
-  const t = Math.min(1, Math.max(0, -diff));
-  return {
-    scale: 1 - t * 0.08,
-    y: t * 16,
-    opacity: 1 - t * 0.15,
-  };
-}
 
 const WORKFLOW_CARDS = [
   {
@@ -132,6 +110,16 @@ const WORKFLOW_CARDS = [
   },
 ];
 
+// Duplicate cards for seamless infinite loop (5 sets = 20 cards)
+const REPEAT_SETS = 5;
+const EXTENDED_CARDS = Array.from({ length: REPEAT_SETS }, (_, setIdx) =>
+  WORKFLOW_CARDS.map((card, cardIdx) => ({
+    ...card,
+    instanceKey: `set-${setIdx}-card-${card.id}`,
+    originalIndex: cardIdx,
+  }))
+).flat();
+
 function CardMockup({ type }) {
   if (type === "brief") {
     return (
@@ -187,7 +175,7 @@ function CardMockup({ type }) {
         {/* Video Player Mockup Strip */}
         <div className="p-2.5 rounded-lg bg-gradient-to-r from-slate-900 to-indigo-950 text-white flex items-center gap-2.5 shadow-xs">
           <div className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-            <Play className="w-3 h-3 fill-white translate-x-0.2" />
+            <Play className="w-3 h-3 fill-white translate-x-0.5" />
           </div>
           <div className="min-w-0 flex-1 text-left">
             <div className="text-[11px] font-bold text-white truncate">Vitamin C AM Routine Hook.mp4</div>
@@ -274,7 +262,13 @@ function CardMockup({ type }) {
 
 export function WorkflowCard({ card, isActive }) {
   return (
-    <div className="relative flex h-full w-full flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl bg-white border border-purple-200/90 shadow-[0_12px_32px_-6px_rgba(124,58,237,0.1),0_4px_16px_rgba(0,0,0,0.03)] p-5 sm:p-6 text-slate-900 select-none transition-all duration-300 hover:border-purple-300 group">
+    <div
+      className={`relative flex h-full w-full flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl bg-white border transition-all duration-300 p-5 sm:p-6 text-slate-900 select-none group ${
+        isActive
+          ? "border-purple-300 shadow-[0_16px_36px_-6px_rgba(124,58,237,0.18),0_4px_16px_rgba(0,0,0,0.04)] ring-2 ring-purple-400/20"
+          : "border-purple-200/90 shadow-[0_10px_28px_-6px_rgba(124,58,237,0.08),0_4px_14px_rgba(0,0,0,0.02)] hover:border-purple-300"
+      }`}
+    >
       {/* Top Accent Gradient Bar */}
       <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${card.gradientBar}`} />
 
@@ -341,103 +335,133 @@ export function WorkflowCard({ card, isActive }) {
 export function ScrollStackWorkflow({
   cardWidth = 350,
   cardHeight = 460,
-  overlapFactor = 0.04,
-  cardGap = 18,
+  cardGap = 20,
   autoLoop = true,
-  loopInterval = 3400,
+  loopInterval = 3200,
 }) {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const baseCount = WORKFLOW_CARDS.length; // 4
+  const middleSetStart = 2 * baseCount; // Index 8 (middle set in 5 sets)
+  
+  const [vIndex, setVIndex] = useState(middleSetStart);
   const [isHovered, setIsHovered] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+
   const trackRef = useRef(null);
-  const offsetRef = useRef(0);
-  const total = WORKFLOW_CARDS.length;
-  const step = sliderStep(cardWidth, overlapFactor, cardGap);
+  const step = cardWidth + cardGap;
+  const vIndexRef = useRef(vIndex);
+  vIndexRef.current = vIndex;
 
   const dragRef = useRef({
     down: false,
     startX: 0,
-    origin: 0,
-    lastX: 0,
-    lastT: 0,
+    currentX: 0,
+    dragOffset: 0,
+    lastTime: 0,
     velocity: 0,
-    moved: 0,
   });
 
-  const apply = (x, animate) => {
-    offsetRef.current = x;
+  const activeRealIndex = ((vIndex % baseCount) + baseCount) % baseCount;
+
+  // Direct helper to position track
+  const setTrackPosition = useCallback((targetIndex, animate = true) => {
     const track = trackRef.current;
     if (!track) return;
-    const transition = animate
-      ? "transform 400ms cubic-bezier(0.22, 1, 0.36, 1)"
-      : "none";
-    track.style.transition = transition;
-    track.style.setProperty("--ox", `${x}px`);
-    const activeExact = -x / step;
 
-    for (let i = 0; i < track.children.length; i++) {
-      const card = track.children[i];
-      const diff = i - activeExact;
-      const leave = cardLeave(diff);
-      card.style.transition = transition;
-      card.style.zIndex = String(i + 1);
-      card.style.setProperty("--y", `${leave.y}px`);
-      card.style.setProperty("--s", String(leave.scale));
-      card.style.setProperty("--op", String(leave.opacity));
+    if (animate) {
+      track.style.transition = "transform 480ms cubic-bezier(0.25, 1, 0.5, 1)";
+      setIsAnimating(true);
+    } else {
+      track.style.transition = "none";
+      setIsAnimating(false);
     }
-  };
 
-  const goTo = (index) => {
-    let next = index;
-    if (next < 0) next = total - 1;
-    if (next >= total) next = 0;
+    const x = -targetIndex * step;
+    track.style.transform = `translate3d(${x}px, 0, 0)`;
+  }, [step]);
 
-    setActiveIndex(next);
-    apply(-next * step, true);
-  };
+  // Handle seamless infinite snapping when transition ends
+  const handleTransitionEnd = useCallback(() => {
+    setIsAnimating(false);
+    const curr = vIndexRef.current;
+    const real = ((curr % baseCount) + baseCount) % baseCount;
+    const normalizedIndex = middleSetStart + real;
 
+    if (curr !== normalizedIndex) {
+      // Instantly snap to the middle set equivalent without animation
+      vIndexRef.current = normalizedIndex;
+      setVIndex(normalizedIndex);
+      setTrackPosition(normalizedIndex, false);
+    }
+  }, [baseCount, middleSetStart, setTrackPosition]);
+
+  // Navigate to target virtual index
+  const goToVIndex = useCallback((newIndex, animate = true) => {
+    vIndexRef.current = newIndex;
+    setVIndex(newIndex);
+    setTrackPosition(newIndex, animate);
+  }, [setTrackPosition]);
+
+  // Navigate to real index (0..3) choosing the shortest path from current vIndex
+  const goToRealIndex = useCallback((targetReal) => {
+    const current = vIndexRef.current;
+    const currentReal = ((current % baseCount) + baseCount) % baseCount;
+    let diff = targetReal - currentReal;
+    if (diff > baseCount / 2) diff -= baseCount;
+    if (diff < -baseCount / 2) diff += baseCount;
+    goToVIndex(current + diff, true);
+  }, [baseCount, goToVIndex]);
+
+  // Initialize track position on mount / resize
   useLayoutEffect(() => {
-    apply(offsetRef.current, false);
-  }, [cardWidth, cardHeight, overlapFactor, cardGap, total]);
+    setTrackPosition(vIndexRef.current, false);
+  }, [setTrackPosition, cardWidth, cardGap]);
 
-  // Autoplay carousel loop with Pause on Hover
+  // Autoplay loop with Pause-on-Hover
   useEffect(() => {
     if (!autoLoop || isHovered) return;
+
     const timer = setInterval(() => {
       if (!dragRef.current.down) {
-        goTo((activeIndex + 1) % total);
+        goToVIndex(vIndexRef.current + 1, true);
       }
     }, loopInterval);
 
     return () => clearInterval(timer);
-  }, [activeIndex, autoLoop, isHovered, loopInterval, total]);
+  }, [autoLoop, isHovered, loopInterval, goToVIndex]);
 
+  // Pointer drag & touch swipe interactions
   const onPointerDown = (e) => {
     if (e.button !== 0) return;
-    const drag = dragRef.current;
-    drag.down = true;
-    drag.startX = e.clientX;
-    drag.origin = offsetRef.current;
-    drag.lastX = e.clientX;
-    drag.lastT = performance.now();
-    drag.velocity = 0;
-    drag.moved = 0;
+    const track = trackRef.current;
+    if (!track) return;
+
+    dragRef.current.down = true;
+    dragRef.current.startX = e.clientX;
+    dragRef.current.currentX = e.clientX;
+    dragRef.current.dragOffset = 0;
+    dragRef.current.lastTime = performance.now();
+    dragRef.current.velocity = 0;
+
+    track.style.transition = "none";
     e.currentTarget.setPointerCapture(e.pointerId);
   };
 
   const onPointerMove = (e) => {
     const drag = dragRef.current;
     if (!drag.down) return;
+
     const now = performance.now();
-    const dt = Math.max(1, now - drag.lastT);
-    drag.velocity = ((e.clientX - drag.lastX) / dt) * 1000;
-    drag.lastX = e.clientX;
-    drag.lastT = now;
-    drag.moved = Math.max(drag.moved, Math.abs(e.clientX - drag.startX));
-    const x = drag.origin + (e.clientX - drag.startX);
-    apply(x, false);
-    const predicted = Math.max(0, Math.min(Math.round(-x / step), total - 1));
-    if (predicted !== activeIndex) {
-      setActiveIndex(predicted);
+    const dt = Math.max(1, now - drag.lastTime);
+    drag.velocity = ((e.clientX - drag.currentX) / dt) * 1000;
+    drag.currentX = e.clientX;
+    drag.lastTime = now;
+
+    drag.dragOffset = e.clientX - drag.startX;
+    const baseX = -vIndexRef.current * step;
+    const currentX = baseX + drag.dragOffset;
+
+    if (trackRef.current) {
+      trackRef.current.style.transform = `translate3d(${currentX}px, 0, 0)`;
     }
   };
 
@@ -446,14 +470,24 @@ export function ScrollStackWorkflow({
     if (!drag.down) return;
     drag.down = false;
     e.currentTarget.releasePointerCapture(e.pointerId);
-    goTo(snapSliderIndex(offsetRef.current, step, drag.velocity, total));
+
+    const moved = drag.dragOffset;
+    let delta = 0;
+
+    if (drag.velocity < -280 || moved < -step * 0.25) {
+      delta = Math.max(1, Math.round(Math.abs(moved) / step) || 1);
+    } else if (drag.velocity > 280 || moved > step * 0.25) {
+      delta = -Math.max(1, Math.round(Math.abs(moved) / step) || 1);
+    }
+
+    goToVIndex(vIndexRef.current + delta, true);
   };
 
   return (
     <section id="how-it-works" className="py-12 sm:py-16 relative bg-[#fafbfc] overflow-hidden">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8">
           <div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-100/80 border border-purple-200 text-[10px] font-bold uppercase tracking-wider text-purple-800 mb-2">
               <Layers className="w-3.5 h-3.5 text-purple-600" />
@@ -463,7 +497,7 @@ export function ScrollStackWorkflow({
               How BrandForge Operates
             </h2>
             <p className="mt-1 text-xs sm:text-sm text-slate-600 max-w-xl">
-              Hover over any card to pause. Drag, swipe, or click through to explore the automated campaign flow.
+              Continuous 4-stage automated pipeline. Hover anywhere to pause, or click and drag to navigate.
             </p>
           </div>
 
@@ -472,7 +506,7 @@ export function ScrollStackWorkflow({
             <button
               type="button"
               aria-label="Previous step"
-              onClick={() => goTo(activeIndex - 1)}
+              onClick={() => goToVIndex(vIndexRef.current - 1, true)}
               className="flex size-9 sm:size-10 items-center justify-center rounded-full bg-white border border-purple-200 text-[#1e1b4b] shadow-xs hover:border-purple-400 hover:bg-purple-50 transition active:scale-95 cursor-pointer"
             >
               <ChevronLeft className="size-4 text-purple-900" strokeWidth={2.5} />
@@ -480,7 +514,7 @@ export function ScrollStackWorkflow({
             <button
               type="button"
               aria-label="Next step"
-              onClick={() => goTo(activeIndex + 1)}
+              onClick={() => goToVIndex(vIndexRef.current + 1, true)}
               className="flex size-9 sm:size-10 items-center justify-center rounded-full bg-gradient-to-r from-[#8b5cf6] to-[#7c3aed] text-white shadow-xs hover:shadow-purple-500/30 transition active:scale-95 cursor-pointer border-none"
             >
               <ChevronRight className="size-4 text-white" strokeWidth={2.5} />
@@ -488,15 +522,19 @@ export function ScrollStackWorkflow({
           </div>
         </div>
 
-        {/* Overlapping Slider Track Container (With Pause on Hover) */}
+        {/* Carousel Outer Track Container (Pause on Hover) */}
         <div
-          className="relative flex w-full select-none flex-col"
+          className="relative w-full select-none"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
+          {/* Subtle Left & Right edge fade gradients for ultra-premium look */}
+          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-8 sm:w-16 bg-gradient-to-r from-[#fafbfc] to-transparent z-10" />
+          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 sm:w-16 bg-gradient-to-l from-[#fafbfc] to-transparent z-10" />
+
           <div
-            className="flex w-full cursor-grab touch-pan-y items-center overflow-hidden py-3 sm:py-5 active:cursor-grabbing"
-            style={{ minHeight: cardHeight + 30 }}
+            className="w-full cursor-grab touch-pan-y overflow-hidden py-4 active:cursor-grabbing"
+            style={{ minHeight: cardHeight + 20 }}
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
             onPointerUp={onPointerUp}
@@ -504,57 +542,65 @@ export function ScrollStackWorkflow({
           >
             <div
               ref={trackRef}
-              className="flex items-center pl-2 sm:pl-6"
-              style={{ transform: "translate3d(var(--ox, 0px), 0, 0)" }}
+              onTransitionEnd={handleTransitionEnd}
+              className="flex items-center"
+              style={{
+                willChange: "transform",
+              }}
             >
-              {WORKFLOW_CARDS.map((card, index) => (
-                <div
-                  key={card.id}
-                  className="shrink-0"
-                  style={{
-                    width: cardWidth,
-                    height: cardHeight,
-                    marginRight: cardGap - cardWidth * overlapFactor,
-                    zIndex: index + 1,
-                    transformOrigin: "50% 90%",
-                    transform: "translateY(var(--y, 0px)) scale(var(--s, 1))",
-                    opacity: "var(--op, 1)",
-                  }}
-                  onClick={() => {
-                    if (dragRef.current.moved < 8) goTo(index);
-                  }}
-                >
-                  <WorkflowCard card={card} isActive={activeIndex === index} />
-                </div>
-              ))}
+              {EXTENDED_CARDS.map((card, idx) => {
+                const isCurrentActive = idx === vIndex;
+                return (
+                  <div
+                    key={card.instanceKey}
+                    className="shrink-0 transition-transform duration-300"
+                    style={{
+                      width: cardWidth,
+                      height: cardHeight,
+                      marginRight: cardGap,
+                    }}
+                    onClick={() => {
+                      if (Math.abs(dragRef.current.dragOffset) < 8) {
+                        goToVIndex(idx, true);
+                      }
+                    }}
+                  >
+                    <WorkflowCard card={card} isActive={isCurrentActive} />
+                  </div>
+                );
+              })}
             </div>
           </div>
 
-          {/* Dots Indicator & Step Progress */}
-          <div className="mt-3 flex items-center justify-between px-3 sm:px-6">
+          {/* Dots Indicator & Real-Time Status */}
+          <div className="mt-4 flex items-center justify-between px-2 sm:px-4">
             <div className="flex items-center gap-2">
               <span className="text-xs font-bold text-slate-500">
-                Step <span className="text-purple-700 font-black">{activeIndex + 1}</span> of {total}
+                Stage <span className="text-purple-700 font-black">{activeRealIndex + 1}</span> of {baseCount}:{" "}
+                <span className="text-slate-800 font-bold hidden sm:inline">
+                  {WORKFLOW_CARDS[activeRealIndex].tabTitle.split("·")[1]}
+                </span>
               </span>
               {isHovered && (
                 <span className="text-[10px] font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded-full border border-purple-200 animate-pulse">
-                  Paused
+                  Paused on Hover
                 </span>
               )}
             </div>
 
+            {/* 4 Interactive Step Indicator Dots */}
             <div className="flex items-center gap-1.5">
               {WORKFLOW_CARDS.map((_, i) => (
                 <button
                   key={i}
                   type="button"
-                  onClick={() => goTo(i)}
-                  className={`h-2 rounded-full transition-all duration-300 border-none cursor-pointer ${
-                    activeIndex === i
-                      ? "w-8 bg-gradient-to-r from-[#8b5cf6] to-[#7c3aed]"
-                      : "w-2 bg-purple-200 hover:bg-purple-300"
+                  onClick={() => goToRealIndex(i)}
+                  className={`h-2.5 rounded-full transition-all duration-300 border-none cursor-pointer ${
+                    activeRealIndex === i
+                      ? "w-8 bg-gradient-to-r from-[#8b5cf6] to-[#7c3aed] shadow-xs shadow-purple-500/30"
+                      : "w-2.5 bg-purple-200 hover:bg-purple-300"
                   }`}
-                  aria-label={`Go to step ${i + 1}`}
+                  aria-label={`Go to stage ${i + 1}`}
                 />
               ))}
             </div>
@@ -566,3 +612,4 @@ export function ScrollStackWorkflow({
 }
 
 export default ScrollStackWorkflow;
+
