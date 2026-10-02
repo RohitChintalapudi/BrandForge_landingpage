@@ -413,40 +413,69 @@ const LandingPage = () => {
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
           <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             className="flex flex-col items-center text-center max-w-3xl mx-auto"
           >
-            {/* Main Headline */}
+            {/* Animated Live Pill Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/95 border border-purple-200/90 shadow-[0_2px_12px_rgba(139,92,246,0.12)] mb-5 backdrop-blur-md hover:border-purple-300 transition-all cursor-default"
+            >
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-xs font-bold tracking-wide bg-gradient-to-r from-purple-900 via-indigo-900 to-purple-800 bg-clip-text text-transparent">
+                The #1 UGC Creator & Brand Marketplace
+              </span>
+              <Sparkles className="w-3.5 h-3.5 text-purple-600 animate-spin" style={{ animationDuration: "8s" }} />
+            </motion.div>
+
+            {/* Main Animated Headline */}
             <motion.h1
-              variants={fadeIn}
-              className="text-3xl sm:text-4xl lg:text-[3.25rem] font-black text-[#1e1b4b] tracking-tight leading-[1.15]"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-3xl sm:text-5xl lg:text-[3.4rem] font-black text-[#1e1b4b] tracking-tight leading-[1.12]"
             >
               Where Top Brands & Creators{" "}
-              <span className="bg-gradient-to-r from-[#7c3aed] via-[#8b5cf6] to-[#4f46e5] bg-clip-text text-transparent">
-                Forge Winning Campaigns
+              <span className="relative inline-block mt-1 sm:mt-0">
+                <span className="bg-gradient-to-r from-[#7c3aed] via-[#9333ea] to-[#4f46e5] bg-clip-text text-transparent">
+                  Forge Winning Campaigns
+                </span>
+                {/* Glowing Underline Accent */}
+                <motion.span
+                  initial={{ width: 0 }}
+                  animate={{ width: "100%" }}
+                  transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+                  className="absolute -bottom-1 left-0 h-1 bg-gradient-to-r from-purple-500 via-indigo-500 to-purple-600 rounded-full opacity-80"
+                />
               </span>
             </motion.h1>
 
-            {/* Subtitle */}
+            {/* Dynamic Subtitle */}
             <motion.p
-              variants={fadeIn}
-              className="mt-3.5 text-xs sm:text-sm md:text-base text-slate-600 max-w-xl leading-relaxed"
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mt-4 text-xs sm:text-base md:text-lg text-slate-600 max-w-2xl leading-relaxed"
             >
-              Launch targeted creative briefs, receive high-converting user-generated video pitches, crown winners in 1-click, and supercharge your organic & paid ad performance.
+              Launch targeted creative briefs, receive authentic user-generated video pitches, crown winners with instant escrow payouts, and supercharge your ad ROAS.
             </motion.p>
 
-            {/* Dual CTA Buttons */}
+            {/* Dual Interactive CTA Buttons */}
             <motion.div
-              variants={fadeIn}
-              className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-sm"
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3.5 w-full max-w-sm"
             >
               <motion.a
                 href={REGISTER_URL}
-                whileHover={{ y: -1, boxShadow: "0 8px 24px rgba(124, 58, 237, 0.32)" }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#8b5cf6] via-[#7c3aed] to-[#4f46e5] text-white font-bold text-xs sm:text-sm shadow-[0_4px_16px_rgba(124,58,237,0.25)] transition-all"
+                whileHover={{ scale: 1.03, y: -2, boxShadow: "0 10px 25px -3px rgba(124, 58, 237, 0.4)" }}
+                whileTap={{ scale: 0.97 }}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#8b5cf6] via-[#7c3aed] to-[#4f46e5] text-white font-bold text-xs sm:text-sm shadow-[0_4px_18px_rgba(124,58,237,0.3)] transition-all cursor-pointer"
               >
                 <Building2 className="w-4 h-4" />
                 <span>Launch a Campaign</span>
@@ -455,9 +484,9 @@ const LandingPage = () => {
 
               <motion.a
                 href={REGISTER_URL}
-                whileHover={{ y: -1, backgroundColor: "rgba(255, 255, 255, 1)", borderColor: "rgba(139, 92, 246, 0.4)" }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-white/95 border border-purple-200 text-[#1e1b4b] font-bold text-xs sm:text-sm shadow-xs hover:shadow-sm transition-all"
+                whileHover={{ scale: 1.03, y: -2, backgroundColor: "rgba(255, 255, 255, 1)", borderColor: "rgba(139, 92, 246, 0.5)" }}
+                whileTap={{ scale: 0.97 }}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-white/95 border border-purple-200 text-[#1e1b4b] font-bold text-xs sm:text-sm shadow-xs hover:shadow-sm transition-all cursor-pointer"
               >
                 <Palette className="w-4 h-4 text-[#7c3aed]" />
                 <span>Join as Creator</span>
@@ -466,18 +495,20 @@ const LandingPage = () => {
 
             {/* Quick Feature Highlights */}
             <motion.div
-              variants={fadeIn}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
               className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-[11px] font-semibold text-slate-500"
             >
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                 <span>Zero agency overhead</span>
               </div>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                 <span>Guaranteed prize pools</span>
               </div>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                 <span>Full commercial usage rights</span>
               </div>
@@ -485,17 +516,19 @@ const LandingPage = () => {
 
             {/* Live Activity Floating Chips Deck */}
             <motion.div
-              variants={fadeIn}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
               className="mt-6 flex flex-wrap items-center justify-center gap-2.5 max-w-2xl"
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/90 border border-purple-100 shadow-xs text-left">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/95 border border-purple-100/90 shadow-xs text-left backdrop-blur-md">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
                 <span className="text-[11px] text-slate-700 font-medium">
                   🏢 <strong>GlowVeda:</strong> Summer Vitamin C Reel • <span className="text-purple-700 font-bold">₹25,000 Pool</span>
                 </span>
               </div>
 
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/90 border border-purple-100 shadow-xs text-left">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/95 border border-purple-100/90 shadow-xs text-left backdrop-blur-md">
                 <Trophy className="w-3.5 h-3.5 text-amber-500" />
                 <span className="text-[11px] text-slate-700 font-medium">
                   🎨 <strong>Aarav Sharma</strong> crowned winner • <span className="text-emerald-600 font-bold">₹35,000 Paid</span>
