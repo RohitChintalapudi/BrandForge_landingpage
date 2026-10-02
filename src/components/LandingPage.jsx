@@ -459,7 +459,7 @@ const LandingPage = () => {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-4 text-xs sm:text-base md:text-lg text-slate-600 max-w-2xl leading-relaxed"
+              className="mt-3 text-xs sm:text-sm text-slate-600 max-w-lg leading-relaxed font-normal"
             >
               Launch targeted creative briefs, receive authentic user-generated video pitches, crown winners with instant escrow payouts, and supercharge your ad ROAS.
             </motion.p>
