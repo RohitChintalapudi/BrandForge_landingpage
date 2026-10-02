@@ -23,7 +23,7 @@ const WORKFLOW_CARDS = [
   {
     id: "step-1",
     stepNumber: "01",
-    tabTitle: "01 · Brief Launch",
+    tabTitle: "Brief Launch",
     role: "Brand Campaign Initiation",
     title: "Post Targeted Briefs & Lock Prize Escrow",
     description:
@@ -38,14 +38,13 @@ const WORKFLOW_CARDS = [
     features: [
       "Custom hook prompts & visual guidelines",
       "100% Escrow-protected prize guarantee",
-      "Instant matching with verified creators",
     ],
     mockupType: "brief",
   },
   {
     id: "step-2",
     stepNumber: "02",
-    tabTitle: "02 · Video Pitch",
+    tabTitle: "Video Pitch",
     role: "Creator Video Pitching",
     title: "Stream Raw 4K Video Pitches in Real-Time",
     description:
@@ -60,14 +59,13 @@ const WORKFLOW_CARDS = [
     features: [
       "Frictionless Drive & YouTube submissions",
       "Stream raw uncompressed 4K video clips",
-      "Side-by-side pitch scoring & review",
     ],
     mockupType: "pitch",
   },
   {
     id: "step-3",
     stepNumber: "03",
-    tabTitle: "03 · Crown & Payout",
+    tabTitle: "Crown & Payout",
     role: "Instant Settlement",
     title: "1-Click Winner Selection & Direct 24h Payout",
     description:
@@ -82,14 +80,13 @@ const WORKFLOW_CARDS = [
     features: [
       "Automated 1-click winner selection",
       "Instant direct creator bank transfers",
-      "Full commercial usage rights certificate",
     ],
     mockupType: "payout",
   },
   {
     id: "step-4",
     stepNumber: "04",
-    tabTitle: "04 · Scale Ad ROAS",
+    tabTitle: "Scale Ad ROAS",
     role: "Ad Deployment",
     title: "Deploy Winning Creatives into Meta & TikTok Ads",
     description:
@@ -104,7 +101,6 @@ const WORKFLOW_CARDS = [
     features: [
       "Clean unwatermarked raw video masters",
       "High CTR ad hooks for Meta & TikTok",
-      "Zero recurring agency retainer fees",
     ],
     mockupType: "growth",
   },
@@ -123,34 +119,36 @@ const EXTENDED_CARDS = Array.from({ length: REPEAT_SETS }, (_, setIdx) =>
 function CardMockup({ type }) {
   if (type === "brief") {
     return (
-      <div className="rounded-xl p-3.5 bg-gradient-to-br from-purple-50/80 via-white to-purple-50/50 border border-purple-100 shadow-xs space-y-2">
-        <div className="flex items-center justify-between text-xs">
-          <span className="font-bold text-[#1e1b4b] flex items-center gap-1.5">
-            <span className="w-5 h-5 rounded-md bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-[10px]">
+      <div className="rounded-xl p-3 bg-gradient-to-br from-purple-50/70 via-white to-purple-50/40 border border-purple-100 shadow-xs space-y-2">
+        <div className="flex items-center justify-between gap-2 text-xs">
+          <div className="flex items-center gap-1.5 min-w-0">
+            <span className="w-5 h-5 rounded-md bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-[10px] flex-shrink-0">
               🏢
             </span>
-            <span>Aura Botanics Summer Reel</span>
-          </span>
-          <span className="text-[10px] font-bold text-purple-700 bg-purple-100/70 px-2 py-0.5 rounded-full">
+            <span className="font-bold text-[#1e1b4b] text-[11px] truncate">
+              Aura Botanics Summer Reel
+            </span>
+          </div>
+          <span className="text-[9px] font-bold text-purple-700 bg-purple-100/80 px-2 py-0.5 rounded-full flex-shrink-0">
             Escrow Locked
           </span>
         </div>
 
-        <div className="p-2 rounded-lg bg-white border border-purple-100 text-[11px] space-y-1">
-          <div className="text-[10px] font-bold text-slate-500 uppercase">Hook Prompt</div>
-          <div className="text-slate-800 font-semibold line-clamp-1">
-            "3-Second Hook: Why Your Skin Feels Dehydrated in Summer"
+        <div className="p-2 rounded-lg bg-white border border-purple-100/90 text-[11px] space-y-0.5">
+          <div className="text-[9px] font-bold text-slate-400 uppercase tracking-wide">Hook Prompt</div>
+          <div className="text-slate-800 font-semibold text-[11px] truncate">
+            "3-Second Hook: Why Your Skin Feels Dehydrated"
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-2 text-center text-[10px]">
-          <div className="p-1.5 rounded-lg bg-white border border-purple-100">
-            <span className="text-slate-400 block font-bold">Aspect Ratio</span>
-            <span className="font-black text-slate-900">9:16 Vertical</span>
+          <div className="p-1.5 rounded-lg bg-white border border-purple-100/80">
+            <span className="text-slate-400 block font-bold text-[9px]">Aspect Ratio</span>
+            <span className="font-black text-slate-800 text-[11px]">9:16 Vertical</span>
           </div>
-          <div className="p-1.5 rounded-lg bg-white border border-purple-100">
-            <span className="text-slate-400 block font-bold">Prize Bounty</span>
-            <span className="font-black text-purple-700">₹30,000</span>
+          <div className="p-1.5 rounded-lg bg-white border border-purple-100/80">
+            <span className="text-slate-400 block font-bold text-[9px]">Prize Bounty</span>
+            <span className="font-black text-purple-700 text-[11px]">₹30,000</span>
           </div>
         </div>
       </div>
@@ -159,32 +157,34 @@ function CardMockup({ type }) {
 
   if (type === "pitch") {
     return (
-      <div className="rounded-xl p-3.5 bg-gradient-to-br from-indigo-50/80 via-white to-indigo-50/50 border border-indigo-100 shadow-xs space-y-2">
-        <div className="flex items-center justify-between text-xs">
-          <span className="font-bold text-[#1e1b4b] flex items-center gap-1.5">
-            <span className="w-5 h-5 rounded-md bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-[10px]">
+      <div className="rounded-xl p-3 bg-gradient-to-br from-indigo-50/70 via-white to-indigo-50/40 border border-indigo-100 shadow-xs space-y-2">
+        <div className="flex items-center justify-between gap-2 text-xs">
+          <div className="flex items-center gap-1.5 min-w-0">
+            <span className="w-5 h-5 rounded-md bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-[10px] flex-shrink-0">
               🎨
             </span>
-            <span>Aarav Sharma (@aarav_creates)</span>
-          </span>
-          <span className="text-[10px] font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full flex items-center gap-0.5">
+            <span className="font-bold text-[#1e1b4b] text-[11px] truncate">
+              Aarav Sharma (@aarav_creates)
+            </span>
+          </div>
+          <span className="text-[9px] font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full flex items-center gap-0.5 flex-shrink-0">
             <Star className="w-2.5 h-2.5 fill-amber-400 text-amber-500" /> 4.9
           </span>
         </div>
 
         {/* Video Player Mockup Strip */}
-        <div className="p-2.5 rounded-lg bg-gradient-to-r from-slate-900 to-indigo-950 text-white flex items-center gap-2.5 shadow-xs">
-          <div className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+        <div className="p-2 rounded-lg bg-gradient-to-r from-slate-900 to-indigo-950 text-white flex items-center gap-2.5 shadow-xs">
+          <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
             <Play className="w-3 h-3 fill-white translate-x-0.5" />
           </div>
           <div className="min-w-0 flex-1 text-left">
-            <div className="text-[11px] font-bold text-white truncate">Vitamin C AM Routine Hook.mp4</div>
+            <div className="text-[11px] font-bold text-white truncate">Vitamin C Routine.mp4</div>
             <div className="text-[9px] text-indigo-200">Google Drive 4K Raw • 0:34s</div>
           </div>
         </div>
 
         <div className="flex items-center justify-between text-[10px] px-1 font-semibold text-slate-500">
-          <span>Format: Uncompressed 4K</span>
+          <span>Format: 4K Raw Master</span>
           <span className="text-emerald-600 font-bold flex items-center gap-1">
             <CheckCircle2 className="w-3 h-3" /> Ready for Review
           </span>
@@ -195,32 +195,32 @@ function CardMockup({ type }) {
 
   if (type === "payout") {
     return (
-      <div className="rounded-xl p-3.5 bg-gradient-to-br from-amber-50/80 via-white to-amber-50/50 border border-amber-200 shadow-xs space-y-2">
-        <div className="flex items-center justify-between text-xs">
-          <span className="font-bold text-[#1e1b4b] flex items-center gap-1.5">
-            <span className="w-5 h-5 rounded-md bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-[10px]">
+      <div className="rounded-xl p-3 bg-gradient-to-br from-amber-50/70 via-white to-amber-50/40 border border-amber-200 shadow-xs space-y-2">
+        <div className="flex items-center justify-between gap-2 text-xs">
+          <div className="flex items-center gap-1.5 min-w-0">
+            <span className="w-5 h-5 rounded-md bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-[10px] flex-shrink-0">
               👑
             </span>
-            <span>Winner Crowned</span>
-          </span>
-          <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100/80 px-2 py-0.5 rounded-full">
+            <span className="font-bold text-[#1e1b4b] text-[11px] truncate">Winner Crowned</span>
+          </div>
+          <span className="text-[9px] font-bold text-emerald-700 bg-emerald-100/80 px-2 py-0.5 rounded-full flex-shrink-0">
             Paid in 24h ✓
           </span>
         </div>
 
-        <div className="p-2.5 rounded-lg bg-white border border-amber-200 flex items-center justify-between text-left">
-          <div className="flex items-center gap-2">
+        <div className="p-2 rounded-lg bg-white border border-amber-200 flex items-center justify-between text-left">
+          <div className="flex items-center gap-2 min-w-0">
             <Trophy className="w-4 h-4 text-amber-500 flex-shrink-0" />
-            <div>
-              <span className="text-[9px] font-bold text-slate-400 uppercase block">Crowned Creator</span>
-              <span className="text-xs font-bold text-slate-900">Priya Menon (@priyaugestudio)</span>
+            <div className="min-w-0">
+              <span className="text-[8px] font-bold text-slate-400 uppercase block">Crowned Creator</span>
+              <span className="text-[11px] font-bold text-slate-900 truncate block">Priya Menon (@priya)</span>
             </div>
           </div>
-          <span className="text-xs font-black text-emerald-600">₹35,000</span>
+          <span className="text-xs font-black text-emerald-600 flex-shrink-0">₹35,000</span>
         </div>
 
         <div className="flex items-center justify-between text-[10px] px-1 font-semibold text-slate-600">
-          <span>Full Commercial License:</span>
+          <span>Usage License:</span>
           <span className="text-emerald-700 font-bold">100% Granted</span>
         </div>
       </div>
@@ -228,27 +228,27 @@ function CardMockup({ type }) {
   }
 
   return (
-    <div className="rounded-xl p-3.5 bg-gradient-to-br from-emerald-50/80 via-white to-emerald-50/50 border border-emerald-200 shadow-xs space-y-2">
-      <div className="flex items-center justify-between text-xs">
-        <span className="font-bold text-[#1e1b4b] flex items-center gap-1.5">
-          <span className="w-5 h-5 rounded-md bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-[10px]">
+    <div className="rounded-xl p-3 bg-gradient-to-br from-emerald-50/70 via-white to-emerald-50/40 border border-emerald-200 shadow-xs space-y-2">
+      <div className="flex items-center justify-between gap-2 text-xs">
+        <div className="flex items-center gap-1.5 min-w-0">
+          <span className="w-5 h-5 rounded-md bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-[10px] flex-shrink-0">
             🚀
           </span>
-          <span>Meta & TikTok Ad Scaling</span>
-        </span>
-        <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100/80 px-2 py-0.5 rounded-full">
+          <span className="font-bold text-[#1e1b4b] text-[11px] truncate">Meta & TikTok Ad Scaling</span>
+        </div>
+        <span className="text-[9px] font-bold text-emerald-700 bg-emerald-100/80 px-2 py-0.5 rounded-full flex-shrink-0">
           3.4x ROAS
         </span>
       </div>
 
-      <div className="p-2.5 rounded-lg bg-white border border-emerald-100 grid grid-cols-2 gap-2 text-center text-[10px]">
+      <div className="p-2 rounded-lg bg-white border border-emerald-100 grid grid-cols-2 gap-2 text-center text-[10px]">
         <div>
-          <span className="text-slate-400 block font-bold">Average CTR</span>
-          <span className="text-sm font-black text-emerald-600">+148%</span>
+          <span className="text-slate-400 block font-bold text-[9px]">Average CTR</span>
+          <span className="text-xs font-black text-emerald-600">+148%</span>
         </div>
         <div>
-          <span className="text-slate-400 block font-bold">Cost Per Click</span>
-          <span className="text-sm font-black text-purple-700">-42% CPA</span>
+          <span className="text-slate-400 block font-bold text-[9px]">Cost Per Click</span>
+          <span className="text-xs font-black text-purple-700">-42% CPA</span>
         </div>
       </div>
 
@@ -263,7 +263,7 @@ function CardMockup({ type }) {
 export function WorkflowCard({ card, isActive }) {
   return (
     <div
-      className={`relative flex h-full w-full flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl bg-white border transition-all duration-300 p-5 sm:p-6 text-slate-900 select-none group ${
+      className={`relative flex h-full w-full flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl bg-white border transition-all duration-300 p-5 sm:p-5.5 text-slate-900 select-none group ${
         isActive
           ? "border-purple-300 shadow-[0_16px_36px_-6px_rgba(124,58,237,0.18),0_4px_16px_rgba(0,0,0,0.04)] ring-2 ring-purple-400/20"
           : "border-purple-200/90 shadow-[0_10px_28px_-6px_rgba(124,58,237,0.08),0_4px_14px_rgba(0,0,0,0.02)] hover:border-purple-300"
@@ -274,8 +274,8 @@ export function WorkflowCard({ card, isActive }) {
 
       {/* Top Header Pill & Step Number */}
       <div>
-        <div className="flex items-center justify-between gap-2 mb-3">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-50 border border-purple-200/80 text-[10px] font-bold tracking-wide text-purple-900">
+        <div className="flex items-center justify-between gap-2 mb-2.5">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-purple-50 border border-purple-200/80 text-[10px] font-bold tracking-wide text-purple-900">
             <span className="font-black text-purple-700">{card.stepNumber}</span>
             <span>•</span>
             <span>{card.tabTitle}</span>
@@ -290,7 +290,7 @@ export function WorkflowCard({ card, isActive }) {
         <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">
           {card.role}
         </div>
-        <h3 className="text-base sm:text-lg font-black leading-snug tracking-tight text-[#1e1b4b] mb-1.5 group-hover:text-purple-700 transition-colors">
+        <h3 className="text-base sm:text-[17px] font-black leading-snug tracking-tight text-[#1e1b4b] mb-1.5 group-hover:text-purple-700 transition-colors">
           {card.title}
         </h3>
         <p className="text-xs text-slate-600 leading-relaxed font-normal line-clamp-2">
@@ -299,22 +299,22 @@ export function WorkflowCard({ card, isActive }) {
       </div>
 
       {/* Middle Interactive Mockup Component */}
-      <div className="my-3">
+      <div className="my-2.5">
         <CardMockup type={card.mockupType} />
       </div>
 
       {/* Feature Bullet Points */}
-      <div className="space-y-1 my-1">
-        {card.features.slice(0, 2).map((feat, idx) => (
+      <div className="space-y-1.5 my-1">
+        {card.features.map((feat, idx) => (
           <div key={idx} className="flex items-center gap-1.5 text-[11px] font-medium text-slate-600">
-            <CheckCircle2 className="w-3 h-3 text-emerald-600 flex-shrink-0" />
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
             <span className="truncate">{feat}</span>
           </div>
         ))}
       </div>
 
       {/* Bottom Card Footer */}
-      <div className="pt-3 mt-2 border-t border-slate-100 flex items-center justify-between gap-2">
+      <div className="pt-3 mt-auto border-t border-slate-100 flex items-center justify-between gap-2">
         <div>
           <span className="text-[9px] text-slate-400 uppercase font-bold block">{card.highlightLabel}</span>
           <span className="text-xs sm:text-sm font-black text-purple-800">{card.highlightValue}</span>
@@ -322,7 +322,7 @@ export function WorkflowCard({ card, isActive }) {
 
         <a
           href={REGISTER_URL}
-          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#8b5cf6] to-[#7c3aed] text-white text-xs font-bold shadow-xs hover:shadow-purple-500/30 transition-all cursor-pointer"
+          className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-[#8b5cf6] to-[#7c3aed] text-white text-xs font-bold shadow-xs hover:shadow-purple-500/30 transition-all cursor-pointer"
         >
           <span>Explore</span>
           <ArrowRight className="w-3 h-3" />
@@ -334,7 +334,7 @@ export function WorkflowCard({ card, isActive }) {
 
 export function ScrollStackWorkflow({
   cardWidth = 350,
-  cardHeight = 460,
+  cardHeight = 490,
   cardGap = 20,
   autoLoop = true,
   loopInterval = 3200,
@@ -578,7 +578,7 @@ export function ScrollStackWorkflow({
               <span className="text-xs font-bold text-slate-500">
                 Stage <span className="text-purple-700 font-black">{activeRealIndex + 1}</span> of {baseCount}:{" "}
                 <span className="text-slate-800 font-bold hidden sm:inline">
-                  {WORKFLOW_CARDS[activeRealIndex].tabTitle.split("·")[1]}
+                  {WORKFLOW_CARDS[activeRealIndex].tabTitle}
                 </span>
               </span>
               {isHovered && (
