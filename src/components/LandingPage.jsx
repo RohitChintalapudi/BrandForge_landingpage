@@ -558,9 +558,9 @@ const LandingPage = () => {
       {/* =====================================================
           2. INTERACTIVE LIVE DASHBOARD PREVIEW (BRAND & CREATOR PORTALS)
       ===================================================== */}
-      <section id="live-demo" className="py-12 sm:py-16 relative">
+      <section id="live-demo" className="py-10 sm:py-14 relative">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="text-center max-w-2xl mx-auto mb-8">
+          <div className="text-center max-w-2xl mx-auto mb-6">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-100/70 border border-purple-200 text-[10px] font-bold uppercase tracking-wider text-purple-800 mb-2">
               <Sparkles className="w-3 h-3 text-purple-600" />
               <span>Interactive Command Experience</span>
@@ -568,12 +568,12 @@ const LandingPage = () => {
             <h2 className="text-2xl sm:text-3xl font-black text-[#1e1b4b] tracking-tight">
               Experience the Dashboard in Action
             </h2>
-            <p className="mt-1.5 text-xs sm:text-sm text-slate-600">
+            <p className="mt-1 text-xs sm:text-sm text-slate-600">
               Toggle between the dual portals to explore how Brands manage campaigns and how Creators discover and pitch winning concepts.
             </p>
 
             {/* Portal Switcher Tabs */}
-            <div className="mt-5 inline-flex p-1 rounded-xl bg-white border border-purple-200 shadow-xs">
+            <div className="mt-4 inline-flex p-1 rounded-xl bg-white border border-purple-200 shadow-xs">
               <button
                 onClick={() => setDashboardView("brand")}
                 className={`flex items-center gap-2 px-4 py-1.5 rounded-lg font-bold text-xs cursor-pointer border-none transition-all ${
@@ -600,10 +600,10 @@ const LandingPage = () => {
             </div>
           </div>
 
-          {/* Interactive Mockup Container */}
-          <div className="bg-[#f8fafc] rounded-2xl border border-purple-200/80 shadow-[0_10px_30px_rgba(139,92,246,0.08)] p-3.5 sm:p-6 relative overflow-hidden">
+          {/* Symmetrical Rectangular Mockup Card */}
+          <div className="bg-[#f8fafc] rounded-2xl border border-purple-200/90 shadow-[0_12px_32px_-4px_rgba(139,92,246,0.12),0_4px_12px_rgba(0,0,0,0.04)] p-3.5 sm:p-5 relative overflow-hidden">
             {/* Top Mockup Browser Chrome */}
-            <div className="flex items-center justify-between pb-3.5 mb-4 border-b border-purple-100">
+            <div className="flex items-center justify-between pb-3 mb-3.5 border-b border-purple-100">
               <div className="flex items-center gap-1.5">
                 <div className="w-2.5 h-2.5 rounded-full bg-rose-400" />
                 <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
@@ -622,236 +622,161 @@ const LandingPage = () => {
 
             {/* VIEW A: BRAND DASHBOARD MOCKUP */}
             {dashboardView === "brand" && (
-              <div className="space-y-4">
-                {/* Brand Welcome Banner */}
-                <div className="rounded-xl p-4 sm:p-5 text-white relative overflow-hidden bg-gradient-to-br from-[#1e1b4b] via-[#31104b] to-[#180d38] border border-purple-500/30 shadow-sm">
-                  <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-3">
-                    <div className="max-w-md">
-                      <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/10 border border-white/20 text-[10px] font-bold text-indigo-200 mb-1.5 backdrop-blur-md">
-                        <span>🏢 Brand Management Portal</span>
+              <div className="space-y-3.5">
+                {/* Brand Header Banner */}
+                <div className="rounded-xl p-3.5 sm:p-4 text-white relative overflow-hidden bg-gradient-to-r from-[#1e1b4b] via-[#31104b] to-[#1e1b4b] border border-purple-500/30 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-purple-600/30 border border-purple-400/40 flex items-center justify-center text-lg shadow-inner">
+                      🏢
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h3 className="text-sm sm:text-base font-black text-white">EcoGlow Organics</h3>
+                        <span className="px-2 py-0.5 rounded bg-purple-500/30 text-purple-200 text-[9px] font-bold border border-purple-400/30">
+                          Brand Verified
+                        </span>
                       </div>
-                      <h3 className="text-lg sm:text-xl font-black text-white">
-                        Welcome back, EcoGlow Brands 👋
-                      </h3>
-                      <p className="mt-0.5 text-xs text-slate-300">
-                        Create high-impact creator campaigns, monitor submissions in real-time, and crown top talent.
+                      <p className="text-[11px] text-slate-300">
+                        Managing 4 active campaigns • 46 submissions received
                       </p>
                     </div>
+                  </div>
 
-                    <div>
-                      <a
-                        href={REGISTER_URL}
-                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-[#a855f7] to-[#7c3aed] text-white font-bold text-xs shadow-sm hover:shadow-purple-500/40 transition-all"
-                      >
-                        <span className="text-sm leading-none font-bold">+</span>
-                        <span>Create Campaign</span>
-                      </a>
-                    </div>
+                  <a
+                    href={REGISTER_URL}
+                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#8b5cf6] to-[#7c3aed] text-white font-bold text-xs shadow-xs hover:shadow-purple-500/30 transition-all self-start sm:self-auto"
+                  >
+                    <span>+ New Campaign</span>
+                  </a>
+                </div>
+
+                {/* 4 Metric Stats Grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                  <div className="bg-white rounded-xl p-2.5 border border-purple-100 shadow-xs">
+                    <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Total Briefs</div>
+                    <div className="text-xl font-black text-[#1e1b4b]">18</div>
+                    <div className="text-[9px] text-slate-500">Active portfolio</div>
+                  </div>
+                  <div className="bg-white rounded-xl p-2.5 border border-purple-100 shadow-xs">
+                    <div className="text-[9px] font-bold uppercase tracking-wider text-emerald-600">Live Campaigns</div>
+                    <div className="text-xl font-black text-emerald-600">12</div>
+                    <div className="text-[9px] text-slate-500">Open for pitches</div>
+                  </div>
+                  <div className="bg-white rounded-xl p-2.5 border border-purple-100 shadow-xs">
+                    <div className="text-[9px] font-bold uppercase tracking-wider text-amber-600">Pending Review</div>
+                    <div className="text-xl font-black text-amber-600">2</div>
+                    <div className="text-[9px] text-slate-500">Awaiting approval</div>
+                  </div>
+                  <div className="bg-white rounded-xl p-2.5 border border-purple-200 shadow-xs bg-purple-50/40">
+                    <div className="text-[9px] font-bold uppercase tracking-wider text-purple-700">Submissions</div>
+                    <div className="text-xl font-black text-[#7c3aed]">46</div>
+                    <div className="text-[9px] text-purple-600 font-medium">Video concepts</div>
                   </div>
                 </div>
 
-                {/* Metrics Grid */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5">
-                  <div className="bg-white rounded-xl p-3.5 border border-purple-100 shadow-xs">
-                    <div className="flex justify-between items-center mb-0.5">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Total Campaigns</span>
-                      <span className="text-[9px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 font-bold">All-time</span>
-                    </div>
-                    <div className="text-2xl font-black text-[#1e1b4b]">18</div>
-                    <div className="text-[10px] text-slate-500">Active portfolio</div>
-                  </div>
-
-                  <div className="bg-white rounded-xl p-3.5 border border-purple-100 shadow-xs">
-                    <div className="flex justify-between items-center mb-0.5">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Live & Approved</span>
-                      <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 font-bold border border-emerald-200">Live</span>
-                    </div>
-                    <div className="text-2xl font-black text-emerald-600">12</div>
-                    <div className="text-[10px] text-slate-500">Open submissions</div>
-                  </div>
-
-                  <div className="bg-white rounded-xl p-3.5 border border-purple-100 shadow-xs">
-                    <div className="flex justify-between items-center mb-0.5">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Pending Review</span>
-                      <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-50 text-amber-700 font-bold border border-amber-200">Review</span>
-                    </div>
-                    <div className="text-2xl font-black text-amber-600">2</div>
-                    <div className="text-[10px] text-slate-500">Admin verification</div>
-                  </div>
-
-                  <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-3.5 border border-purple-200 shadow-xs">
-                    <div className="flex justify-between items-center mb-0.5">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-purple-700">Total Submissions</span>
-                      <span className="text-[9px] px-1.5 py-0.5 rounded bg-purple-200/60 text-purple-900 font-bold">Pitches</span>
-                    </div>
-                    <div className="text-2xl font-black text-[#7c3aed]">46</div>
-                    <div className="text-[10px] text-purple-700">Video concepts</div>
-                  </div>
-                </div>
-
-                {/* Campaign Explorer Controls & Table/Cards */}
-                <div className="bg-white rounded-xl p-4 border border-purple-100 shadow-xs space-y-4">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                    <div className="flex items-center gap-2">
-                      <h4 className="text-sm font-black text-[#1e1b4b]">Active Brand Campaigns</h4>
-                      <span className="px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 text-[10px] font-bold">
-                        {filteredDemoCampaigns.length}
+                {/* Two Column Grid: Left Campaigns / Right Winner Simulation */}
+                <div className="grid md:grid-cols-2 gap-3">
+                  {/* Left Column: Active Campaigns List */}
+                  <div className="bg-white rounded-xl p-3.5 border border-purple-100 shadow-xs flex flex-col justify-between">
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="text-xs font-black text-[#1e1b4b] flex items-center gap-1.5">
+                        <Layers className="w-3.5 h-3.5 text-purple-600" />
+                        <span>Active Briefs</span>
+                      </h4>
+                      <span className="text-[10px] font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded-full">
+                        2 Live
                       </span>
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-2">
-                      {/* Search */}
-                      <div className="relative">
-                        <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
-                        <input
-                          type="text"
-                          placeholder="Search campaigns..."
-                          value={demoSearchQuery}
-                          onChange={(e) => setDemoSearchQuery(e.target.value)}
-                          className="pl-8 pr-2.5 py-1 rounded-lg border border-slate-200 text-xs font-medium focus:outline-none focus:border-purple-500 bg-slate-50"
-                        />
+                    <div className="space-y-2">
+                      <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-purple-200 transition-all flex items-center justify-between">
+                        <div>
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">Live</span>
+                            <span className="text-[11px] font-bold text-slate-900 line-clamp-1">Summer Glow Vitamin C Reel</span>
+                          </div>
+                          <span className="text-[10px] text-purple-700 font-semibold mt-0.5 block">₹25,000 Prize Pool • 14 Pitches</span>
+                        </div>
+                        <span className="text-[10px] text-slate-400 font-mono">Oct 15</span>
                       </div>
 
-                      {/* Filter Pills */}
-                      <div className="flex items-center p-0.5 bg-slate-100 rounded-lg">
-                        {["all", "approved", "pending"].map((filterKey) => (
-                          <button
-                            key={filterKey}
-                            onClick={() => setDemoBrandFilter(filterKey)}
-                            className={`px-2.5 py-0.5 rounded-md text-[11px] font-bold capitalize transition-all border-none cursor-pointer ${
-                              demoBrandFilter === filterKey
-                                ? "bg-white text-purple-800 shadow-xs"
-                                : "bg-transparent text-slate-500 hover:text-slate-900"
-                            }`}
-                          >
-                            {filterKey}
-                          </button>
-                        ))}
+                      <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-purple-200 transition-all flex items-center justify-between">
+                        <div>
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">Live</span>
+                            <span className="text-[11px] font-bold text-slate-900 line-clamp-1">Hydrating Lip Oil 15s Hook</span>
+                          </div>
+                          <span className="text-[10px] text-purple-700 font-semibold mt-0.5 block">₹18,000 Prize Pool • 9 Pitches</span>
+                        </div>
+                        <span className="text-[10px] text-slate-400 font-mono">Oct 20</span>
                       </div>
+                    </div>
+
+                    <div className="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px]">
+                      <span className="text-slate-500 font-medium">Total Escrow: <strong>₹43,000</strong></span>
+                      <a href={LOGIN_URL} className="text-purple-700 font-bold hover:underline flex items-center gap-0.5">
+                        <span>View all</span>
+                        <ArrowUpRight className="w-3 h-3" />
+                      </a>
                     </div>
                   </div>
 
-                  {/* Campaign Cards Grid */}
-                  <div className="grid md:grid-cols-3 gap-3">
-                    {filteredDemoCampaigns.map((camp) => (
-                      <div
-                        key={camp.id}
-                        className="rounded-xl p-3 border border-purple-100/90 bg-slate-50/50 hover:bg-white hover:border-purple-300 hover:shadow-xs transition-all flex flex-col justify-between"
-                      >
-                        <div>
-                          <div className="flex items-center justify-between mb-1.5">
-                            <span
-                              className={`text-[9px] px-1.5 py-0.5 rounded font-bold uppercase ${
-                                camp.status === "approved"
-                                  ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
-                                  : "bg-amber-50 text-amber-700 border border-amber-200"
+                  {/* Right Column: Winner Crowning Simulation */}
+                  <div className="bg-gradient-to-br from-purple-50/60 to-indigo-50/60 rounded-xl p-3.5 border border-purple-200 shadow-xs flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-1.5">
+                          <Trophy className="w-3.5 h-3.5 text-amber-500" />
+                          <h4 className="text-xs font-black text-[#1e1b4b]">Crown Top Pitch (Demo)</h4>
+                        </div>
+                        {demoWinnerId && (
+                          <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-300 animate-pulse">
+                            Winner Crowned 👑
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="space-y-2">
+                        {demoSubmissions.slice(0, 2).map((sub) => {
+                          const isWon = demoWinnerId === sub.id;
+                          return (
+                            <div
+                              key={sub.id}
+                              className={`p-2.5 rounded-lg bg-white border transition-all flex items-center justify-between ${
+                                isWon
+                                  ? "border-amber-400 ring-1 ring-amber-300 shadow-xs"
+                                  : "border-slate-200 hover:border-purple-300"
                               }`}
                             >
-                              {camp.status}
-                            </span>
-                            <span className="text-[10px] font-bold text-slate-400 flex items-center gap-1">
-                              <Clock className="w-2.5 h-2.5" /> {camp.deadline}
-                            </span>
-                          </div>
-
-                          <h5 className="font-bold text-xs text-[#1e1b4b] line-clamp-2">
-                            {camp.title}
-                          </h5>
-                          <span className="text-[10px] text-purple-600 font-semibold block mt-0.5">
-                            {camp.brand} • {camp.category}
-                          </span>
-                        </div>
-
-                        <div className="mt-3 pt-2 border-t border-slate-200/70 flex items-center justify-between">
-                          <div>
-                            <span className="text-[9px] text-slate-400 uppercase font-bold block">Reward</span>
-                            <span className="text-xs font-black text-purple-800">{camp.reward}</span>
-                          </div>
-                          <div className="text-right">
-                            <span className="text-[9px] text-slate-400 uppercase font-bold block">Pitches</span>
-                            <span className="text-[11px] font-bold text-slate-700">{camp.submissionsCount} Videos</span>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Interactive Winner Crowning Simulation Box */}
-                  <div className="mt-3 p-3.5 rounded-xl bg-gradient-to-r from-purple-50 via-indigo-50 to-purple-50 border border-purple-200">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
-                      <div>
-                        <div className="flex items-center gap-1.5">
-                          <Trophy className="w-4 h-4 text-amber-500" />
-                          <h5 className="font-bold text-xs text-[#1e1b4b]">
-                            Interactive Demo: Review & Crown Winner
-                          </h5>
-                        </div>
-                        <p className="text-[11px] text-slate-600 mt-0.5">
-                          Click <strong>"Crown as Winner"</strong> on any submitted pitch to trigger real-time winner selection.
-                        </p>
-                      </div>
-
-                      {demoWinnerId && (
-                        <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-bold">
-                          <span>🏆 Winner: {demoSubmissions.find((s) => s.id === demoWinnerId)?.creatorName}</span>
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="grid sm:grid-cols-2 gap-2.5">
-                      {demoSubmissions.map((sub) => {
-                        const isWon = demoWinnerId === sub.id;
-                        return (
-                          <div
-                            key={sub.id}
-                            className={`p-3 rounded-lg bg-white border transition-all flex flex-col justify-between ${
-                              isWon
-                                ? "border-amber-400 ring-1 ring-amber-300 shadow-xs"
-                                : "border-slate-200 hover:border-purple-300"
-                            }`}
-                          >
-                            <div className="flex items-start justify-between gap-2">
-                              <div>
+                              <div className="pr-2">
                                 <div className="flex items-center gap-1.5">
-                                  <span className="w-5 h-5 rounded-full bg-gradient-to-br from-purple-400 to-indigo-600 text-white font-bold text-[10px] flex items-center justify-center">
-                                    {sub.creatorName.slice(0, 1)}
-                                  </span>
-                                  <div>
-                                    <span className="font-bold text-xs text-slate-900 block">{sub.creatorName}</span>
-                                    <span className="text-[10px] text-slate-500">{sub.handle}</span>
-                                  </div>
+                                  <span className="font-bold text-[11px] text-slate-900">{sub.creatorName}</span>
+                                  <span className="text-[9px] text-slate-400 font-mono">{sub.handle}</span>
                                 </div>
-                                <p className="text-[11px] font-semibold text-slate-700 mt-1.5">
+                                <p className="text-[10px] text-slate-600 font-medium line-clamp-1 mt-0.5">
                                   "{sub.videoTitle}"
                                 </p>
-                                <span className="text-[9px] text-purple-700 bg-purple-50 px-1.5 py-0.5 rounded font-mono inline-block mt-0.5">
-                                  {sub.platform}
-                                </span>
                               </div>
-
-                              <span className="text-[10px] font-bold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded-full flex items-center gap-1">
-                                <Star className="w-2.5 h-2.5 fill-amber-400 text-amber-500" /> {sub.rating}
-                              </span>
-                            </div>
-
-                            <div className="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between">
-                              <span className="text-[10px] text-slate-400">{sub.submittedTime}</span>
 
                               <button
                                 onClick={() => handleSelectWinnerDemo(sub.id)}
-                                className={`px-2.5 py-1 rounded-md text-[11px] font-bold cursor-pointer transition-all border-none ${
+                                className={`px-2.5 py-1 rounded-md text-[10px] font-bold cursor-pointer transition-all border-none flex-shrink-0 ${
                                   isWon
                                     ? "bg-amber-500 text-white shadow-xs"
                                     : "bg-purple-600 text-white hover:bg-purple-700"
                                 }`}
                               >
-                                {isWon ? "🏆 Crowned!" : "Crown as Winner 👑"}
+                                {isWon ? "🏆 Winner!" : "Crown 👑"}
                               </button>
                             </div>
-                          </div>
-                        );
-                      })}
+                          );
+                        })}
+                      </div>
                     </div>
+
+                    <p className="text-[10px] text-slate-500 mt-2 text-center">
+                      Click Crown to simulate automated creator payout and video licensing.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -859,147 +784,158 @@ const LandingPage = () => {
 
             {/* VIEW B: CREATOR DASHBOARD MOCKUP */}
             {dashboardView === "creator" && (
-              <div className="space-y-4">
-                {/* Creator Welcome Banner */}
-                <div className="rounded-xl p-4 sm:p-5 text-white relative overflow-hidden bg-gradient-to-br from-[#1e1b4b] via-[#31104b] to-[#180d38] border border-purple-500/30 shadow-sm">
-                  <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-3">
-                    <div className="max-w-md">
-                      <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-purple-500/20 border border-purple-300/30 text-[10px] font-bold text-purple-200 mb-1.5 backdrop-blur-md">
-                        <span>🎨 Creator Growth & Pitch Portal</span>
+              <div className="space-y-3.5">
+                {/* Creator Header Banner */}
+                <div className="rounded-xl p-3.5 sm:p-4 text-white relative overflow-hidden bg-gradient-to-r from-[#1e1b4b] via-[#31104b] to-[#1e1b4b] border border-purple-500/30 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 text-white flex items-center justify-center text-lg font-black shadow-inner">
+                      🎨
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h3 className="text-sm sm:text-base font-black text-white">Aisha Patel</h3>
+                        <span className="px-2 py-0.5 rounded bg-amber-400/20 text-amber-300 text-[9px] font-bold border border-amber-400/30">
+                          Top Creator • 3 Wins
+                        </span>
                       </div>
-                      <h3 className="text-lg sm:text-xl font-black text-white">
-                        Welcome back, Creator Aisha 👋
-                      </h3>
-                      <p className="mt-0.5 text-xs text-slate-300">
-                        Discover live brand opportunities, pitch your creative video concepts, and celebrate winning rewards.
+                      <p className="text-[11px] text-slate-300">
+                        Level 2 UGC Creator • ₹75,000 Earned to date
                       </p>
                     </div>
-
-                    <div>
-                      <button
-                        onClick={triggerConfetti}
-                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold text-xs shadow-sm hover:shadow-amber-500/40 transition-all border-none cursor-pointer"
-                      >
-                        <Trophy className="w-3.5 h-3.5" />
-                        <span>Celebrate Wins (3)</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Creator Metrics Grid */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5">
-                  <div className="bg-white rounded-xl p-3.5 border border-purple-100 shadow-xs">
-                    <div className="flex justify-between items-center mb-0.5">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Open Briefs</span>
-                      <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 font-bold border border-emerald-200">Live</span>
-                    </div>
-                    <div className="text-2xl font-black text-emerald-600">24</div>
-                    <div className="text-[10px] text-slate-500">Ready for pitch</div>
                   </div>
 
-                  <div className="bg-white rounded-xl p-3.5 border border-purple-100 shadow-xs">
-                    <div className="flex justify-between items-center mb-0.5">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Pitches Sent</span>
-                      <span className="text-[9px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 font-bold">Total</span>
-                    </div>
-                    <div className="text-2xl font-black text-[#1e1b4b]">8</div>
-                    <div className="text-[10px] text-slate-500">Collaborations</div>
-                  </div>
-
-                  <div className="bg-white rounded-xl p-3.5 border border-amber-200 shadow-xs">
-                    <div className="flex justify-between items-center mb-0.5">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Crowned Wins</span>
-                      <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-50 text-amber-700 font-bold border border-amber-200">🏆 3 Wins</span>
-                    </div>
-                    <div className="text-2xl font-black text-amber-600">3</div>
-                    <div className="text-[10px] text-slate-500">Campaigns awarded</div>
-                  </div>
-
-                  <div className="bg-gradient-to-br from-purple-50 to-amber-50/50 rounded-xl p-3.5 border border-purple-200 shadow-xs">
-                    <div className="flex justify-between items-center mb-0.5">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-purple-700">Total Earnings</span>
-                      <span className="text-[9px] px-1.5 py-0.5 rounded bg-purple-200/60 text-purple-900 font-bold">💎 Payout</span>
-                    </div>
-                    <div className="text-xl sm:text-2xl font-black text-[#7c3aed]">₹75,000</div>
-                    <div className="text-[10px] text-purple-700">All-time payouts</div>
-                  </div>
-                </div>
-
-                {/* Wins Accolade Banner */}
-                <div className="rounded-xl p-3.5 bg-gradient-to-r from-amber-500/10 via-purple-500/10 to-indigo-500/10 border border-amber-300/60 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center text-base shadow-xs">
-                      🏆
-                    </div>
-                    <div>
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-amber-800">⭐ Top Creator Accolade</span>
-                      <h4 className="text-xs font-bold text-slate-900">You have won 3 brand campaigns!</h4>
-                      <p className="text-[11px] text-slate-600">Total awarded earnings: <strong>₹75,000</strong>.</p>
-                    </div>
-                  </div>
                   <button
                     onClick={triggerConfetti}
-                    className="px-3 py-1 rounded-lg bg-white border border-amber-300 text-amber-900 font-bold text-xs shadow-xs hover:bg-amber-50 cursor-pointer"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold text-xs shadow-xs hover:shadow-amber-500/30 transition-all border-none cursor-pointer self-start sm:self-auto"
                   >
-                    🎉 Confetti
+                    <Trophy className="w-3 h-3" />
+                    <span>Celebrate Wins</span>
                   </button>
                 </div>
 
-                {/* Interactive Submission Pitch Simulator */}
-                <div className="bg-white rounded-xl p-4 border border-purple-100 shadow-xs">
-                  <h4 className="text-xs font-black text-[#1e1b4b] mb-0.5">
-                    Interactive Creator Pitch Simulator
-                  </h4>
-                  <p className="text-[11px] text-slate-600 mb-3">
-                    Submit a Drive, Loom, or YouTube video link to test the instant pitch engine.
-                  </p>
+                {/* 4 Metric Stats Grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                  <div className="bg-white rounded-xl p-2.5 border border-purple-100 shadow-xs">
+                    <div className="text-[9px] font-bold uppercase tracking-wider text-emerald-600">Open Briefs</div>
+                    <div className="text-xl font-black text-emerald-600">24</div>
+                    <div className="text-[9px] text-slate-500">Ready to pitch</div>
+                  </div>
+                  <div className="bg-white rounded-xl p-2.5 border border-purple-100 shadow-xs">
+                    <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Pitches Sent</div>
+                    <div className="text-xl font-black text-[#1e1b4b]">8</div>
+                    <div className="text-[9px] text-slate-500">Active pitches</div>
+                  </div>
+                  <div className="bg-white rounded-xl p-2.5 border border-amber-200 shadow-xs">
+                    <div className="text-[9px] font-bold uppercase tracking-wider text-amber-600">Won Bounties</div>
+                    <div className="text-xl font-black text-amber-600">3</div>
+                    <div className="text-[9px] text-slate-500">100% Payout rate</div>
+                  </div>
+                  <div className="bg-white rounded-xl p-2.5 border border-purple-200 shadow-xs bg-purple-50/40">
+                    <div className="text-[9px] font-bold uppercase tracking-wider text-purple-700">Total Earnings</div>
+                    <div className="text-xl font-black text-[#7c3aed]">₹75,000</div>
+                    <div className="text-[9px] text-purple-600 font-medium">Direct payouts</div>
+                  </div>
+                </div>
 
-                  <form onSubmit={handleSubmitPitchDemo} className="space-y-3 max-w-xl">
-                    <div>
-                      <label className="block text-[10px] font-bold text-slate-700 uppercase mb-1">
-                        Select Campaign Target
-                      </label>
-                      <select className="w-full px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-slate-800 bg-slate-50 focus:outline-none focus:border-purple-500">
-                        <option>Summer Glow Vitamin C Serum UGC Reel (Reward: ₹25,000)</option>
-                        <option>Smart Ergonomic Backpack Everyday Carry (Reward: ₹18,000)</option>
-                        <option>SuperCoffee Energy Brew 30s Hook (Reward: ₹30,000)</option>
-                      </select>
+                {/* Two Column Grid: Left Opportunities / Right Pitch Submission Simulator */}
+                <div className="grid md:grid-cols-2 gap-3">
+                  {/* Left Column: Live Brand Opportunities */}
+                  <div className="bg-white rounded-xl p-3.5 border border-purple-100 shadow-xs flex flex-col justify-between">
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="text-xs font-black text-[#1e1b4b] flex items-center gap-1.5">
+                        <Flame className="w-3.5 h-3.5 text-purple-600" />
+                        <span>Recommended Briefs</span>
+                      </h4>
+                      <span className="text-[10px] font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded-full">
+                        High Match
+                      </span>
                     </div>
 
-                    <div>
-                      <label className="block text-[10px] font-bold text-slate-700 uppercase mb-1">
-                        Media / Public Drive URL
-                      </label>
-                      <div className="flex gap-2">
-                        <input
-                          type="url"
-                          value={demoPitchUrl}
-                          onChange={(e) => setDemoPitchUrl(e.target.value)}
-                          placeholder="https://drive.google.com/file/d/..."
-                          className="flex-1 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-mono text-slate-800 bg-slate-50 focus:outline-none focus:border-purple-500"
-                        />
-                        <button
-                          type="submit"
-                          className="px-4 py-1.5 rounded-lg bg-gradient-to-r from-[#8b5cf6] to-[#7c3aed] text-white font-bold text-xs shadow-xs hover:shadow-sm flex items-center gap-1 cursor-pointer border-none"
-                        >
-                          <Send className="w-3 h-3" />
-                          <span>Submit Pitch</span>
-                        </button>
+                    <div className="space-y-2">
+                      <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-purple-200 transition-all flex items-center justify-between">
+                        <div>
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-purple-100 text-purple-800">Beauty</span>
+                            <span className="text-[11px] font-bold text-slate-900 line-clamp-1">Summer Glow Vitamin C Reel</span>
+                          </div>
+                          <span className="text-[10px] text-purple-700 font-semibold mt-0.5 block">GlowVeda Organics • ₹25,000 Reward</span>
+                        </div>
+                        <span className="text-[10px] text-slate-400 font-mono">3d left</span>
+                      </div>
+
+                      <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-100 hover:border-purple-200 transition-all flex items-center justify-between">
+                        <div>
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-indigo-100 text-indigo-800">Gear</span>
+                            <span className="text-[11px] font-bold text-slate-900 line-clamp-1">Ergonomic EDC Backpack Ad</span>
+                          </div>
+                          <span className="text-[10px] text-purple-700 font-semibold mt-0.5 block">UrbanNomad • ₹18,000 Reward</span>
+                        </div>
+                        <span className="text-[10px] text-slate-400 font-mono">5d left</span>
                       </div>
                     </div>
 
-                    {demoPitchSubmitted && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 3 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-bold flex items-center gap-1.5"
-                      >
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                        <span>🚀 Pitch concept submitted successfully to brand partner!</span>
-                      </motion.div>
-                    )}
-                  </form>
+                    <div className="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px]">
+                      <span className="text-slate-500 font-medium">Available Pools: <strong>₹3,40,000+</strong></span>
+                      <a href={LOGIN_URL} className="text-purple-700 font-bold hover:underline flex items-center gap-0.5">
+                        <span>Explore all</span>
+                        <ArrowUpRight className="w-3 h-3" />
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Instant Pitch Engine Simulator */}
+                  <div className="bg-gradient-to-br from-purple-50/60 to-indigo-50/60 rounded-xl p-3.5 border border-purple-200 shadow-xs flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <h4 className="text-xs font-black text-[#1e1b4b] flex items-center gap-1.5">
+                          <Send className="w-3.5 h-3.5 text-purple-600" />
+                          <span>Instant Pitch Simulator</span>
+                        </h4>
+                        <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-purple-100 text-purple-800">
+                          Live Demo
+                        </span>
+                      </div>
+
+                      <form onSubmit={handleSubmitPitchDemo} className="space-y-2">
+                        <select className="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-slate-800 bg-white focus:outline-none focus:border-purple-500">
+                          <option>Summer Glow Vitamin C (₹25,000)</option>
+                          <option>Ergonomic EDC Backpack (₹18,000)</option>
+                        </select>
+
+                        <div className="flex gap-1.5">
+                          <input
+                            type="url"
+                            value={demoPitchUrl}
+                            onChange={(e) => setDemoPitchUrl(e.target.value)}
+                            placeholder="Public Drive/Loom URL"
+                            className="flex-1 px-2.5 py-1.5 rounded-lg border border-slate-200 text-[11px] font-mono text-slate-800 bg-white focus:outline-none focus:border-purple-500"
+                          />
+                          <button
+                            type="submit"
+                            className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#8b5cf6] to-[#7c3aed] text-white font-bold text-xs shadow-xs hover:shadow-sm cursor-pointer border-none flex-shrink-0"
+                          >
+                            Submit
+                          </button>
+                        </div>
+
+                        {demoPitchSubmitted && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 2 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="p-1.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-[10px] font-bold flex items-center gap-1"
+                          >
+                            <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                            <span>🚀 Video pitch submitted to brand escrow!</span>
+                          </motion.div>
+                        )}
+                      </form>
+                    </div>
+
+                    <p className="text-[10px] text-slate-500 mt-2 text-center">
+                      Brands review video concepts and award payouts directly within 48 hours.
+                    </p>
+                  </div>
                 </div>
               </div>
             )}
