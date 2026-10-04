@@ -51,7 +51,18 @@ const Navbar = () => {
   };
 
   return (
-    <header className="fixed top-2 sm:top-3 inset-x-0 z-50 px-3 sm:px-6 pointer-events-none">
+    <motion.header
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{
+        type: "spring",
+        stiffness: 260,
+        damping: 24,
+        mass: 0.8,
+        delay: 0.15,
+      }}
+      className="fixed top-2 sm:top-3 inset-x-0 z-50 px-3 sm:px-6 pointer-events-none"
+    >
       <div className="max-w-5xl mx-auto pointer-events-auto">
         {/* Floating Compact Glass Island */}
         <div
@@ -173,7 +184,7 @@ const Navbar = () => {
           )}
         </AnimatePresence>
       </div>
-    </header>
+    </motion.header>
   );
 };
 
