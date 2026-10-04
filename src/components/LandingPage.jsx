@@ -1243,165 +1243,420 @@ const LandingPage = () => {
       {/* =====================================================
           5. INTERACTIVE ROI & EARNINGS CALCULATOR
       ===================================================== */}
-      <section id="roi-calculator" className="py-12 sm:py-16 relative">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="text-center max-w-xl mx-auto mb-8">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-[10px] font-bold uppercase text-emerald-800 mb-2">
-              <TrendingUp className="w-3 h-3 text-emerald-600" />
-              <span>Value Estimator</span>
+      <section id="roi-calculator" className="py-14 sm:py-20 relative overflow-hidden">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-purple-50 border border-purple-200/90 text-[11px] font-bold uppercase tracking-wider text-[#7c3aed] mb-3 shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-purple-600 animate-spin" style={{ animationDuration: "10s" }} />
+              <span>Interactive Value Estimator</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-[#1e1b4b] tracking-tight">
-              Calculate Your Impact on BrandForge
+            
+            <h2 className="text-2xl sm:text-4xl font-black text-[#1e1b4b] tracking-tight">
+              Calculate Your Impact on{" "}
+              <span className="bg-gradient-to-r from-[#7c3aed] via-[#9333ea] to-[#4f46e5] bg-clip-text text-transparent">
+                BrandForge
+              </span>
             </h2>
-            <p className="mt-1 text-xs sm:text-sm text-slate-600">
-              See how much you save as a brand or earn as a creator.
+            <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Transparent, data-backed estimates: see how much faster and cheaper you scale UGC ads, or how much you earn.
             </p>
 
-            {/* Role Tab */}
-            <div className="mt-4 inline-flex p-1 rounded-xl bg-slate-100 border border-slate-200">
+            {/* Dynamic Segmented Role Switcher */}
+            <div className="mt-6 inline-flex p-1.5 rounded-full bg-slate-100/90 border border-slate-200/90 shadow-inner relative">
               <button
                 onClick={() => setCalculatorRole("brand")}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all border-none cursor-pointer ${
-                  calculatorRole === "brand"
-                    ? "bg-white text-purple-800 shadow-xs"
-                    : "bg-transparent text-slate-500"
+                className={`relative px-5 py-2 rounded-full text-xs sm:text-sm font-bold transition-colors duration-200 border-none cursor-pointer z-10 flex items-center gap-2 select-none ${
+                  calculatorRole === "brand" ? "text-white" : "text-slate-600 hover:text-purple-700 bg-transparent"
                 }`}
               >
-                🏢 For Brands (Cost Savings)
+                {calculatorRole === "brand" && (
+                  <motion.div
+                    layoutId="calcRolePill"
+                    transition={{ type: "spring", stiffness: 450, damping: 32 }}
+                    className="absolute inset-0 bg-gradient-to-r from-[#7c3aed] via-[#8b5cf6] to-[#6366f1] rounded-full shadow-[0_2px_12px_rgba(124,58,237,0.35)] -z-10"
+                  />
+                )}
+                <Building2 className="w-4 h-4" />
+                <span>For Brands (Cost Savings)</span>
               </button>
+
               <button
                 onClick={() => setCalculatorRole("creator")}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all border-none cursor-pointer ${
-                  calculatorRole === "creator"
-                    ? "bg-white text-purple-800 shadow-xs"
-                    : "bg-transparent text-slate-500"
+                className={`relative px-5 py-2 rounded-full text-xs sm:text-sm font-bold transition-colors duration-200 border-none cursor-pointer z-10 flex items-center gap-2 select-none ${
+                  calculatorRole === "creator" ? "text-white" : "text-slate-600 hover:text-purple-700 bg-transparent"
                 }`}
               >
-                🎨 For Creators (Earnings)
+                {calculatorRole === "creator" && (
+                  <motion.div
+                    layoutId="calcRolePill"
+                    transition={{ type: "spring", stiffness: 450, damping: 32 }}
+                    className="absolute inset-0 bg-gradient-to-r from-[#7c3aed] via-[#8b5cf6] to-[#6366f1] rounded-full shadow-[0_2px_12px_rgba(124,58,237,0.35)] -z-10"
+                  />
+                )}
+                <Palette className="w-4 h-4" />
+                <span>For Creators (Earnings)</span>
               </button>
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl p-5 sm:p-7 border border-purple-200/80 shadow-[0_10px_30px_rgba(139,92,246,0.06)]">
+          {/* Main Glass Calculator Box */}
+          <div className="bg-white/95 backdrop-blur-2xl rounded-3xl p-6 sm:p-9 border border-purple-200/80 shadow-[0_20px_60px_-15px_rgba(124,58,237,0.14),0_4px_24px_rgba(15,23,42,0.06)] relative overflow-hidden">
+            {/* Ambient background glows */}
+            <div className="absolute -top-24 -right-24 w-80 h-80 bg-purple-200/35 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-indigo-200/35 rounded-full blur-3xl pointer-events-none" />
+
             {calculatorRole === "brand" ? (
-              <div className="grid md:grid-cols-2 gap-6 items-center">
-                <div className="space-y-4">
-                  <div>
-                    <div className="flex justify-between items-center mb-1.5">
-                      <label className="text-xs sm:text-sm font-bold text-slate-800">
-                        Monthly UGC Campaign Budget
-                      </label>
-                      <span className="text-base font-black text-[#7c3aed]">
-                        ₹{brandBudget.toLocaleString()}
-                      </span>
+              <div className="grid lg:grid-cols-12 gap-8 items-stretch relative z-10">
+                {/* Left Controls & Breakdown (7 cols) */}
+                <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
+                  {/* Slider Control Area */}
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-end">
+                      <div>
+                        <label className="text-xs sm:text-sm font-black text-slate-900 block">
+                          Monthly UGC Campaign Budget
+                        </label>
+                        <span className="text-[11px] font-semibold text-slate-500">
+                          Adjust budget to simulate creative output & savings
+                        </span>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-xs font-bold text-slate-400 block uppercase">Selected</span>
+                        <span className="text-xl sm:text-2xl font-black bg-gradient-to-r from-[#7C3AED] to-[#4F46E5] bg-clip-text text-transparent">
+                          ₹{brandBudget.toLocaleString()}
+                        </span>
+                      </div>
                     </div>
-                    <input
-                      type="range"
-                      min="10000"
-                      max="500000"
-                      step="5000"
-                      value={brandBudget}
-                      onChange={(e) => setBrandBudget(Number(e.target.value))}
-                      className="w-full accent-purple-600 h-1.5 bg-slate-200 rounded-lg cursor-pointer"
-                    />
-                    <div className="flex justify-between text-[10px] text-slate-400 mt-1 font-semibold">
-                      <span>₹10,000</span>
-                      <span>₹2,50,000</span>
-                      <span>₹5,00,000</span>
+
+                    {/* Custom Range Slider */}
+                    <div className="pt-2">
+                      <input
+                        type="range"
+                        min="10000"
+                        max="500000"
+                        step="5000"
+                        value={brandBudget}
+                        onChange={(e) => setBrandBudget(Number(e.target.value))}
+                        className="w-full accent-[#7c3aed] h-2.5 bg-slate-200/80 rounded-full cursor-pointer transition-all hover:bg-slate-300"
+                      />
+                      <div className="flex justify-between text-[11px] text-slate-500 mt-1.5 font-bold">
+                        <span>₹10K</span>
+                        <span>₹2.5L</span>
+                        <span>₹5.0 Lakhs</span>
+                      </div>
+                    </div>
+
+                    {/* Budget Quick-Presets */}
+                    <div className="flex flex-wrap gap-2 pt-1">
+                      {[
+                        { label: "₹25K (Starter)", val: 25000 },
+                        { label: "₹50K (Growth 🔥)", val: 50000 },
+                        { label: "₹1.5L (Scale)", val: 150000 },
+                        { label: "₹3L (Enterprise)", val: 300000 },
+                      ].map((preset) => (
+                        <button
+                          key={preset.val}
+                          onClick={() => setBrandBudget(preset.val)}
+                          className={`px-3 py-1 text-xs font-bold rounded-full transition-all border cursor-pointer ${
+                            brandBudget === preset.val
+                              ? "bg-purple-100 text-[#7c3aed] border-purple-300 shadow-xs"
+                              : "bg-slate-50 hover:bg-purple-50 text-slate-600 hover:text-purple-700 border-slate-200"
+                          }`}
+                        >
+                          {preset.label}
+                        </button>
+                      ))}
                     </div>
                   </div>
 
-                  <div className="p-3 rounded-lg bg-purple-50/60 border border-purple-100 text-[11px] text-slate-600 space-y-0.5">
-                    <div className="font-bold text-purple-900">Why BrandForge Outperforms Agencies:</div>
-                    <p>Traditional agency video production costs ~₹30k–₹50k/video. On BrandForge, you get multiple vetted creator pitches per bounty pool.</p>
+                  {/* 3 Metric KPI Cards */}
+                  <div className="grid grid-cols-3 gap-2.5 sm:gap-3 pt-2">
+                    <div className="bg-purple-50/70 border border-purple-100 rounded-2xl p-3 text-center">
+                      <div className="text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-tight">
+                        Ad Concepts
+                      </div>
+                      <div className="text-base sm:text-lg font-black text-[#1e1b4b] mt-0.5">
+                        {calculatedVideos * 3}+ <span className="text-[10px] font-bold text-purple-600">Hooks</span>
+                      </div>
+                    </div>
+
+                    <div className="bg-emerald-50/70 border border-emerald-100 rounded-2xl p-3 text-center">
+                      <div className="text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-tight">
+                        Cost / Video
+                      </div>
+                      <div className="text-base sm:text-lg font-black text-emerald-700 mt-0.5">
+                        ~₹{Math.round(brandBudget / Math.max(1, calculatedVideos * 2)).toLocaleString()}
+                      </div>
+                    </div>
+
+                    <div className="bg-indigo-50/70 border border-indigo-100 rounded-2xl p-3 text-center">
+                      <div className="text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-tight">
+                        Turnaround
+                      </div>
+                      <div className="text-base sm:text-lg font-black text-indigo-700 mt-0.5">
+                        3 – 7 Days
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* BrandForge Advantages Checklist */}
+                  <div className="p-3.5 rounded-2xl bg-slate-50/80 border border-slate-200/80 flex flex-wrap items-center justify-between gap-2 text-xs font-bold text-slate-700">
+                    <span className="flex items-center gap-1.5 text-slate-800">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                      <span>Zero Agency Retainers</span>
+                    </span>
+                    <span className="flex items-center gap-1.5 text-slate-800">
+                      <Shield className="w-4 h-4 text-purple-600" />
+                      <span>Bank Escrow Guarantee</span>
+                    </span>
+                    <span className="flex items-center gap-1.5 text-slate-800">
+                      <Zap className="w-4 h-4 text-amber-500" />
+                      <span>Full Commercial Rights</span>
+                    </span>
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-[#1e1b4b] to-[#31104b] rounded-xl p-5 text-white space-y-3.5">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-purple-300">
-                    Estimated ROI Summary
-                  </span>
+                {/* Right Cosmic Live ROI Dashboard (5 cols) */}
+                <div className="lg:col-span-5 bg-gradient-to-br from-[#120e2d] via-[#1b1346] to-[#0d0725] text-white rounded-2xl sm:rounded-3xl p-6 sm:p-7 border border-purple-500/30 shadow-[0_16px_40px_rgba(15,7,35,0.45)] relative overflow-hidden flex flex-col justify-between">
+                  {/* Decorative mesh */}
+                  <div className="absolute top-0 right-0 w-36 h-36 bg-purple-500/15 rounded-full blur-2xl pointer-events-none" />
 
-                  <div>
-                    <div className="text-[11px] text-slate-300">Estimated Video Creatives Received</div>
-                    <div className="text-2xl font-black text-white mt-0.5">
-                      {calculatedVideos} - {calculatedVideos * 3}+ <span className="text-xs font-medium text-purple-200">Ad Concepts</span>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 border border-white/15 text-[10px] font-bold uppercase tracking-wider text-purple-200">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        <span>Live ROI Projection</span>
+                      </div>
+                      <span className="text-[11px] font-black text-emerald-400 bg-emerald-500/15 px-2 py-0.5 rounded-full border border-emerald-500/30">
+                        +68% Cost Saved
+                      </span>
+                    </div>
+
+                    {/* Main Net Savings Hero */}
+                    <div>
+                      <div className="text-xs font-semibold text-slate-300">
+                        Estimated Net Cost Savings
+                      </div>
+                      <div className="text-3xl sm:text-4xl font-black text-emerald-400 tracking-tight mt-1">
+                        ₹{calculatedSavings.toLocaleString()}
+                      </div>
+                      <p className="text-[11px] text-slate-400 mt-1">
+                        Compared to standard agency production fee of ₹{calculatedAgencyCost.toLocaleString()}
+                      </p>
+                    </div>
+
+                    {/* Visual Comparison Bar */}
+                    <div className="space-y-2 pt-2 border-t border-purple-500/20">
+                      <div>
+                        <div className="flex justify-between text-[11px] font-bold text-slate-300 mb-1">
+                          <span>BrandForge Cost</span>
+                          <span className="text-purple-300">₹{brandBudget.toLocaleString()}</span>
+                        </div>
+                        <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
+                          <div
+                            className="h-full bg-gradient-to-r from-[#8b5cf6] to-[#06b6d4] rounded-full transition-all duration-300"
+                            style={{ width: `${Math.min(100, Math.max(15, (brandBudget / calculatedAgencyCost) * 100))}%` }}
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <div className="flex justify-between text-[11px] font-bold text-slate-400 mb-1">
+                          <span>Traditional Agency Cost</span>
+                          <span className="line-through text-slate-400">₹{calculatedAgencyCost.toLocaleString()}</span>
+                        </div>
+                        <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
+                          <div className="h-full bg-slate-500/60 rounded-full w-full" />
+                        </div>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="pt-2.5 border-t border-purple-500/30 flex justify-between items-center">
-                    <div>
-                      <div className="text-[10px] text-slate-300">Traditional Agency Cost</div>
-                      <div className="text-sm font-bold text-slate-300 line-through">
-                        ₹{calculatedAgencyCost.toLocaleString()}
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-[10px] text-emerald-300 font-bold">Estimated Savings</div>
-                      <div className="text-lg font-black text-emerald-400">
-                        ₹{calculatedSavings.toLocaleString()}
-                      </div>
-                    </div>
+                  {/* Direct Launch CTA */}
+                  <div className="pt-5 mt-4 border-t border-purple-500/25">
+                    <motion.a
+                      href={REGISTER_URL}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#8b5cf6] via-[#7c3aed] to-[#4f46e5] text-white text-xs sm:text-sm font-bold shadow-[0_4px_20px_rgba(124,58,237,0.4)] flex items-center justify-center gap-2 hover:shadow-purple-500/50 transition-all border border-purple-400/30"
+                    >
+                      <Building2 className="w-4 h-4" />
+                      <span>Launch Campaign with ₹{brandBudget.toLocaleString()}</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </motion.a>
                   </div>
                 </div>
               </div>
             ) : (
-              <div className="grid md:grid-cols-2 gap-6 items-center">
-                <div className="space-y-4">
-                  <div>
-                    <div className="flex justify-between items-center mb-1.5">
-                      <label className="text-xs sm:text-sm font-bold text-slate-800">
-                        Campaign Concepts Pitched / Month
-                      </label>
-                      <span className="text-base font-black text-[#7c3aed]">
-                        {creatorPitches} Pitches
-                      </span>
+              <div className="grid lg:grid-cols-12 gap-8 items-stretch relative z-10">
+                {/* Left Creator Controls & Breakdown (7 cols) */}
+                <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
+                  {/* Slider Control Area */}
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-end">
+                      <div>
+                        <label className="text-xs sm:text-sm font-black text-slate-900 block">
+                          Campaign Concepts Pitched / Month
+                        </label>
+                        <span className="text-[11px] font-semibold text-slate-500">
+                          Simulate your monthly pitches to top Indian & global brands
+                        </span>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-xs font-bold text-slate-400 block uppercase">Pitches</span>
+                        <span className="text-xl sm:text-2xl font-black bg-gradient-to-r from-[#7C3AED] to-[#4F46E5] bg-clip-text text-transparent">
+                          {creatorPitches} Pitches
+                        </span>
+                      </div>
                     </div>
-                    <input
-                      type="range"
-                      min="1"
-                      max="20"
-                      step="1"
-                      value={creatorPitches}
-                      onChange={(e) => setCreatorPitches(Number(e.target.value))}
-                      className="w-full accent-purple-600 h-1.5 bg-slate-200 rounded-lg cursor-pointer"
-                    />
-                    <div className="flex justify-between text-[10px] text-slate-400 mt-1 font-semibold">
-                      <span>1 pitch</span>
-                      <span>10 pitches</span>
-                      <span>20 pitches</span>
+
+                    {/* Custom Range Slider */}
+                    <div className="pt-2">
+                      <input
+                        type="range"
+                        min="1"
+                        max="20"
+                        step="1"
+                        value={creatorPitches}
+                        onChange={(e) => setCreatorPitches(Number(e.target.value))}
+                        className="w-full accent-[#7c3aed] h-2.5 bg-slate-200/80 rounded-full cursor-pointer transition-all hover:bg-slate-300"
+                      />
+                      <div className="flex justify-between text-[11px] text-slate-500 mt-1.5 font-bold">
+                        <span>1 Pitch</span>
+                        <span>10 Pitches</span>
+                        <span>20 Pitches</span>
+                      </div>
+                    </div>
+
+                    {/* Creator Quick-Presets */}
+                    <div className="flex flex-wrap gap-2 pt-1">
+                      {[
+                        { label: "3 Pitches (Side Gig)", val: 3 },
+                        { label: "6 Pitches (Pro Creator 🔥)", val: 6 },
+                        { label: "12 Pitches (Full-Time)", val: 12 },
+                        { label: "18 Pitches (Elite Agency)", val: 18 },
+                      ].map((preset) => (
+                        <button
+                          key={preset.val}
+                          onClick={() => setCreatorPitches(preset.val)}
+                          className={`px-3 py-1 text-xs font-bold rounded-full transition-all border cursor-pointer ${
+                            creatorPitches === preset.val
+                              ? "bg-purple-100 text-[#7c3aed] border-purple-300 shadow-xs"
+                              : "bg-slate-50 hover:bg-purple-50 text-slate-600 hover:text-purple-700 border-slate-200"
+                          }`}
+                        >
+                          {preset.label}
+                        </button>
+                      ))}
                     </div>
                   </div>
 
-                  <div className="p-3 rounded-lg bg-indigo-50/60 border border-indigo-100 text-[11px] text-slate-600 space-y-0.5">
-                    <div className="font-bold text-indigo-900">Creator Earning Potential:</div>
-                    <p>Top creators pitch 4–8 brand campaigns monthly with average reward sizes of ₹15,000–₹35,000.</p>
+                  {/* 3 Metric KPI Cards */}
+                  <div className="grid grid-cols-3 gap-2.5 sm:gap-3 pt-2">
+                    <div className="bg-purple-50/70 border border-purple-100 rounded-2xl p-3 text-center">
+                      <div className="text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-tight">
+                        Win Rate Potential
+                      </div>
+                      <div className="text-base sm:text-lg font-black text-[#1e1b4b] mt-0.5">
+                        40% – 60%
+                      </div>
+                    </div>
+
+                    <div className="bg-emerald-50/70 border border-emerald-100 rounded-2xl p-3 text-center">
+                      <div className="text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-tight">
+                        Avg Bounty
+                      </div>
+                      <div className="text-base sm:text-lg font-black text-emerald-700 mt-0.5">
+                        ₹25k – ₹45k
+                      </div>
+                    </div>
+
+                    <div className="bg-indigo-50/70 border border-indigo-100 rounded-2xl p-3 text-center">
+                      <div className="text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-tight">
+                        Payout Speed
+                      </div>
+                      <div className="text-base sm:text-lg font-black text-indigo-700 mt-0.5">
+                        24 Hours
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Creator Advantages Checklist */}
+                  <div className="p-3.5 rounded-2xl bg-slate-50/80 border border-slate-200/80 flex flex-wrap items-center justify-between gap-2 text-xs font-bold text-slate-700">
+                    <span className="flex items-center gap-1.5 text-slate-800">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                      <span>Zero Follower Requirements</span>
+                    </span>
+                    <span className="flex items-center gap-1.5 text-slate-800">
+                      <Shield className="w-4 h-4 text-purple-600" />
+                      <span>100% Escrow Guaranteed Pay</span>
+                    </span>
+                    <span className="flex items-center gap-1.5 text-slate-800">
+                      <Zap className="w-4 h-4 text-amber-500" />
+                      <span>Instant Portfolio Badges</span>
+                    </span>
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-br from-[#1e1b4b] to-[#31104b] rounded-xl p-5 text-white space-y-3.5">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-purple-300">
-                    Projected Monthly Earnings
-                  </span>
+                {/* Right Cosmic Live Creator Dashboard (5 cols) */}
+                <div className="lg:col-span-5 bg-gradient-to-br from-[#120e2d] via-[#1b1346] to-[#0d0725] text-white rounded-2xl sm:rounded-3xl p-6 sm:p-7 border border-purple-500/30 shadow-[0_16px_40px_rgba(15,7,35,0.45)] relative overflow-hidden flex flex-col justify-between">
+                  {/* Decorative mesh */}
+                  <div className="absolute top-0 right-0 w-36 h-36 bg-purple-500/15 rounded-full blur-2xl pointer-events-none" />
 
-                  <div>
-                    <div className="text-[11px] text-slate-300">Estimated Monthly Creator Income</div>
-                    <div className="text-2xl font-black text-emerald-400 mt-0.5">
-                      ₹{calculatedCreatorEarnings.toLocaleString()} <span className="text-xs font-normal text-slate-300">/ mo</span>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 border border-white/15 text-[10px] font-bold uppercase tracking-wider text-purple-200">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        <span>Creator Income Forecast</span>
+                      </div>
+                      <span className="text-[11px] font-black text-emerald-400 bg-emerald-500/15 px-2 py-0.5 rounded-full border border-emerald-500/30">
+                        Top Creator Tier
+                      </span>
+                    </div>
+
+                    {/* Main Monthly Income Hero */}
+                    <div>
+                      <div className="text-xs font-semibold text-slate-300">
+                        Projected Monthly Creator Income
+                      </div>
+                      <div className="text-3xl sm:text-4xl font-black text-emerald-400 tracking-tight mt-1">
+                        ₹{calculatedCreatorEarnings.toLocaleString()} <span className="text-sm font-medium text-slate-300">/ mo</span>
+                      </div>
+                      <p className="text-[11px] text-slate-400 mt-1">
+                        Based on {creatorPitches} active pitches across vetted brand campaign bounties.
+                      </p>
+                    </div>
+
+                    {/* Annualized Stats Matrix */}
+                    <div className="grid grid-cols-2 gap-3 pt-3 border-t border-purple-500/20">
+                      <div className="p-2.5 rounded-xl bg-white/5 border border-white/10">
+                        <div className="text-[10px] text-slate-300 font-bold uppercase">Annualized Run Rate</div>
+                        <div className="text-base font-black text-white mt-0.5">
+                          ₹{(calculatedCreatorEarnings * 12).toLocaleString()}
+                        </div>
+                      </div>
+
+                      <div className="p-2.5 rounded-xl bg-white/5 border border-white/10">
+                        <div className="text-[10px] text-slate-300 font-bold uppercase">Payment Gateway</div>
+                        <div className="text-base font-black text-emerald-400 mt-0.5">
+                          Direct Bank / UPI
+                        </div>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="pt-2.5 border-t border-purple-500/30 flex justify-between items-center">
-                    <div>
-                      <div className="text-[10px] text-slate-300">Annualized Run Rate</div>
-                      <div className="text-sm font-bold text-white">
-                        ₹{(calculatedCreatorEarnings * 12).toLocaleString()}
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-[10px] text-purple-300">Payout Speed</div>
-                      <div className="text-xs font-bold text-white">Within 24 Hours</div>
-                    </div>
+                  {/* Direct Pitch CTA */}
+                  <div className="pt-5 mt-4 border-t border-purple-500/25">
+                    <motion.a
+                      href={REGISTER_URL}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#8b5cf6] via-[#7c3aed] to-[#4f46e5] text-white text-xs sm:text-sm font-bold shadow-[0_4px_20px_rgba(124,58,237,0.4)] flex items-center justify-center gap-2 hover:shadow-purple-500/50 transition-all border border-purple-400/30"
+                    >
+                      <Palette className="w-4 h-4" />
+                      <span>Start Pitching as Creator</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </motion.a>
                   </div>
                 </div>
               </div>
