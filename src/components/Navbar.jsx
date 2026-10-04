@@ -20,18 +20,20 @@ const Navbar = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      const scrollPosition = window.scrollY + 120;
+      const scrollPosition = window.scrollY + 140;
+      let current = "";
       for (const link of navLinks) {
         const el = document.getElementById(link.id);
         if (el) {
           const top = el.offsetTop;
           const height = el.offsetHeight;
           if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(link.id);
+            current = link.id;
             break;
           }
         }
       }
+      setActiveSection(current);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -41,6 +43,7 @@ const Navbar = () => {
 
   const scrollToSection = (sectionId) => {
     setIsOpen(false);
+    setActiveSection(sectionId);
     const element = document.getElementById(sectionId);
     if (element) {
       const yOffset = -85;
@@ -81,7 +84,10 @@ const Navbar = () => {
           <motion.div
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            onClick={() => {
+              setActiveSection("");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
             className="flex items-center gap-2.5 cursor-pointer select-none flex-shrink-0 pl-1"
           >
             <img
@@ -95,21 +101,43 @@ const Navbar = () => {
             </div>
           </motion.div>
 
-          {/* Dynamic Island Segmented Links (Desktop) */}
-          <nav className="hidden md:flex items-center gap-1 bg-slate-100/75 p-1.5 rounded-full border border-slate-200/60">
+          {/* Dynamic Island Animated Gliding Segmented Links (Desktop) */}
+          <nav className="hidden md:flex items-center gap-1 bg-slate-100/80 p-1.5 rounded-full border border-slate-200/60 relative">
             {navLinks.map((item) => {
               const isActive = activeSection === item.id;
               return (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`relative px-3.5 py-1.5 text-xs sm:text-sm font-semibold rounded-full transition-all duration-150 border-none cursor-pointer ${
+                  className={`relative px-4 py-1.5 text-xs sm:text-sm font-semibold rounded-full transition-colors duration-200 border-none cursor-pointer select-none ${
                     isActive
-                      ? "text-[#6d28d9] bg-white shadow-xs font-bold border border-purple-100/80"
-                      : "text-slate-600 hover:text-[#7c3aed] hover:bg-white/60 bg-transparent"
+                      ? "text-[#6d28d9] font-bold"
+                      : "text-slate-600 hover:text-[#7c3aed] bg-transparent"
                   }`}
                 >
-                  {item.label}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activePillIndicator"
+                      transition={{
+                        type: "spring",
+                        stiffness: 450,
+                        damping: 32,
+                      }}
+                      className="absolute inset-0 bg-white rounded-full shadow-[0_2px_10px_rgba(124,58,237,0.14),0_1px_3px_rgba(0,0,0,0.05)] border border-purple-200/80"
+                    />
+                  )}
+                  <span className="relative z-10 flex items-center gap-1.5">
+                    {isActive && (
+                      <motion.span
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        exit={{ scale: 0 }}
+                        transition={{ type: "spring", stiffness: 500, damping: 25 }}
+                        className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#7c3aed] to-[#6366f1]"
+                      />
+                    )}
+                    <span>{item.label}</span>
+                  </span>
                 </button>
               );
             })}
@@ -156,16 +184,28 @@ const Navbar = () => {
               className="md:hidden mt-3.5 pt-3.5 border-t border-purple-100 overflow-hidden"
             >
               <div className="flex flex-col gap-1.5">
-                {navLinks.map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => scrollToSection(item.id)}
-                    className="w-full text-left py-2.5 px-3.5 rounded-2xl text-xs sm:text-sm font-bold text-slate-700 hover:text-[#7c3aed] hover:bg-purple-50/80 transition-colors flex items-center justify-between border-none bg-transparent cursor-pointer"
-                  >
-                    <span>{item.label}</span>
-                    <ChevronRight className="w-4 h-4 text-purple-400" />
-                  </button>
-                ))}
+                {navLinks.map((item) => {
+                  const isActive = activeSection === item.id;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => scrollToSection(item.id)}
+                      className={`w-full text-left py-2.5 px-3.5 rounded-2xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-between border-none cursor-pointer ${
+                        isActive
+                          ? "text-[#6d28d9] bg-purple-50/90 border border-purple-200/80 shadow-xs"
+                          : "text-slate-700 hover:text-[#7c3aed] hover:bg-purple-50/50 bg-transparent"
+                      }`}
+                    >
+                      <span className="flex items-center gap-2">
+                        {isActive && (
+                          <span className="w-2 h-2 rounded-full bg-gradient-to-r from-[#7c3aed] to-[#6366f1]" />
+                        )}
+                        <span>{item.label}</span>
+                      </span>
+                      <ChevronRight className={`w-4 h-4 ${isActive ? "text-[#7c3aed]" : "text-purple-400"}`} />
+                    </button>
+                  );
+                })}
 
                 <div className="pt-3 mt-1.5 border-t border-purple-100 flex items-center gap-2.5">
                   <a
