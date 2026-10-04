@@ -43,7 +43,7 @@ const Navbar = () => {
     setIsOpen(false);
     const element = document.getElementById(sectionId);
     if (element) {
-      const yOffset = -75;
+      const yOffset = -85;
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
@@ -60,53 +60,53 @@ const Navbar = () => {
         mass: 0.8,
         delay: 0.15,
       }}
-      className="fixed top-2.5 sm:top-3.5 inset-x-0 z-50 flex justify-center px-3 sm:px-4 pointer-events-none"
+      className="fixed top-3 sm:top-4 inset-x-0 z-50 flex justify-center px-3 sm:px-6 pointer-events-none"
     >
-      {/* iPhone Dynamic Island Container */}
+      {/* iPhone Dynamic Island Container (White Glass Edition) */}
       <motion.div
         layout
         transition={{ type: "spring", stiffness: 380, damping: 28 }}
         className={`pointer-events-auto transition-all duration-300 backdrop-blur-2xl ${
           isOpen
-            ? "w-full max-w-md rounded-[28px] p-3.5 bg-[#0a0718]/95 border border-purple-500/30 shadow-[0_20px_50px_rgba(0,0,0,0.5),0_0_30px_rgba(124,58,237,0.25)]"
-            : `rounded-full py-1.5 px-2.5 sm:px-3.5 bg-[#0b081c]/90 border ${
+            ? "w-full max-w-lg rounded-[32px] p-4 sm:p-5 bg-white/98 border border-purple-200/90 shadow-[0_24px_60px_-12px_rgba(15,23,42,0.18),0_8px_32px_rgba(124,58,237,0.16)]"
+            : `rounded-full py-2 sm:py-2.5 px-3.5 sm:px-5 bg-white/95 border ${
                 scrolled
-                  ? "border-purple-400/35 shadow-[0_16px_36px_-6px_rgba(0,0,0,0.45),0_0_24px_rgba(124,58,237,0.25)]"
-                  : "border-white/15 shadow-[0_12px_30px_-6px_rgba(0,0,0,0.35),0_0_18px_rgba(124,58,237,0.18)]"
+                  ? "border-purple-200/90 shadow-[0_16px_40px_-6px_rgba(15,23,42,0.14),0_6px_24px_rgba(124,58,237,0.14)]"
+                  : "border-purple-100/90 shadow-[0_12px_32px_-6px_rgba(15,23,42,0.1),0_4px_18px_rgba(124,58,237,0.1)]"
               }`
         }`}
       >
-        <div className="flex items-center justify-between gap-3 sm:gap-5">
+        <div className="flex items-center justify-between gap-3 sm:gap-6">
           {/* Dynamic Island Brand Logo */}
           <motion.div
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="flex items-center gap-2 cursor-pointer select-none flex-shrink-0 pl-1"
+            className="flex items-center gap-2.5 cursor-pointer select-none flex-shrink-0 pl-1"
           >
             <img
               src="/favi.png"
               alt="BrandForge"
-              className="w-7 h-7 rounded-full object-contain flex-shrink-0 shadow-sm ring-1 ring-purple-400/40"
+              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-contain flex-shrink-0 shadow-xs ring-2 ring-purple-100"
             />
 
-            <div className="text-base sm:text-lg font-black tracking-tight leading-none">
-              <span className="font-extrabold text-white">Brand</span><span className="bg-gradient-to-r from-[#c084fc] via-[#a855f7] to-[#818cf8] bg-clip-text text-transparent font-black">Forge</span>
+            <div className="text-lg sm:text-xl font-black tracking-tight text-[#1e1b4b] leading-none">
+              <span className="font-extrabold text-[#1e1b4b]">Brand</span><span className="bg-gradient-to-r from-[#7C3AED] via-[#6366F1] to-[#4F46E5] bg-clip-text text-transparent font-black">Forge</span>
             </div>
           </motion.div>
 
           {/* Dynamic Island Segmented Links (Desktop) */}
-          <nav className="hidden md:flex items-center gap-0.5 bg-white/[0.06] p-1 rounded-full border border-white/10">
+          <nav className="hidden md:flex items-center gap-1 bg-slate-100/75 p-1.5 rounded-full border border-slate-200/60">
             {navLinks.map((item) => {
               const isActive = activeSection === item.id;
               return (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`relative px-3 py-1 text-xs font-semibold rounded-full transition-all duration-200 border-none cursor-pointer ${
+                  className={`relative px-3.5 py-1.5 text-xs sm:text-sm font-semibold rounded-full transition-all duration-150 border-none cursor-pointer ${
                     isActive
-                      ? "text-white bg-purple-600/60 shadow-[0_0_12px_rgba(168,85,247,0.4)] font-bold border border-purple-400/40"
-                      : "text-slate-300 hover:text-white hover:bg-white/10 bg-transparent"
+                      ? "text-[#6d28d9] bg-white shadow-xs font-bold border border-purple-100/80"
+                      : "text-slate-600 hover:text-[#7c3aed] hover:bg-white/60 bg-transparent"
                   }`}
                 >
                   {item.label}
@@ -116,32 +116,32 @@ const Navbar = () => {
           </nav>
 
           {/* Dynamic Island Right Actions */}
-          <div className="hidden sm:flex items-center gap-2 flex-shrink-0 pr-0.5">
+          <div className="hidden sm:flex items-center gap-2 flex-shrink-0 pr-1">
             <a
               href={LOGIN_URL}
-              className="px-3 py-1.5 text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/10 rounded-full transition-colors"
+              className="px-3.5 py-2 text-xs sm:text-sm font-bold text-slate-700 hover:text-[#7c3aed] hover:bg-purple-50/70 rounded-full transition-colors"
             >
               Sign In
             </a>
 
             <motion.a
               href={REGISTER_URL}
-              whileHover={{ scale: 1.04, boxShadow: "0 0 20px rgba(168, 85, 247, 0.45)" }}
-              whileTap={{ scale: 0.96 }}
-              className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-[#8b5cf6] via-[#7c3aed] to-[#4f46e5] text-white text-xs font-bold shadow-[0_2px_12px_rgba(124,58,237,0.3)] transition-all border border-purple-300/30"
+              whileHover={{ y: -1, scale: 1.02, boxShadow: "0 6px 20px rgba(124, 58, 237, 0.35)" }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-[#8b5cf6] via-[#7c3aed] to-[#4f46e5] text-white text-xs sm:text-sm font-bold shadow-[0_3px_14px_rgba(124,58,237,0.28)] transition-all"
             >
               <span>Get Started</span>
-              <ChevronRight className="w-3.5 h-3.5" />
+              <ChevronRight className="w-4 h-4" />
             </motion.a>
           </div>
 
           {/* Dynamic Island Mobile Toggle Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-1.5 rounded-full text-slate-300 hover:text-white hover:bg-white/15 transition-colors border border-white/15 bg-white/5"
+            className="md:hidden p-2 rounded-full text-slate-700 hover:bg-purple-50 hover:text-[#7c3aed] transition-colors border border-purple-100/80 bg-white/70"
             aria-label="Toggle navigation menu"
           >
-            {isOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
 
@@ -153,33 +153,33 @@ const Navbar = () => {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.22, ease: "easeOut" }}
-              className="md:hidden mt-3 pt-3 border-t border-white/10 overflow-hidden"
+              className="md:hidden mt-3.5 pt-3.5 border-t border-purple-100 overflow-hidden"
             >
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-1.5">
                 {navLinks.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className="w-full text-left py-2 px-3 rounded-xl text-xs font-semibold text-slate-200 hover:text-white hover:bg-white/10 transition-colors flex items-center justify-between border-none bg-transparent cursor-pointer"
+                    className="w-full text-left py-2.5 px-3.5 rounded-2xl text-xs sm:text-sm font-bold text-slate-700 hover:text-[#7c3aed] hover:bg-purple-50/80 transition-colors flex items-center justify-between border-none bg-transparent cursor-pointer"
                   >
                     <span>{item.label}</span>
-                    <ChevronRight className="w-3.5 h-3.5 text-purple-400" />
+                    <ChevronRight className="w-4 h-4 text-purple-400" />
                   </button>
                 ))}
 
-                <div className="pt-2.5 mt-1 border-t border-white/10 flex items-center gap-2">
+                <div className="pt-3 mt-1.5 border-t border-purple-100 flex items-center gap-2.5">
                   <a
                     href={LOGIN_URL}
-                    className="flex-1 py-2 text-center text-xs font-semibold text-slate-200 hover:text-white bg-white/5 hover:bg-white/10 rounded-full transition-all border border-white/10"
+                    className="flex-1 py-2.5 text-center text-xs sm:text-sm font-bold text-slate-700 hover:text-[#7c3aed] bg-slate-50 hover:bg-purple-50 rounded-full transition-all border border-slate-100"
                   >
                     Sign In
                   </a>
                   <a
                     href={REGISTER_URL}
-                    className="flex-1 py-2 text-center text-xs font-bold text-white bg-gradient-to-r from-[#8b5cf6] via-[#7c3aed] to-[#4f46e5] rounded-full shadow-sm hover:shadow-purple-500/30 transition-all flex items-center justify-center gap-1 border border-purple-400/30"
+                    className="flex-1 py-2.5 text-center text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-[#8b5cf6] via-[#7c3aed] to-[#4f46e5] rounded-full shadow-md hover:shadow-purple-500/25 transition-all flex items-center justify-center gap-1.5"
                   >
                     <span>Get Started</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
+                    <ArrowUpRight className="w-4 h-4" />
                   </a>
                 </div>
               </div>
