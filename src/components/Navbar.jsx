@@ -67,7 +67,7 @@ const Navbar = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="flex items-center gap-2.5 cursor-pointer select-none flex-shrink-0"
+              className="flex items-center gap-2 cursor-pointer select-none flex-shrink-0"
             >
               <img
                 src="/favi.png"
@@ -76,10 +76,7 @@ const Navbar = () => {
               />
 
               <div className="text-lg sm:text-xl font-black tracking-tight text-[#1e1b4b] leading-none">
-                <span className="font-extrabold text-[#1e1b4b]">Brand</span>
-                <span className="bg-gradient-to-r from-[#7C3AED] via-[#6366F1] to-[#4F46E5] bg-clip-text text-transparent font-black ml-0.5">
-                  Forge
-                </span>
+                <span className="font-extrabold text-[#1e1b4b]">Brand</span><span className="bg-gradient-to-r from-[#7C3AED] via-[#6366F1] to-[#4F46E5] bg-clip-text text-transparent font-black">Forge</span>
               </div>
             </motion.div>
 
