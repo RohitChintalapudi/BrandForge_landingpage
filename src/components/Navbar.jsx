@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight, ArrowUpRight, Menu, X } from "lucide-react";
 import { LOGIN_URL, REGISTER_URL } from "../config/appUrls.js";
@@ -7,6 +7,8 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const isProgrammaticScroll = useRef(false);
+  const scrollTimeoutRef = useRef(null);
 
   const navLinks = [
     { label: "Live Demo", id: "live-demo" },
@@ -19,6 +21,9 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+
+      // If user clicked a nav link, prevent scroll-event race conditions while animating
+      if (isProgrammaticScroll.current) return;
 
       const scrollPosition = window.scrollY + 140;
       let current = "";
@@ -38,12 +43,22 @@ const Navbar = () => {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+    };
   }, []);
 
   const scrollToSection = (sectionId) => {
     setIsOpen(false);
     setActiveSection(sectionId);
+    isProgrammaticScroll.current = true;
+
+    if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+    scrollTimeoutRef.current = setTimeout(() => {
+      isProgrammaticScroll.current = false;
+    }, 850);
+
     const element = document.getElementById(sectionId);
     if (element) {
       const yOffset = -85;
@@ -101,7 +116,7 @@ const Navbar = () => {
             </div>
           </motion.div>
 
-          {/* Dynamic Island Animated Gliding Segmented Links (Desktop) */}
+          {/* Dynamic Island Smooth Gliding Segmented Links (Desktop) */}
           <nav className="hidden md:flex items-center gap-1 bg-slate-100/80 p-1.5 rounded-full border border-slate-200/60 relative">
             {navLinks.map((item) => {
               const isActive = activeSection === item.id;
@@ -109,9 +124,9 @@ const Navbar = () => {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`relative px-4 py-1.5 text-xs sm:text-sm font-semibold rounded-full transition-colors duration-200 border-none cursor-pointer select-none ${
+                  className={`relative px-4 py-1.5 text-xs sm:text-sm font-bold rounded-full transition-colors duration-150 border-none cursor-pointer select-none ${
                     isActive
-                      ? "text-[#6d28d9] font-bold"
+                      ? "text-[#6d28d9]"
                       : "text-slate-600 hover:text-[#7c3aed] bg-transparent"
                   }`}
                 >
@@ -120,24 +135,14 @@ const Navbar = () => {
                       layoutId="activePillIndicator"
                       transition={{
                         type: "spring",
-                        stiffness: 450,
-                        damping: 32,
+                        stiffness: 380,
+                        damping: 30,
+                        mass: 0.6,
                       }}
-                      className="absolute inset-0 bg-white rounded-full shadow-[0_2px_10px_rgba(124,58,237,0.14),0_1px_3px_rgba(0,0,0,0.05)] border border-purple-200/80"
+                      className="absolute inset-0 bg-white rounded-full shadow-[0_2px_8px_rgba(124,58,237,0.12),0_1px_2px_rgba(0,0,0,0.04)] border border-purple-200/80"
                     />
                   )}
-                  <span className="relative z-10 flex items-center gap-1.5">
-                    {isActive && (
-                      <motion.span
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        exit={{ scale: 0 }}
-                        transition={{ type: "spring", stiffness: 500, damping: 25 }}
-                        className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#7c3aed] to-[#6366f1]"
-                      />
-                    )}
-                    <span>{item.label}</span>
-                  </span>
+                  <span className="relative z-10">{item.label}</span>
                 </button>
               );
             })}
@@ -196,12 +201,7 @@ const Navbar = () => {
                           : "text-slate-700 hover:text-[#7c3aed] hover:bg-purple-50/50 bg-transparent"
                       }`}
                     >
-                      <span className="flex items-center gap-2">
-                        {isActive && (
-                          <span className="w-2 h-2 rounded-full bg-gradient-to-r from-[#7c3aed] to-[#6366f1]" />
-                        )}
-                        <span>{item.label}</span>
-                      </span>
+                      <span>{item.label}</span>
                       <ChevronRight className={`w-4 h-4 ${isActive ? "text-[#7c3aed]" : "text-purple-400"}`} />
                     </button>
                   );
