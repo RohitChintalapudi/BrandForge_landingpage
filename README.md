@@ -11,7 +11,7 @@
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-12.0-FF0055?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
-[Live Demo](https://brand-forge-frontend.vercel.app) • [Features](#-core-features) • [Workflow](#-interactive-workflow) • [Tech Stack](#-tech-stack) • [Getting Started](#-getting-started)
+[Live Demo](https://brand-forge-frontend.vercel.app) • [Features](#-core-features) • [Workflow](#-interactive-workflow) • [Architecture](#-component-architecture) • [Tech Stack](#-tech-stack) • [Getting Started](#-getting-started)
 
 ---
 
@@ -64,3 +64,53 @@ Traditional influencer marketing is plagued by endless back-and-forth emails, ri
 ### 🧮 Interactive ROI & Value Estimator
 - **Brand Mode**: Calculate agency cost savings, estimated video pitches, and ROI multiplier based on monthly creative budgets.
 - **Creator Mode**: Estimate monthly earnings potential based on video pitches submitted per month and projected win rates.
+
+---
+
+## 🔄 Interactive Workflow
+
+BrandForge operates on a frictionless 4-phase transaction and creative pipeline:
+
+```mermaid
+graph TD
+    A[Brand Launches Brief] -->|Deposit Prize to Escrow| B[Locked Prize Escrow 🔒]
+    B --> C[Creators Submit 4K Video Pitches]
+    C -->|Drive / Loom / YouTube / Dropbox| D[Brand Cockpit Review & Scoring]
+    D -->|1-Click Selection| E[Winner Crowned 👑]
+    E -->|Direct 24h Payout| F[Creator Receives Bank Transfer 💸]
+    E -->|Automated License Transfer| G[Commercial Ad Rights Released to Brand 🚀]
+    G --> H[Scale Ad ROAS on Meta / TikTok / YouTube]
+```
+
+---
+
+## 🏗️ Component Architecture
+
+```
+src/
+├── App.jsx                     # Top-level Application Shell
+├── main.jsx                    # Vite React 19 Entrypoint
+├── index.css                   # Tailwind CSS v4 directives & custom utilities
+├── config/
+│   └── appUrls.js              # Production authentication & app redirection URLs
+└── components/
+    ├── Navbar.jsx              # Dynamic Island floating pill navigation with spring indicators
+    ├── LandingPage.jsx         # Core landing page, interactive cockpit, marketplace & ROI calc
+    ├── ScrollStackWorkflow.jsx # Sticky scroll-driven 4-phase workflow showcase with card stacking
+    └── SectionDivider.jsx      # Gradient wave & ambient glow section transition dividers
+```
+
+---
+
+## 🛠️ Tech Stack & Dependencies
+
+| Category | Technology | Purpose |
+| :--- | :--- | :--- |
+| **Framework** | [React 19](https://react.dev/) | Core UI library utilizing modern hooks & concurrent rendering |
+| **Build Tool** | [Vite 7](https://vitejs.dev/) | Lightning-fast HMR and optimized production bundling |
+| **Styling** | [Tailwind CSS v4](https://tailwindcss.com/) | Modern utility-first CSS framework with `@tailwindcss/vite` |
+| **Animations** | [Framer Motion 12](https://www.framer.com/motion/) | Spring physics, layout animations, gestures & scroll reveals |
+| **Icons** | [Lucide React](https://lucide.dev/) | Modern, lightweight icon suite |
+| **Interactivity** | [Canvas Confetti](https://www.npmjs.com/package/canvas-confetti) | High-performance canvas-based celebratory particle explosions |
+| **Smooth Scroll** | [Lenis](https://lenis.darkroom.engineering/) | Kinetic smooth scroll engine for luxury feel |
+| **Code Quality** | [ESLint 9](https://eslint.org/) | Modern flat configuration for React & React Hooks |
