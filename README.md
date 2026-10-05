@@ -9,9 +9,10 @@
 [![Vite](https://img.shields.io/badge/Vite-7.2-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-12.0-FF0055?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
+[![Vercel Deployed](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://brand-forge-frontend.vercel.app)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
-[Live Demo](https://brand-forge-frontend.vercel.app) • [Features](#-core-features) • [Workflow](#-interactive-workflow) • [Architecture](#-component-architecture) • [Tech Stack](#-tech-stack) • [Getting Started](#-getting-started)
+[Live Demo](https://brand-forge-frontend.vercel.app) • [Features](#-core-features) • [Workflow](#-interactive-workflow) • [Architecture](#-component-architecture) • [Tech Stack](#-tech-stack--dependencies) • [Getting Started](#-getting-started) • [Deployment](#-deployment)
 
 ---
 
@@ -114,3 +115,75 @@ src/
 | **Interactivity** | [Canvas Confetti](https://www.npmjs.com/package/canvas-confetti) | High-performance canvas-based celebratory particle explosions |
 | **Smooth Scroll** | [Lenis](https://lenis.darkroom.engineering/) | Kinetic smooth scroll engine for luxury feel |
 | **Code Quality** | [ESLint 9](https://eslint.org/) | Modern flat configuration for React & React Hooks |
+
+---
+
+## 🚀 Getting Started
+
+Follow these steps to run the BrandForge frontend locally on your development machine.
+
+### Prerequisites
+- **Node.js**: `v18.0.0` or higher
+- **npm** / **pnpm** / **yarn**
+
+### Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/RohitChintalapudi/BrandForge_landingpage.git
+   cd BrandForge_landingpage
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Start the local development server**:
+   ```bash
+   npm run dev
+   ```
+
+4. **Open your browser** and visit `http://localhost:5173`.
+
+---
+
+## ⚙️ Configuration
+
+Platform redirection and authentication endpoints are centralized in [`src/config/appUrls.js`](file:///c:/Users/rohit/OneDrive/Desktop/project/BrandForge/frontend/src/config/appUrls.js):
+
+```javascript
+export const REGISTER_URL = "https://brand-forge-frontend.vercel.app";
+export const LOGIN_URL = "https://brand-forge-frontend.vercel.app";
+```
+
+To connect to a custom backend or staging environment, simply update these endpoints or introduce environment variables via Vite (`import.meta.env`).
+
+---
+
+## 📦 Available Scripts
+
+| Command | Description |
+| :--- | :--- |
+| `npm run dev` | Starts the Vite development server with Hot Module Replacement (HMR) |
+| `npm run build` | Compiles and bundles production-ready assets into the `dist/` directory |
+| `npm run preview` | Locally preview the production build output |
+| `npm run lint` | Runs ESLint to check for syntax and stylistic issues |
+
+---
+
+## 🌐 Deployment
+
+BrandForge is optimized for instant deployment on [Vercel](https://vercel.com/) or [Netlify](https://www.netlify.com/):
+
+1. Link your GitHub repository to Vercel.
+2. Select the **Vite** preset (Build command: `npm run build`, Output directory: `dist`).
+3. Deploy!
+
+Live production URL: **[https://brand-forge-frontend.vercel.app](https://brand-forge-frontend.vercel.app)**
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
