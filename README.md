@@ -1,189 +1,203 @@
 <div align="center">
 
-# ⚡ BrandForge
+# BrandForge
 
-### The Next-Gen UGC Video Pitching & Creator Marketplace Platform
-**Where High-Growth D2C Brands & Top-Tier Video Creators Forge High-Converting Ad Content**
+**The Escrow-Backed UGC Video Pitching & Creator Marketplace**
 
-[![React](https://img.shields.io/badge/React-19.2-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
-[![Vite](https://img.shields.io/badge/Vite-7.2-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Framer Motion](https://img.shields.io/badge/Framer_Motion-12.0-FF0055?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
-[![Vercel Deployed](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://brand-forge-frontend.vercel.app)
-[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+*Where high-growth D2C brands and India's top video creators forge high-converting ad content*
 
-[Live Demo](https://brand-forge-frontend.vercel.app) • [Features](#-core-features) • [Workflow](#-interactive-workflow) • [Architecture](#-component-architecture) • [Tech Stack](#-tech-stack--dependencies) • [Getting Started](#-getting-started) • [Deployment](#-deployment)
+[![React](https://img.shields.io/badge/React-19.2-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-7.2-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.1-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-FF0055?style=flat-square&logo=framer&logoColor=white)](https://www.framer.com/motion/)
+[![Vercel](https://img.shields.io/badge/Live_on-Vercel-000000?style=flat-square&logo=vercel&logoColor=white)](https://brand-forge-frontend.vercel.app)
 
----
+[Live Demo](https://brand-forge-frontend.vercel.app) · [Features](#features) · [Workflow](#platform-workflow) · [Architecture](#architecture) · [Design System](#design-system) · [Getting Started](#getting-started) · [Deployment](#deployment)
 
 </div>
 
-## 📖 Overview
+---
 
-**BrandForge** is an end-to-end UGC (User-Generated Content) video pitching platform that bridges high-growth direct-to-consumer (D2C) brands with skilled video creators and UGC artists. 
+## Overview
 
-Traditional influencer marketing is plagued by endless back-and-forth emails, rigid contracts, unverified creators, and zero content guarantees before payment. BrandForge eliminates this friction by introducing an **escrow-backed contest & pitch model**:
-- **Brands** launch hyper-targeted video briefs with guaranteed prize escrow pools.
-- **Creators** stream raw uncompressed video pitches directly via Google Drive, YouTube, Loom, or Dropbox.
-- **Brands crown winning concepts in 1-click**, instantly disbursing payouts to creators while unlocking full commercial usage rights for Meta, TikTok, and YouTube ads.
+**BrandForge** is the marketing frontend for an end-to-end UGC (User-Generated Content) pitching platform that connects high-growth D2C brands with skilled video creators and UGC artists.
+
+Traditional influencer marketing suffers from endless back-and-forth emails, rigid contracts, unverified creators, and zero content guarantees before payment. BrandForge replaces that friction with an **escrow-backed contest & pitch model**:
+
+1. **Brands** launch hyper-targeted video briefs backed by guaranteed, escrow-locked prize pools (₹5,000 – ₹1,00,000+).
+2. **Creators** stream raw uncompressed video pitches directly via Google Drive, YouTube, Loom, Dropbox, or Vimeo links — no file-size limits, no compression.
+3. **Brands crown winning concepts in one click**, triggering direct bank payouts to creators within 24 hours and releasing full commercial usage rights for Meta, TikTok, and YouTube ads.
+
+This repository contains the single-page React landing experience: an interactive product demo, live campaign explorer, ROI estimator, and the full platform narrative.
 
 ---
 
-## ✨ Core Features
+## Features
 
-### 🏝️ iPhone Dynamic Island Navigation Bar
-- **Floating Glassmorphic Pill Capsule**: Translucent white-glass capsule header with layered drop-shadows and spring-physics entry animations.
-- **Gliding Indicator**: Smooth layout spring pill that glides seamlessly under the active navigation link.
-- **Zero-Conflict Scroll Tracking**: Smooth section detection coupled with debounced programmatic scroll locks to eliminate jitter.
-- **Mobile Responsive Drawer**: Expandable capsule dropdown with instant access to platform routes.
+### iPhone Dynamic Island Navigation
 
-### 🎮 Dual-Role Interactive Live Simulator
-- **Brand Cockpit Preview**:
-  - Filter campaigns across `Approved` and `Pending Review` states.
-  - Review incoming creator submissions with real-time metadata, platform sources, and star ratings.
-  - **1-Click Winner Selection**: Interactive crowning simulation with dynamic particle confetti celebrations.
-- **Creator Studio Preview**:
-  - Direct video pitch submission cockpit supporting Google Drive, YouTube Unlisted, Loom, and Dropbox links.
-  - Live upload simulation with validation and instant status feedback.
+A floating glassmorphic pill capsule fixed to the top of the viewport ([Navbar.jsx](src/components/Navbar.jsx)):
 
-### 🛍️ Real-Time Campaign Explorer
-- Dynamic campaign discovery directory categorized by industry:
-  - 🌿 *Beauty & Wellness*
-  - 🎒 *D2C Lifestyle*
-  - ⚡ *Tech & SaaS*
-  - 🍵 *Food & Beverage*
-  - ⌚ *Fitness Tech*
-- Visual urgency indicators, prize pool chips, deadline timers, and instant pitch submission triggers.
+- Spring-physics drop-in entrance and a gliding `layoutId` indicator pill that animates between active links.
+- Scroll-position section tracking with a programmatic-scroll lock (850 ms debounce) that eliminates the scroll-listener race condition and indicator jitter.
+- Morphs into an expanded dropdown panel on mobile with animated height transitions.
+- Sign In / Get Started actions wired to centralized auth URLs.
 
-### 📜 ScrollStack Workflow Architecture
-- Interactive 4-stage visual journey highlighting the lifecycle of a BrandForge campaign:
-  1. **Brief Launch & Prize Escrow**: Set campaign hooks, visual guidelines, and deposit escrow funds.
-  2. **4K Raw Video Pitching**: Creators submit high-resolution uncompressed video concepts.
-  3. **Winner Crowning & Instant Payout**: 1-click winner selection with 24-hour direct payouts.
-  4. **Ad ROAS Scale**: Plug winning creatives into Meta & TikTok ad pipelines with 3.4x average ROAS.
+### Dual-Role Interactive Simulator
 
-### 🧮 Interactive ROI & Value Estimator
-- **Brand Mode**: Calculate agency cost savings, estimated video pitches, and ROI multiplier based on monthly creative budgets.
-- **Creator Mode**: Estimate monthly earnings potential based on video pitches submitted per month and projected win rates.
+A working product preview toggled between two roles ([LandingPage.jsx](src/components/LandingPage.jsx)):
+
+| Brand Cockpit | Creator Studio |
+| :--- | :--- |
+| Filter campaigns across `Approved` / `Pending Review` states | Paste-ready pitch submission supporting Drive, YouTube Unlisted, Loom, and Dropbox |
+| Search campaigns by title and category | Live upload simulation with URL validation |
+| Review creator submissions with metadata, platform source, and star ratings | Instant submission status feedback |
+| One-click winner selection with canvas-confetti celebration | — |
+
+### Real-Time Campaign Explorer
+
+A discovery directory of live brand campaigns filterable by category — Beauty & Wellness, D2C Lifestyle, Tech & SaaS, Tech & Fintech, Food & Beverage, and Fitness Tech — with visual urgency indicators, prize-pool chips, deadline timers, and instant pitch submission triggers.
+
+### Infinite Workflow Carousel
+
+A 4-stage pipeline presented as a seamlessly looping carousel ([ScrollStackWorkflow.jsx](src/components/ScrollStackWorkflow.jsx)) — not a static list:
+
+- Card track duplicated 5× (20 cards) with index normalization for an infinite loop with no visible seam.
+- Autoplay progression that pauses on hover and during pointer interaction.
+- Pointer drag and touch swipe with velocity-based flick detection and per-card snap.
+- Arrow navigation controls and per-step animated UI mockups (brief composer, pitch review, payout release, ad-scale growth).
+
+**The four stages:** Brief Launch & Prize Escrow → 4K Raw Video Pitching → Winner Crowning & 24h Payout → Ad ROAS Scale (3.4x average return).
+
+### Interactive ROI & Value Estimator
+
+A dual-mode calculator with live-computed metrics ([formulas](src/components/LandingPage.jsx#L398)):
+
+- **Brand mode** — estimated videos produced (`budget / ₹10,000`), equivalent agency cost (`3.2× budget`), and total savings.
+- **Creator mode** — projected monthly earnings (`pitches × ₹12,500`) based on submission volume.
+
+### FAQ Accordion
+
+Five expandable answers covering escrow mechanics, accepted pitch formats, commercial rights transfer, the no-follower-minimum policy, and 2-hour campaign moderation turnaround.
 
 ---
 
-## 🔄 Interactive Workflow
-
-BrandForge operates on a frictionless 4-phase transaction and creative pipeline:
+## Platform Workflow
 
 ```mermaid
 graph TD
-    A[Brand Launches Brief] -->|Deposit Prize to Escrow| B[Locked Prize Escrow 🔒]
+    A[Brand Launches Brief] -->|Deposits prize pool| B[Escrow-Locked Prize Pool]
     B --> C[Creators Submit 4K Video Pitches]
-    C -->|Drive / Loom / YouTube / Dropbox| D[Brand Cockpit Review & Scoring]
-    D -->|1-Click Selection| E[Winner Crowned 👑]
-    E -->|Direct 24h Payout| F[Creator Receives Bank Transfer 💸]
-    E -->|Automated License Transfer| G[Commercial Ad Rights Released to Brand 🚀]
+    C -->|Drive / YouTube / Loom / Dropbox / Vimeo| D[Brand Cockpit Review & Scoring]
+    D -->|One-click selection| E[Winner Crowned]
+    E -->|Direct bank transfer| F[Creator Paid Within 24 Hours]
+    E -->|Automated license transfer| G[Full Commercial Rights Released]
     G --> H[Scale Ad ROAS on Meta / TikTok / YouTube]
 ```
 
 ---
 
-## 🏗️ Component Architecture
+## Architecture
+
+Single-page application — every section lives on one route, composed of four components:
 
 ```
 src/
-├── App.jsx                     # Top-level Application Shell
-├── main.jsx                    # Vite React 19 Entrypoint
-├── index.css                   # Tailwind CSS v4 directives & custom utilities
+├── App.jsx                        # Application shell, mounts LandingPage
+├── main.jsx                       # React 19 entrypoint (StrictMode)
+├── index.css                      # Tailwind v4 import, design tokens, keyframes, glass utilities
 ├── config/
-│   └── appUrls.js              # Production authentication & app redirection URLs
+│   └── appUrls.js                 # Centralized REGISTER_URL / LOGIN_URL auth endpoints
 └── components/
-    ├── Navbar.jsx              # Dynamic Island floating pill navigation with spring indicators
-    ├── LandingPage.jsx         # Core landing page, interactive cockpit, marketplace & ROI calc
-    ├── ScrollStackWorkflow.jsx # Sticky scroll-driven 4-phase workflow showcase with card stacking
-    └── SectionDivider.jsx      # Gradient wave & ambient glow section transition dividers
+    ├── Navbar.jsx                 # Dynamic Island pill nav with gliding indicator + mobile drawer
+    ├── LandingPage.jsx            # Hero, simulator, value pillars, explorer, calculator, FAQ
+    ├── ScrollStackWorkflow.jsx    # Infinite workflow carousel with drag/swipe + autoplay
+    └── SectionDivider.jsx         # Gradient glow-line section transitions
 ```
+
+**Landing page section map:**
+
+| Section | Anchor | Contents |
+| :--- | :--- | :--- |
+| Hero | `#hero` | Headline, dual CTAs (Launch a Campaign / Join as Creator), ambient glow orbs |
+| Live Simulator | `#live-demo` | Brand cockpit and creator studio role toggle |
+| Value Pillars | `#for-brands` | Side-by-side brand and creator benefit breakdowns |
+| Campaign Explorer | `#campaigns-explorer` | Category-filtered live campaign directory |
+| Workflow Carousel | `#how-it-works` | Looping 4-stage pipeline with mockups |
+| ROI Calculator | `#roi-calculator` | Brand / creator mode estimator |
+| FAQ | `#faq` | Escrow, formats, rights, payouts |
 
 ---
 
-## 🛠️ Tech Stack & Dependencies
+## Design System
+
+Brand tokens are defined as CSS custom properties in [`src/index.css`](src/index.css) and mirrored throughout components:
+
+- **Palette** — deep indigo base (`#1e1b4b`), brand purple (`#8b5cf6` / `#7c3aed`), indigo accent (`#4f46e5`), amber and emerald for payout/growth states.
+- **Typography** — Plus Jakarta Sans (primary) and Inter (fallback), loaded via Google Fonts with weights 300–900.
+- **Surfaces** — glassmorphism utilities (`glass-panel`, `glass-card-dark`) using layered `backdrop-blur`, translucent purple borders, and multi-layer shadows.
+- **Ambience** — radial dot-mesh patterns, blurred glow orbs, and `floatSlow` / `pulseGlow` / `shimmerEffect` keyframe animations.
+- **Detailing** — scrollbars hidden globally, smooth scrolling, `overflow-x` guarded.
+
+---
+
+## Tech Stack
 
 | Category | Technology | Purpose |
 | :--- | :--- | :--- |
-| **Framework** | [React 19](https://react.dev/) | Core UI library utilizing modern hooks & concurrent rendering |
-| **Build Tool** | [Vite 7](https://vitejs.dev/) | Lightning-fast HMR and optimized production bundling |
-| **Styling** | [Tailwind CSS v4](https://tailwindcss.com/) | Modern utility-first CSS framework with `@tailwindcss/vite` |
-| **Animations** | [Framer Motion 12](https://www.framer.com/motion/) | Spring physics, layout animations, gestures & scroll reveals |
-| **Icons** | [Lucide React](https://lucide.dev/) | Modern, lightweight icon suite |
-| **Interactivity** | [Canvas Confetti](https://www.npmjs.com/package/canvas-confetti) | High-performance canvas-based celebratory particle explosions |
-| **Smooth Scroll** | [Lenis](https://lenis.darkroom.engineering/) | Kinetic smooth scroll engine for luxury feel |
-| **Code Quality** | [ESLint 9](https://eslint.org/) | Modern flat configuration for React & React Hooks |
+| Framework | [React 19](https://react.dev/) | UI library (hooks, StrictMode, concurrent rendering) |
+| Build tool | [Vite 7](https://vitejs.dev/) | Dev server with HMR and production bundling |
+| Styling | [Tailwind CSS v4](https://tailwindcss.com/) | Utility-first styling via `@tailwindcss/vite` plugin |
+| Animation | [Framer Motion 12](https://www.framer.com/motion/) | Springs, layout animations, gestures, scroll reveals |
+| Icons | [Lucide React](https://lucide.dev/) | Icon suite |
+| Interactivity | [canvas-confetti](https://www.npmjs.com/package/canvas-confetti) | Winner-selection celebrations |
+| Smooth scroll | [Lenis](https://lenis.darkroom.engineering/) | Kinetic scroll engine |
+| Code quality | [ESLint 9](https://eslint.org/) | Flat config with React Hooks and Refresh plugins |
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
-Follow these steps to run the BrandForge frontend locally on your development machine.
+**Prerequisites:** Node.js `v18+` and npm (or pnpm / yarn).
 
-### Prerequisites
-- **Node.js**: `v18.0.0` or higher
-- **npm** / **pnpm** / **yarn**
+```bash
+# 1. Clone
+git clone https://github.com/RohitChintalapudi/BrandForge_landingpage.git
+cd BrandForge_landingpage
 
-### Installation
+# 2. Install dependencies
+npm install
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/RohitChintalapudi/BrandForge_landingpage.git
-   cd BrandForge_landingpage
-   ```
+# 3. Start the dev server (http://localhost:5173)
+npm run dev
+```
 
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
+## Configuration
 
-3. **Start the local development server**:
-   ```bash
-   npm run dev
-   ```
-
-4. **Open your browser** and visit `http://localhost:5173`.
-
----
-
-## ⚙️ Configuration
-
-Platform redirection and authentication endpoints are centralized in [`src/config/appUrls.js`](file:///c:/Users/rohit/OneDrive/Desktop/project/BrandForge/frontend/src/config/appUrls.js):
+Auth and platform redirection endpoints are centralized in [`src/config/appUrls.js`](src/config/appUrls.js):
 
 ```javascript
 export const REGISTER_URL = "https://brand-forge-frontend.vercel.app";
 export const LOGIN_URL = "https://brand-forge-frontend.vercel.app";
 ```
 
-To connect to a custom backend or staging environment, simply update these endpoints or introduce environment variables via Vite (`import.meta.env`).
+Point these at a custom backend or staging environment directly, or migrate them to Vite environment variables (`import.meta.env.VITE_*`) for per-deploy overrides.
 
----
-
-## 📦 Available Scripts
+## Scripts
 
 | Command | Description |
 | :--- | :--- |
-| `npm run dev` | Starts the Vite development server with Hot Module Replacement (HMR) |
-| `npm run build` | Compiles and bundles production-ready assets into the `dist/` directory |
-| `npm run preview` | Locally preview the production build output |
-| `npm run lint` | Runs ESLint to check for syntax and stylistic issues |
+| `npm run dev` | Vite dev server with hot module replacement |
+| `npm run build` | Production build into `dist/` |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint` | ESLint check across the project |
 
----
+## Deployment
 
-## 🌐 Deployment
+Optimized for [Vercel](https://vercel.com/) or [Netlify](https://www.netlify.com/):
 
-BrandForge is optimized for instant deployment on [Vercel](https://vercel.com/) or [Netlify](https://www.netlify.com/):
+1. Link the GitHub repository.
+2. Select the **Vite** preset (build command `npm run build`, output directory `dist`).
+3. Deploy.
 
-1. Link your GitHub repository to Vercel.
-2. Select the **Vite** preset (Build command: `npm run build`, Output directory: `dist`).
-3. Deploy!
-
-Live production URL: **[https://brand-forge-frontend.vercel.app](https://brand-forge-frontend.vercel.app)**
-
----
-
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
+Production URL: **[brand-forge-frontend.vercel.app](https://brand-forge-frontend.vercel.app)**
