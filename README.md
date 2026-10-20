@@ -1,6 +1,6 @@
 <div align="center">
 
-# ⚡ BrandForge
+# BrandForge
 
 ### The Next-Gen UGC Video Pitching & Creator Marketplace Platform
 **Where High-Growth D2C Brands & Top-Tier Video Creators Forge High-Converting Ad Content**
@@ -13,6 +13,8 @@
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
 [Live Demo](https://brand-forge-frontend.vercel.app) • [Features](#-core-features) • [Workflow](#-interactive-workflow) • [Architecture](#-component-architecture) • [Tech Stack](#-tech-stack--dependencies) • [Getting Started](#-getting-started) • [Deployment](#-deployment)
+
+<img width="1657" height="891" alt="image" src="https://github.com/user-attachments/assets/6d9c53f0-4c7d-4a58-830e-ef383144d030" />
 
 ---
 
