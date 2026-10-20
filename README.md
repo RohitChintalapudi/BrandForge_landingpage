@@ -12,7 +12,9 @@
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-FF0055?style=flat-square&logo=framer&logoColor=white)](https://www.framer.com/motion/)
 [![Vercel](https://img.shields.io/badge/Live_on-Vercel-000000?style=flat-square&logo=vercel&logoColor=white)](https://brand-forge-frontend.vercel.app)
 
-[Live Demo](https://brand-forge-frontend.vercel.app) · [Features](#features) · [Workflow](#platform-workflow) · [Architecture](#architecture) · [Design System](#design-system) · [Getting Started](#getting-started) · [Deployment](#deployment)
+<img width="1657" height="891" alt="image" src="https://github.com/user-attachments/assets/6d9c53f0-4c7d-4a58-830e-ef383144d030" />
+
+---
 
 </div>
 
